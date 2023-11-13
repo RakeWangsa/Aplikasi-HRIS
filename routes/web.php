@@ -1,0 +1,44 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TimesheetController;
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\PenilaianController;
+use App\Http\Controllers\ManagementController;
+
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+Route::group(['middleware' => ['auth', 'ceklevel:karyawan']], function () {
+    route::get('/employee/dashboard', [DashboardController::class, 'dash_karyawan']);
+    route::get('/employee/profile', [ProfileController::class, 'profile_karyawan']);
+    route::get('/employee/absensi', [AbsensiController::class, 'absensi_karyawan']);
+    route::get('/timesheet/time-tracker', [TimesheetController::class, 'timesheet_karyawan']);
+    route::get('/employee/kpi', [PenilaianController::class, 'kpi_karyawan']);
+    route::get('/employee/okr', [PenilaianController::class, 'okr_karyawan']);
+});
+
+Route::group(['middleware' => ['auth', 'ceklevel:executive']], function () {
+    route::get('/executive/dashboard', [DashboardController::class, 'dash_executive']);
+    route::get('/executive/profile', [ProfileController::class, 'profile_karyawan']);
+    route::get('/daftar/karyawan', [ProfileController::class, 'profile_executive']);
+    route::get('/executive/timesheet', [TimesheetController::class, 'timesheet_executive']);
+});
+
+Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
+    route::get('/admin/dashboard', [DashboardController::class, 'dash_admin'])->middleware('auth');
+    route::get('/daftar/absensi', [AbsensiController::class, 'daftar_absensi'])->middleware('auth');
+    route::get('/admin/profiles', [ProfileController::class, 'profile_admin'])->middleware('auth');
+    route::get('/user/management', [ManagementController::class, 'index'])->middleware('auth');
+    route::get('/admin/kpi', [PenilaianController::class, 'kpi_admin'])->middleware('auth');
+    route::get('/admin/okr', [PenilaianController::class, 'okr_admin'])->middleware('auth');
+    Route::get('/editUser/{id}', [ManagementController::class, 'editUser'])->name('editUser')->middleware('auth');
+    Route::get('/updateUser/{id}', [ManagementController::class, 'updateUser'])->name('updateUser');
+    Route::get('/hapusUser/{id}', [ManagementController::class, 'hapusUser'])->name('hapusUser')->middleware('auth');
+    Route::get('/tambahUser/{level}', [ManagementController::class, 'tambah'])->name('tambahUser')->middleware('auth');
+    Route::post('/tambahUser', [ManagementController::class, 'store'])->middleware('auth');
+});
