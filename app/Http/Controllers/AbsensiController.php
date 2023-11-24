@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Absensi;
 
 class AbsensiController extends Controller
 {
@@ -12,6 +14,32 @@ class AbsensiController extends Controller
             'title' => 'Absensi',
             'active' => 'absensi_karyawan',
         ]);
+    }
+
+    public function absensi_karyawan_datang(Request $request,$status)
+    {
+        $lokasi = $request->lokasi;
+        if ($lokasi=="di kantor"){
+            $email = session('email');
+            $name = DB::table('Users')
+            ->where('email', $email)
+            ->pluck('name')
+            ->first();
+            date_default_timezone_set('Asia/Jakarta');
+            $hariIni = date('Y-m-d');
+            $waktu = date('H:i:s');
+            Absensi::create([
+                'nama' => $name,
+                'email' => $email,
+                'absensi' => 'datang',
+                'date' => $hariIni,
+                'time' => $waktu,
+                'keterangan' => $status,
+                'file' => 'tes',
+            ]);
+        }
+        return redirect('/employee/absensi');
+        
     }
 
     public function daftar_absensi()

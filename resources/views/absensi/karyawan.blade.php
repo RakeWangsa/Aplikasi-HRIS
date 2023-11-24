@@ -51,18 +51,20 @@
                 <div class="col-xxl-6 col-md-6">
                     <div class="card info-card absen-card">
                         <div class="card-body">
+                            <form method="POST" action="{{ route('absenDatang', ['status' => 'Hadir']) }}" id="absenDatang">
+                                @csrf
                             <h5 class="card-title">Absensi Datang</h5>
                             <div class="row">
-                                {{-- <div class="col-xxl-6 col-md-6"> <input type="date" class="form-control"></div> --}}
-                                <div class="col-xxl-6 col-md-6 mt-2">
-                                    <div class="col-sm-12"> <input class="form-control" type="file" accept="image/*" id="formFile"></div>
-                                </div>
+
+                                    <div class="col-sm-12"> <input class="form-control" type="file" accept="image/*" id="formFile"> <input class="form-control" type="text" name="lokasi" id="inputLokasi"></div>
+
                             </div>
                             <div class="col-xxl-12 col-md-12 button-absensi">
                                 <button id="btnHadir1" type="submit" class="btn btn-primary">Hadir</button>
                                 <button id="btnIzin1" type="submit" class="btn btn-warning text-white">Izin</button>
                                 <button id="btnSakit1" type="submit" class="btn btn-danger">Sakit</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -71,10 +73,9 @@
                         <div class="card-body">
                             <h5 class="card-title">Absensi Pulang</h5>
                             <div class="row">
-                                {{-- <div class="col-xxl-6 col-md-6"> <input type="date" class="form-control"></div> --}}
-                                <div class="col-xxl-6 col-md-6 mt-2">
+
                                     <div class="col-sm-12"> <input class="form-control" type="file" accept="image/*" id="formFile"></div>
-                                </div>
+
                             </div>
                             <div class="col-xxl-12 col-md-12 button-absensi">
                                 <button id="btnHadir2" type="submit" class="btn btn-primary">Hadir</button>
@@ -142,7 +143,8 @@
         }).addTo(map);
 
         // koordinat kantor
-        var kantorCoords1 = [-7.007600624422205, 110.43700765001334]; //farmtech
+        var kantorCoords1 = [-6.996941, 110.424622]; //tes
+        // var kantorCoords1 = [-7.007600624422205, 110.43700765001334]; //farmtech
         var kantorCoords2 = [-7.0102618, 110.4358351]; //farmhill
 
         // marker untuk lokasi pengguna
@@ -155,8 +157,11 @@
         var jarakKeKantor2 = L.latLng(latitude, longitude).distanceTo(L.latLng(kantorCoords2[0], kantorCoords2[1]));
         var radiusKantor = 100; // Radius dalam meter
 
+        var lokasiText = "tidak di kantor";
+
         if (jarakKeKantor1 <= radiusKantor || jarakKeKantor2 <= radiusKantor) {
             document.getElementById("lokasi").innerHTML += "<br>Anda berada di kantor.";
+            lokasiText = "di kantor";
         } else {
             document.getElementById("lokasi").innerHTML += "<br>Anda tidak berada di kantor.";
 
@@ -185,10 +190,39 @@
                 alert("Anda tidak berada di kantor!");
             });
         }
+        document.getElementById("inputLokasi").value = lokasiText;
     }
 
     // Panggil fungsi saat halaman dimuat
     window.onload = dapatkanLokasi;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Add event listeners to buttons
+        document.getElementById("btnHadir1").addEventListener("click", function() {
+            updateFormAction("Hadir");
+        });
+
+        document.getElementById("btnIzin1").addEventListener("click", function() {
+            updateFormAction("Izin");
+        });
+
+        document.getElementById("btnSakit1").addEventListener("click", function() {
+            updateFormAction("Sakit");
+        });
+    });
+
+    function updateFormAction(status) {
+        // Get the form element
+        var form = document.getElementById("absenDatang");
+
+        // Update the form action based on the selected status
+        form.action = "{{ route('absenDatang', ['status' => 'STATUS']) }}".replace('STATUS', status);
+
+        // Submit the form
+        form.submit();
+    }
 </script>
 
 
