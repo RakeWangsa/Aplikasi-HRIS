@@ -34,15 +34,26 @@ class AbsensiController extends Controller
             date_default_timezone_set('Asia/Jakarta');
             $hariIni = date('Y-m-d');
             $waktu = date('H:i:s');
-            Absensi::create([
-                'nama' => $name,
-                'email' => $email,
-                'absensi' => 'Datang',
-                'date' => $hariIni,
-                'time' => $waktu,
-                'keterangan' => $status,
-                'file' => 'tes',
-            ]);
+
+            //cek sudah absen apa belum
+            $cekAbsensi = DB::table('absensi')
+            ->where('email', $email)
+            ->where('absensi', 'Datang')
+            ->where('date', $hariIni)
+            ->select('*')
+            ->get();
+            //jika belum absen
+            if ($cekAbsensi->count() > 0) {
+                Absensi::create([
+                    'nama' => $name,
+                    'email' => $email,
+                    'absensi' => 'Datang',
+                    'date' => $hariIni,
+                    'time' => $waktu,
+                    'keterangan' => $status,
+                    'file' => 'tes',
+                ]);
+            }
         }
         return redirect('/employee/absensi');   
     }
@@ -59,15 +70,26 @@ class AbsensiController extends Controller
             date_default_timezone_set('Asia/Jakarta');
             $hariIni = date('Y-m-d');
             $waktu = date('H:i:s');
-            Absensi::create([
-                'nama' => $name,
-                'email' => $email,
-                'absensi' => 'Pulang',
-                'date' => $hariIni,
-                'time' => $waktu,
-                'keterangan' => $status,
-                'file' => 'tes',
-            ]);
+
+            //cek sudah absen apa belum
+            $cekAbsensi = DB::table('absensi')
+            ->where('email', $email)
+            ->where('absensi', 'Pulang')
+            ->where('date', $hariIni)
+            ->select('*')
+            ->get();
+            //jika belum absen
+            if ($cekAbsensi->count() > 0) {
+                Absensi::create([
+                    'nama' => $name,
+                    'email' => $email,
+                    'absensi' => 'Pulang',
+                    'date' => $hariIni,
+                    'time' => $waktu,
+                    'keterangan' => $status,
+                    'file' => 'tes',
+                ]);
+            }
         }
         return redirect('/employee/absensi');   
     }
