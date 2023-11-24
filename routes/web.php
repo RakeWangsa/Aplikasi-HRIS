@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:karyawan']], function () {
     route::get('/employee/profile', [ProfileController::class, 'profile_karyawan']);
     route::get('/employee/absensi', [AbsensiController::class, 'absensi_karyawan']);
     route::post('/employee/absensi/datang/{status}', [AbsensiController::class, 'absensi_karyawan_datang'])->name('absenDatang');
+    route::post('/employee/absensi/pulang/{status}', [AbsensiController::class, 'absensi_karyawan_pulang'])->name('absenPulang');
     route::get('/timesheet/time-tracker', [TimesheetController::class, 'timesheet_karyawan']);
     route::get('/employee/kpi', [PenilaianController::class, 'kpi_karyawan']);
     route::get('/employee/okr', [PenilaianController::class, 'okr_karyawan']);

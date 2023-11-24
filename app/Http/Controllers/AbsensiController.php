@@ -18,7 +18,7 @@ class AbsensiController extends Controller
 
     public function absensi_karyawan_datang(Request $request,$status)
     {
-        $lokasi = $request->lokasi;
+        $lokasi = $request->lokasi1;
         if ($lokasi=="di kantor"){
             $email = session('email');
             $name = DB::table('Users')
@@ -31,15 +31,39 @@ class AbsensiController extends Controller
             Absensi::create([
                 'nama' => $name,
                 'email' => $email,
-                'absensi' => 'datang',
+                'absensi' => 'Datang',
                 'date' => $hariIni,
                 'time' => $waktu,
                 'keterangan' => $status,
                 'file' => 'tes',
             ]);
         }
-        return redirect('/employee/absensi');
-        
+        return redirect('/employee/absensi');   
+    }
+
+    public function absensi_karyawan_pulang(Request $request,$status)
+    {
+        $lokasi = $request->lokasi2;
+        if ($lokasi=="di kantor"){
+            $email = session('email');
+            $name = DB::table('Users')
+            ->where('email', $email)
+            ->pluck('name')
+            ->first();
+            date_default_timezone_set('Asia/Jakarta');
+            $hariIni = date('Y-m-d');
+            $waktu = date('H:i:s');
+            Absensi::create([
+                'nama' => $name,
+                'email' => $email,
+                'absensi' => 'Pulang',
+                'date' => $hariIni,
+                'time' => $waktu,
+                'keterangan' => $status,
+                'file' => 'tes',
+            ]);
+        }
+        return redirect('/employee/absensi');   
     }
 
     public function daftar_absensi()

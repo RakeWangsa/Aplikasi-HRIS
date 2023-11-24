@@ -56,7 +56,7 @@
                             <h5 class="card-title">Absensi Datang</h5>
                             <div class="row">
 
-                                    <div class="col-sm-12"> <input class="form-control" type="file" accept="image/*" id="formFile"> <input class="form-control" type="text" name="lokasi" id="inputLokasi"></div>
+                                    <div class="col-sm-12"> <input class="form-control" type="file" accept="image/*" id="formFile"> <input class="form-control" type="text" name="lokasi1" id="inputLokasi1"></div>
 
                             </div>
                             <div class="col-xxl-12 col-md-12 button-absensi">
@@ -71,10 +71,12 @@
                 <div class="col-xxl-6 col-md-6">
                     <div class="card info-card absen-card">
                         <div class="card-body">
+                            <form method="POST" action="{{ route('absenPulang', ['status' => 'Hadir']) }}" id="absenPulang">
+                                @csrf
                             <h5 class="card-title">Absensi Pulang</h5>
                             <div class="row">
 
-                                    <div class="col-sm-12"> <input class="form-control" type="file" accept="image/*" id="formFile"></div>
+                                    <div class="col-sm-12"> <input class="form-control" type="file" accept="image/*" id="formFile"> <input class="form-control" type="text" name="lokasi2" id="inputLokasi2"></div>
 
                             </div>
                             <div class="col-xxl-12 col-md-12 button-absensi">
@@ -82,6 +84,7 @@
                                 <button id="btnIzin2" type="submit" class="btn btn-warning text-white">Izin</button>
                                 <button id="btnSakit2" type="submit" class="btn btn-danger">Sakit</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -190,7 +193,8 @@
                 alert("Anda tidak berada di kantor!");
             });
         }
-        document.getElementById("inputLokasi").value = lokasiText;
+        document.getElementById("inputLokasi1").value = lokasiText;
+        document.getElementById("inputLokasi2").value = lokasiText;
     }
 
     // Panggil fungsi saat halaman dimuat
@@ -211,17 +215,32 @@
         document.getElementById("btnSakit1").addEventListener("click", function() {
             updateFormAction("Sakit");
         });
+
+        document.getElementById("btnHadir2").addEventListener("click", function() {
+            updateFormAction("Hadir");
+        });
+
+        document.getElementById("btnIzin2").addEventListener("click", function() {
+            updateFormAction("Izin");
+        });
+
+        document.getElementById("btnSakit2").addEventListener("click", function() {
+            updateFormAction("Sakit");
+        });
     });
 
     function updateFormAction(status) {
         // Get the form element
-        var form = document.getElementById("absenDatang");
+        var formDatang = document.getElementById("absenDatang");
+        var formPulang = document.getElementById("absenPulang");
 
         // Update the form action based on the selected status
-        form.action = "{{ route('absenDatang', ['status' => 'STATUS']) }}".replace('STATUS', status);
+        formDatang.action = "{{ route('absenDatang', ['status' => 'STATUS']) }}".replace('STATUS', status);
+        formPulang.action = "{{ route('absenPulang', ['status' => 'STATUS']) }}".replace('STATUS', status);
 
         // Submit the form
-        form.submit();
+        formDatang.submit();
+        formPulang.submit();
     }
 </script>
 
