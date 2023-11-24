@@ -102,17 +102,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($absensi as $row)
                         <tr>
-                            <td>Datang</td>
-                            <td>2023-10-25</td>
-                            <td>08:00 AM</td>
-                            <td>Hadir</td>
+                            <td>{{ $row->absensi }}</td>
+                            <td>{{ \Carbon\Carbon::parse($row->date)->format('d-m-Y') }}</td>
+                            <td>{{ $row->time }}</td>
+                            <td>{{ $row->keterangan }}</td>
                         </tr>
-                        <tr>
-                            <td>Pulang</td>
-                            <td>2023-10-25</td>
-                            <td>04:00 PM</td>
-                            <td>Hadir</td>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

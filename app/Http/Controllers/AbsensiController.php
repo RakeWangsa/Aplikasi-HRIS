@@ -10,9 +10,15 @@ class AbsensiController extends Controller
 {
     public function absensi_karyawan()
     {
+        $email = session('email');
+        $absensi = DB::table('absensi')
+        ->where('email', $email)
+        ->select('*')
+        ->get();
         return view('absensi.karyawan', [
             'title' => 'Absensi',
             'active' => 'absensi_karyawan',
+            'absensi' => $absensi,
         ]);
     }
 
