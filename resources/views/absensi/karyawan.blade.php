@@ -51,12 +51,12 @@
                 <div class="col-xxl-6 col-md-6">
                     <div class="card info-card absen-card">
                         <div class="card-body">
-                            <form method="POST" action="{{ route('absenDatang', ['status' => 'Hadir']) }}" id="absenDatang">
+                            <form method="POST" action="{{ route('absenDatang', ['status' => 'Hadir']) }}" id="absenDatang" enctype="multipart/form-data">
                                 @csrf
                             <h5 class="card-title">Absensi Datang</h5>
                             <div class="row">
 
-                                    <div class="col-sm-12"> <input class="form-control" type="file" accept="image/*" id="formFile"> <input class="form-control" type="text" name="lokasi1" id="inputLokasi1"></div>
+                                    <div class="col-sm-12"> <input class="form-control" type="file" accept="image/*" name="gambar1" id="formFile" required> <input class="form-control" type="text" name="lokasi1" id="inputLokasi1"></div>
 
                             </div>
                             <div class="col-xxl-12 col-md-12 button-absensi">
@@ -71,12 +71,12 @@
                 <div class="col-xxl-6 col-md-6">
                     <div class="card info-card absen-card">
                         <div class="card-body">
-                            <form method="POST" action="{{ route('absenPulang', ['status' => 'Hadir']) }}" id="absenPulang">
+                            <form method="POST" action="{{ route('absenPulang', ['status' => 'Hadir']) }}" id="absenPulang" enctype="multipart/form-data">
                                 @csrf
                             <h5 class="card-title">Absensi Pulang</h5>
                             <div class="row">
 
-                                    <div class="col-sm-12"> <input class="form-control" type="file" accept="image/*" id="formFile"> <input class="form-control" type="text" name="lokasi2" id="inputLokasi2"></div>
+                                    <div class="col-sm-12"> <input class="form-control" type="file" accept="image/*" name="gambar2" id="formFile" required> <input class="form-control" type="text" name="lokasi2" id="inputLokasi2"></div>
 
                             </div>
                             <div class="col-xxl-12 col-md-12 button-absensi">
@@ -143,7 +143,7 @@
         }).addTo(map);
 
         // koordinat kantor
-        var kantorCoords1 = [-6.996941, 110.424622]; //tes
+        var kantorCoords1 = [-6.9714, 110.4254]; //tes
         // var kantorCoords1 = [-7.007600624422205, 110.43700765001334]; //farmtech
         var kantorCoords2 = [-7.0102618, 110.4358351]; //farmhill
 
@@ -165,28 +165,10 @@
         } else {
             document.getElementById("lokasi").innerHTML += "<br>Anda tidak berada di kantor.";
 
-
             document.getElementById("btnHadir1").addEventListener("click", function() {
                 alert("Anda tidak berada di kantor!");
             });
-
-            document.getElementById("btnIzin1").addEventListener("click", function() {
-                alert("Anda tidak berada di kantor!");
-            });
-
-            document.getElementById("btnSakit1").addEventListener("click", function() {
-                alert("Anda tidak berada di kantor!");
-            });
-
             document.getElementById("btnHadir2").addEventListener("click", function() {
-                alert("Anda tidak berada di kantor!");
-            });
-
-            document.getElementById("btnIzin2").addEventListener("click", function() {
-                alert("Anda tidak berada di kantor!");
-            });
-
-            document.getElementById("btnSakit2").addEventListener("click", function() {
                 alert("Anda tidak berada di kantor!");
             });
         }
@@ -201,30 +183,65 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Add event listeners to buttons
-        document.getElementById("btnHadir1").addEventListener("click", function() {
-            updateFormAction("Hadir");
+        document.getElementById("btnHadir1").addEventListener("click", function(event) {
+            if (!isFormValid("absenDatang")) {
+                event.preventDefault();
+                alert("Harap isi file gambar sebelum mengirim formulir!");
+            } else {
+                updateFormAction("Hadir");
+            }
         });
 
-        document.getElementById("btnIzin1").addEventListener("click", function() {
-            updateFormAction("Izin");
+        document.getElementById("btnIzin1").addEventListener("click", function(event) {
+            if (!isFormValid("absenDatang")) {
+                event.preventDefault();
+                alert("Harap isi file gambar sebelum mengirim formulir!");
+            } else {
+                updateFormAction("Izin");
+            }
         });
 
-        document.getElementById("btnSakit1").addEventListener("click", function() {
-            updateFormAction("Sakit");
+        document.getElementById("btnSakit1").addEventListener("click", function(event) {
+            if (!isFormValid("absenDatang")) {
+                event.preventDefault();
+                alert("Harap isi file gambar sebelum mengirim formulir!");
+            } else {
+                updateFormAction("Sakit");
+            }
         });
 
-        document.getElementById("btnHadir2").addEventListener("click", function() {
-            updateFormAction("Hadir");
+        document.getElementById("btnHadir2").addEventListener("click", function(event) {
+            if (!isFormValid("absenPulang")) {
+                event.preventDefault();
+                alert("Harap isi file gambar sebelum mengirim formulir!");
+            } else {
+                updateFormAction("Hadir");
+            }
         });
 
-        document.getElementById("btnIzin2").addEventListener("click", function() {
-            updateFormAction("Izin");
+        document.getElementById("btnIzin2").addEventListener("click", function(event) {
+            if (!isFormValid("absenPulang")) {
+                event.preventDefault();
+                alert("Harap isi file gambar sebelum mengirim formulir!");
+            } else {
+                updateFormAction("Izin");
+            }
         });
 
-        document.getElementById("btnSakit2").addEventListener("click", function() {
-            updateFormAction("Sakit");
+        document.getElementById("btnSakit2").addEventListener("click", function(event) {
+            if (!isFormValid("absenPulang")) {
+                event.preventDefault();
+                alert("Harap isi file gambar sebelum mengirim formulir!");
+            } else {
+                updateFormAction("Sakit");
+            }
         });
     });
+
+    function isFormValid(formId) {
+        var form = document.getElementById(formId);
+        return form.checkValidity();
+    }
 
     function updateFormAction(status) {
         // Get the form element
@@ -240,6 +257,7 @@
         formPulang.submit();
     }
 </script>
+
 
 
 @endsection

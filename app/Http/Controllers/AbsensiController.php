@@ -45,6 +45,11 @@ class AbsensiController extends Controller
                 ->get();
                 //jika belum absen
                 if ($cekAbsensi->count() == 0) {
+                    
+                    $gambar = $request->file('gambar1'); //ambil gambar dari kolom inputan
+                    $namaGambar = uniqid() . '.' . $gambar->getClientOriginalExtension(); //kasih nama file gambar
+                    $gambar->move(public_path('img'), $namaGambar); //file gambar di pindah ke folder "public/img"
+
                     Absensi::create([
                         'nama' => $name,
                         'email' => $email,
@@ -52,7 +57,7 @@ class AbsensiController extends Controller
                         'date' => $hariIni,
                         'time' => $waktu,
                         'keterangan' => $status,
-                        'file' => 'tes',
+                        'file' => $namaGambar,
                     ]);
                 }
             } 
@@ -75,6 +80,11 @@ class AbsensiController extends Controller
             ->get();
             //jika belum absen
             if ($cekAbsensi->count() == 0) {
+
+                $gambar = $request->file('gambar1');
+                $namaGambar = uniqid() . '.' . $gambar->getClientOriginalExtension();
+                $gambar->move(public_path('img'), $namaGambar);
+
                 Absensi::create([
                     'nama' => $name,
                     'email' => $email,
@@ -82,7 +92,7 @@ class AbsensiController extends Controller
                     'date' => $hariIni,
                     'time' => $waktu,
                     'keterangan' => $status,
-                    'file' => 'tes',
+                    'file' => $namaGambar,
                 ]);
             }
         }
@@ -112,6 +122,11 @@ class AbsensiController extends Controller
                 ->get();
                 //jika belum absen
                 if ($cekAbsensi->count() == 0) {
+
+                    $gambar = $request->file('gambar2');
+                    $namaGambar = uniqid() . '.' . $gambar->getClientOriginalExtension();
+                    $gambar->move(public_path('img'), $namaGambar);
+
                     Absensi::create([
                         'nama' => $name,
                         'email' => $email,
@@ -119,7 +134,7 @@ class AbsensiController extends Controller
                         'date' => $hariIni,
                         'time' => $waktu,
                         'keterangan' => $status,
-                        'file' => 'tes',
+                        'file' => $namaGambar,
                     ]);
                 }
             }
@@ -142,6 +157,11 @@ class AbsensiController extends Controller
             ->get();
             //jika belum absen
             if ($cekAbsensi->count() == 0) {
+
+                $gambar = $request->file('gambar2');
+                $namaGambar = uniqid() . '.' . $gambar->getClientOriginalExtension();
+                $gambar->move(public_path('img'), $namaGambar);
+
                 Absensi::create([
                     'nama' => $name,
                     'email' => $email,
@@ -149,7 +169,7 @@ class AbsensiController extends Controller
                     'date' => $hariIni,
                     'time' => $waktu,
                     'keterangan' => $status,
-                    'file' => 'tes',
+                    'file' => $namaGambar,
                 ]);
             }
         }
@@ -158,9 +178,13 @@ class AbsensiController extends Controller
 
     public function daftar_absensi()
     {
+        $absensi = DB::table('absensi')
+        ->select('*')
+        ->get();
         return view('absensi.admin', [
             'title' => 'Absensi',
             'active' => 'daftar_absensi',
+            'absensi' => $absensi,
         ]);
     }
 }

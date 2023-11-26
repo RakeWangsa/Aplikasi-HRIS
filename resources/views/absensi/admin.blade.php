@@ -41,23 +41,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php($no=1)
+                        @foreach($absensi as $row)
                         <tr>
-                            <td>1</td>
-                            <td>Auliya Putri</td>
-                            <td>Datang</td>
-                            <td>2023-10-25</td>
-                            <td>08:00 AM</td>
-                            <td>Hadir</td>
+                            <td>{{ $no++ }}</td>
+                            <td>{{ $row->nama }}</td>
+                            <td>{{ $row->absensi }}</td>
+                            <td>{{ \Carbon\Carbon::parse($row->date)->format('d-m-Y') }}</td>
+                            <td>{{ $row->time }}</td>
+                            <td>{{ $row->keterangan }}</td>
                             <td>File</td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Auliya Putri</td>
-                            <td>Pulang</td>
-                            <td>2023-10-25</td>
-                            <td>04:00 PM</td>
-                            <td>Hadir</td>
-                            <td>File</td>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
