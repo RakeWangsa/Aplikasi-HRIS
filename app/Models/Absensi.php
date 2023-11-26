@@ -11,8 +11,7 @@ class Absensi extends Model
     protected $table = "absensi";
     public $timestamps = false;
     protected $fillable = [
-        'nama',
-        'email',
+        'id_user',
         'absensi',
         'date',
         'time',

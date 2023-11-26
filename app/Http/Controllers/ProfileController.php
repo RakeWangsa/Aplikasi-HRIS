@@ -7,17 +7,18 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
 {
-    public function profile_karyawan()
+    public function profile()
     {
         $email = session('email');
         $user = DB::table('Users')
         ->where('email', $email)
         ->select('*')
         ->first();
-        return view('profiles.karyawan ', [
+        return view('profiles.profile ', [
             'title' => 'My Profile',
             'active' => 'profile_karyawan',
             'user' => $user
@@ -46,6 +47,7 @@ class ProfileController extends Controller
             'instagram' => $request->instagram,
             'linkedin' => $request->linkedin,
         ]);
+        session(['email' => $request->email]);
         return redirect('/profile');  
     }
 
@@ -88,6 +90,30 @@ class ProfileController extends Controller
         $profile->update([
             'image' => $namaGambar
         ]);
+        return redirect('/profile');  
+    }
+
+    public function deleteImage()
+    {
+        $email = session('email');
+        $id_user = DB::table('Users')
+        ->where('email', $email)
+        ->pluck('id')
+        ->first();
+
+
+        $profile = User::find($id_user);
+        $imageName = $profile->image;
+
+        $profile->update([
+            'image' => 'blank-profile-picture.png'
+        ]);
+
+        $imagePath = public_path('img') . '/' . $imageName;
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
+        }
+
         return redirect('/profile');  
     }
 

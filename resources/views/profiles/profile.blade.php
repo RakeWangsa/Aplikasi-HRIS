@@ -20,7 +20,7 @@
         <div class="col-xl-4">
             <div class="card">
                 <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                    <img src="{{asset('admintemplate/img/aul.jpg')}}" alt="Profile" class="rounded-circle">
+                    <img src="{{asset('img/' . $user->image)}}" alt="Profile" class="rounded-circle">
                     <h2>{{ auth()->user()->name }}</h2>
                     <h3>{{ ['admin' => 'Administrator', 'karyawan' => 'Karyawan', 'executive' => 'Executive User'][auth()->user()->level] }}</h3>
                     <div class="social-links mt-2"> <a href="#" class="twitter"><i class="bi bi-twitter"></i></a> <a href="#" class="facebook"><i class="bi bi-facebook"></i></a> <a href="#" class="instagram"><i class="bi bi-instagram"></i></a> <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a></div>
@@ -38,7 +38,7 @@
                     <div class="tab-content pt-2">
                         <div class="tab-pane fade show active profile-overview" id="profile-overview">
                             <h5 class="card-title">About</h5>
-                            <p class="small fst-italic">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem cupiditate, non laborum fugit debitis odio tenetur provident culpa esse aliquam natus! Laborum a veritatis eaque excepturi exercitationem numquam, blanditiis rerum.</p>
+                            <p class="small fst-italic">{{ $user->about }}</p>
                             <h5 class="card-title">Profile Details</h5>
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label ">Full Name</div>
@@ -77,11 +77,11 @@
                                 <div class="row mb-3">
                                     <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <img src="{{asset('admintemplate/img/aul.jpg')}}" alt="Profile">
+                                        <img src="{{asset('img/' . $user->image)}}" alt="Profile">
                                         <input type="file" name="profileImage" id="fileInput" accept="image/*" style="display: none;">
                                         <div class="pt-2"> <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image" onclick="document.getElementById('fileInput').click();">
                                             <i class="bi bi-upload"></i>
-                                        </a> <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a></div>
+                                        </a> <a href="{{ route('deleteImage') }}" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a></div>
                                     </div>
                                 </div>
                             </form>
@@ -90,51 +90,51 @@
                                 @csrf
                                 <div class="row mb-3">
                                     <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
-                                    <div class="col-md-8 col-lg-9"> <input name="fullName" type="text" class="form-control" id="fullName" value="{{ $user->name }}"></div>
+                                    <div class="col-md-8 col-lg-9"> <input name="fullName" type="text" class="form-control" id="fullName" value="{{ $user->name }}" required></div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
-                                    <div class="col-md-8 col-lg-9"><textarea name="about" class="form-control" id="about" style="height: 100px">{{ $user->about }}</textarea></div>
+                                    <div class="col-md-8 col-lg-9"><textarea name="about" class="form-control" id="about" style="height: 100px" required>{{ $user->about }}</textarea></div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
-                                    <div class="col-md-8 col-lg-9"> <input name="company" type="text" class="form-control" id="company" value="{{ $user->company }}"></div>
+                                    <div class="col-md-8 col-lg-9"> <input name="company" type="text" class="form-control" id="company" value="{{ $user->company }}" required></div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
-                                    <div class="col-md-8 col-lg-9"> <input name="job" type="text" class="form-control" id="Job" value="{{ $user->job }}"></div>
+                                    <div class="col-md-8 col-lg-9"> <input name="job" type="text" class="form-control" id="Job" value="{{ $user->job }}" required></div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
-                                    <div class="col-md-8 col-lg-9"> <input name="country" type="text" class="form-control" id="Country" value="{{ $user->country }}"></div>
+                                    <div class="col-md-8 col-lg-9"> <input name="country" type="text" class="form-control" id="Country" value="{{ $user->country }}" required></div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
-                                    <div class="col-md-8 col-lg-9"> <input name="address" type="text" class="form-control" id="Address" value="{{ $user->address }}"></div>
+                                    <div class="col-md-8 col-lg-9"> <input name="address" type="text" class="form-control" id="Address" value="{{ $user->address }}" required></div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
-                                    <div class="col-md-8 col-lg-9"> <input name="phone" type="text" class="form-control" id="Phone" value="{{ $user->phone }}"></div>
+                                    <div class="col-md-8 col-lg-9"> <input name="phone" type="text" class="form-control" id="Phone" value="{{ $user->phone }}" required></div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                                    <div class="col-md-8 col-lg-9"> <input name="email" type="email" class="form-control" id="Email" value="{{ $user->email }}"></div>
+                                    <div class="col-md-8 col-lg-9"> <input name="email" type="email" class="form-control" id="Email" value="{{ $user->email }}" required></div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-                                    <div class="col-md-8 col-lg-9"> <input name="twitter" type="text" class="form-control" id="Twitter" value="{{ $user->twitter }}"></div>
+                                    <div class="col-md-8 col-lg-9"> <input name="twitter" type="text" class="form-control" id="Twitter" value="{{ $user->twitter }}" required></div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                                    <div class="col-md-8 col-lg-9"> <input name="facebook" type="text" class="form-control" id="Facebook" value="{{ $user->facebook }}"></div>
+                                    <div class="col-md-8 col-lg-9"> <input name="facebook" type="text" class="form-control" id="Facebook" value="{{ $user->facebook }}" required></div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-                                    <div class="col-md-8 col-lg-9"> <input name="instagram" type="text" class="form-control" id="Instagram" value="{{ $user->instagram }}"></div>
+                                    <div class="col-md-8 col-lg-9"> <input name="instagram" type="text" class="form-control" id="Instagram" value="{{ $user->instagram }}" required></div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-                                    <div class="col-md-8 col-lg-9"> <input name="linkedin" type="text" class="form-control" id="Linkedin" value="{{ $user->linkedin }}"></div>
+                                    <div class="col-md-8 col-lg-9"> <input name="linkedin" type="text" class="form-control" id="Linkedin" value="{{ $user->linkedin }}" required></div>
                                 </div>
                                 <div class="btn-save"> <button type="submit" class="btn btn-primary">Save Changes</button></div>
                             </form>

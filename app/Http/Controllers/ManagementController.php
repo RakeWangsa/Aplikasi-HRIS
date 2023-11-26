@@ -52,6 +52,7 @@ class ManagementController extends Controller
             'password' => 'required|min:5|max:255'
         ]);
         $validatedData['level'] = $request->level;
+        $validatedData['image'] = 'blank-profile-picture.png';
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         User::create($validatedData);

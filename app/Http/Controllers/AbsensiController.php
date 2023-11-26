@@ -10,9 +10,8 @@ class AbsensiController extends Controller
 {
     public function absensi_karyawan()
     {
-        $email = session('email');
         $absensi = DB::table('absensi')
-        ->where('email', $email)
+        ->where('id_user', auth()->user()->id)
         ->select('*')
         ->get();
         return view('absensi.karyawan', [
@@ -51,14 +50,15 @@ class AbsensiController extends Controller
                     $gambar->move(public_path('img'), $namaGambar); //file gambar di pindah ke folder "public/img"
 
                     Absensi::create([
-                        'nama' => $name,
-                        'email' => $email,
+                        'id' => auth()->user()->id,
                         'absensi' => 'Datang',
                         'date' => $hariIni,
                         'time' => $waktu,
                         'keterangan' => $status,
                         'file' => $namaGambar,
                     ]);
+                }else{
+                    return redirect()->back()->with('error', 'Anda sudah absen!');
                 }
             } 
         }else{
@@ -86,14 +86,15 @@ class AbsensiController extends Controller
                 $gambar->move(public_path('img'), $namaGambar);
 
                 Absensi::create([
-                    'nama' => $name,
-                    'email' => $email,
+                    'id' => auth()->user()->id,
                     'absensi' => 'Datang',
                     'date' => $hariIni,
                     'time' => $waktu,
                     'keterangan' => $status,
                     'file' => $namaGambar,
                 ]);
+            }else{
+                return redirect()->back()->with('error', 'Anda sudah absen!');
             }
         }
         return redirect('/employee/absensi');   
@@ -128,14 +129,15 @@ class AbsensiController extends Controller
                     $gambar->move(public_path('img'), $namaGambar);
 
                     Absensi::create([
-                        'nama' => $name,
-                        'email' => $email,
+                        'id' => auth()->user()->id,
                         'absensi' => 'Pulang',
                         'date' => $hariIni,
                         'time' => $waktu,
                         'keterangan' => $status,
                         'file' => $namaGambar,
                     ]);
+                }else{
+                    return redirect()->back()->with('error', 'Anda sudah absen!');
                 }
             }
         }else{
@@ -163,14 +165,15 @@ class AbsensiController extends Controller
                 $gambar->move(public_path('img'), $namaGambar);
 
                 Absensi::create([
-                    'nama' => $name,
-                    'email' => $email,
+                    'id' => auth()->user()->id,
                     'absensi' => 'Pulang',
                     'date' => $hariIni,
                     'time' => $waktu,
                     'keterangan' => $status,
                     'file' => $namaGambar,
                 ]);
+            }else{
+                return redirect()->back()->with('error', 'Anda sudah absen!');
             }
         }
         return redirect('/employee/absensi');   
