@@ -21,4 +21,12 @@ class TimesheetController extends Controller
             'active' => 'timesheet_executive',
         ]);
     }
+
+    public function task_timesheet()
+    {
+        return view('timesheet.admin', [
+            'title' => 'Task Timesheet',
+            'active' => 'task_timesheet',
+        ]);
+    }
 }

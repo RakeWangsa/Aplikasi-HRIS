@@ -50,7 +50,28 @@
                             <td>{{ \Carbon\Carbon::parse($row->date)->format('d-m-Y') }}</td>
                             <td>{{ $row->time }}</td>
                             <td>{{ $row->keterangan }}</td>
-                            <td>File</td>
+                            <td>
+                                <a href="#" data-toggle="modal" data-target="#gambarModal{{$row->file}}">
+                                    <img src="{{ asset('img/' . $row->file) }}" alt="Gambar" style="width:50px;height:auto">
+                                </a>    
+                            </td>
+                            <!-- Modal -->
+                            <div class="modal fade" id="gambarModal{{$row->file}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Bukti Hadir</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="{{ asset('img/' . $row->file) }}" alt="Gambar" style="width:100%;height:auto">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </tr>
                         @endforeach
                     </tbody>
