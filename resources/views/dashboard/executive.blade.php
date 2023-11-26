@@ -99,7 +99,7 @@
                     </div>
                 </div>
                 <div class="col-xxl-3 col-md-3">
-                    <div class="card">
+                    <div class="card" data-toggle="modal" data-target="#pengumumanModal">
                         <div class="notif">
                             <a class="icon"><i class='bx bx-bell'></i></a>
                         </div>
@@ -107,13 +107,38 @@
                             <h5 class="card-title-notif">Pengumuman</h5>
                             <div class="d-flex align-items-center">
                                 <div class="pengumuman">
-                                    <a href="">
                                         <span class="announce">What do you want to announce?</span>
-                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="pengumumanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Buat Pengumuman</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <form action="{{ route('submitPengumuman') }}" method="post">
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="announcementText">Isi Pengumuman:</label>
+                                        <input type="text" class="form-control" id="announcementText" name="pengumuman" placeholder="What do you want to announce?">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Kirim</button>
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

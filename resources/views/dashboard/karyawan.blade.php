@@ -104,25 +104,34 @@
                         <div class="card-body">
                             <h5 class="card-title-notif">Pengumuman</h5>
                             <div class="d-flex align-items-center">
-                                <div class="pengumuman">
-                                    <div>
-                                        <h6>1. Nisi ut ut exercitationem voluptatem esse sunt rerum? Lorem ipsum dolor sit amet consectetur adipisicing elit.</h6>
-                                        <hr class="dropdown-divider">
-                                    </div>
-                                    <div class="pt-2">
-                                        <h6>2. Reiciendis dolores repudiandae?</h6>
-                                        <hr class="dropdown-divider">
-                                    </div>
-                                    <div class="pt-2">
-                                        <h6>3. Qui qui reprehenderit ut est illo numquam voluptatem?</h6>
-                                    </div>
+                                <div class="pengumuman" style="max-height: 250px; overflow-y: auto;" id="latestAnnouncement">
+                                    @foreach($pengumuman as $row)
+                                        <div class="pb-2">
+                                            <h6><strong>{{ $row->waktu }}</strong><br><br>{{ $row->pesan }}</h6>
+                                            <hr class="dropdown-divider">
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    window.onload = function() {
+        // Fungsi untuk mengatur scroll ke bawah pada elemen dengan id "latestAnnouncement"
+        function scrollToBottom() {
+            var latestAnnouncement = document.getElementById('latestAnnouncement');
+            latestAnnouncement.scrollTop = latestAnnouncement.scrollHeight;
+        }
+
+        // Panggil fungsi scrollToBottom() saat halaman dimuat
+        scrollToBottom();
+    };
+</script>
 @endsection

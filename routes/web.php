@@ -50,3 +50,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     route::post('/admin/task-timesheet/addTask', [TimesheetController::class, 'addTask'])->name('addTask')->middleware('auth');
     route::get('/admin/task-timesheet/deleteTask/{id}', [TimesheetController::class, 'deleteTask'])->name('deleteTask')->middleware('auth');
 });
+
+Route::group(['middleware' => ['auth', 'ceklevel:executive,admin']], function () {
+    route::post('/submitPengumuman', [DashboardController::class, 'submitPengumuman'])->name('submitPengumuman');
+});
+
