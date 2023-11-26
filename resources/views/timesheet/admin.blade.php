@@ -38,7 +38,7 @@
                             <tr>
                                 <td scope="row">{{ $no++ }}</td>
                                 <td>{{ $row->jenis_task }}</td>
-                                <td><a href="{{ route('deleteTask') }}"><span class='bx bxs-trash bx-border-circle bg-danger text-white'></span></a></td>
+                                <td><a href="{{ route('deleteTask', ['id' => encrypt($row->id)]) }}" onclick="return confirm('Apakah Anda yakin?')"><span class='bx bxs-trash bx-border-circle bg-danger text-white'></span></a></td>
                             </tr>
                             @endforeach
                         </tbody>

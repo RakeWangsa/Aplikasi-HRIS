@@ -15,30 +15,31 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    <form id="myForm" action="{{ route('submitTimesheet') }}" method="post">
+                        @csrf
                         <div class="row mb-3 mt-4">
-                            <div class="col-xxl-8 col-md-8"> <input type="text" class="form-control" placeholder="What are you working on?"></div>
+                            <div class="col-xxl-8 col-md-8"> <input type="text" class="form-control" name="task" placeholder="What are you working on?" required></div>
                             <div class="col-xxl-4 col-md-4">
                                 <div class="col-sm-12">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Select task</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <select id="taskSelect" class="form-select" name="category" aria-label="Default select example" required>
+                                        <option selected disabled>Select task</option>
+                                        @foreach($task as $row)
+                                            <option value="{{ $row->jenis_task }}">{{ $row->jenis_task }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <div class="col-xxl-3 col-md-3"> <input type="date" class="form-control" placeholder="Applies on"></div>
+                            <div class="col-xxl-3 col-md-3"> <input type="date" name="date" class="form-control" placeholder="Applies on" required></div>
 
-                            <div class="col-xxl-3 col-md-3"> <input type="time" class="form-control" placeholder="Start time"></div>
+                            <div class="col-xxl-3 col-md-3"> <input type="time" name="start_time" class="form-control" placeholder="Start time" required></div>
 
-                            <div class="col-xxl-3 col-md-3"> <input type="time" class="form-control" placeholder="End time"></div>
+                            <div class="col-xxl-3 col-md-3"> <input type="time" name="end_time" class="form-control" placeholder="End time" required></div>
 
                             <div class="col-xxl-3 col-md-3 button-timesheet">
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <button type="submit" class="btn btn-secondary">Cancel</button>
+                                <button type="reset" class="btn btn-secondary">Cancel</button>
                             </div>
                         </div>
                     </form>
@@ -54,46 +55,17 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php($no=1)
+                            @foreach($timesheet as $row)
                             <tr>
-                                <td scope="row">1</td>
-                                <td>Membuat timeline</td>
-                                <td>Timeline</td>
-                                <td>2023-10-25</td>
-                                <td>10:00 AM</td>
-                                <td>11:00 AM</td>
+                                <td scope="row">{{ $no++ }}</td>
+                                <td>{{ $row->task }}</td>
+                                <td>{{ $row->category }}</td>
+                                <td>{{ $row->date }}</td>
+                                <td>{{ $row->start_time }}</td>
+                                <td>{{ $row->end_time }}</td>
                             </tr>
-                            <tr>
-                                <td scope="row">2</td>
-                                <td>Membuat timeline</td>
-                                <td>Timeline</td>
-                                <td>2023-10-25</td>
-                                <td>10:00 AM</td>
-                                <td>11:00 AM</td>
-                            </tr>
-                            <tr>
-                                <td scope="row">3</td>
-                                <td>Membuat timeline</td>
-                                <td>Timeline</td>
-                                <td>2023-10-25</td>
-                                <td>10:00 AM</td>
-                                <td>11:00 AM</td>
-                            </tr>
-                            <tr>
-                                <td scope="row">4</td>
-                                <td>Membuat timeline</td>
-                                <td>Timeline</td>
-                                <td>2023-10-25</td>
-                                <td>10:00 AM</td>
-                                <td>11:00 AM</td>
-                            </tr>
-                            <tr>
-                                <td scope="row">5</td>
-                                <td>Membuat timeline</td>
-                                <td>Timeline</td>
-                                <td>2023-10-25</td>
-                                <td>10:00 AM</td>
-                                <td>11:00 AM</td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -101,4 +73,17 @@
         </div>
     </div>
 </section>
+
+<script>
+    document.getElementById('myForm').addEventListener('submit', function (event) {
+        var selectElement = document.getElementById('taskSelect');
+        var selectedValue = selectElement.value;
+
+        // Periksa apakah opsi yang dipilih adalah opsi pertama (disabled)
+        if (selectedValue === selectElement.options[0].value) {
+            alert('Pilih task selain opsi pertama.');
+            event.preventDefault(); // Mencegah pengiriman formulir jika tidak valid
+        }
+    });
+</script>
 @endsection

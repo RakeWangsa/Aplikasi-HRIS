@@ -4,16 +4,58 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TaskTimesheet;
+use App\Models\Timesheet;
 use Illuminate\Support\Facades\DB;
 
 class TimesheetController extends Controller
 {
     public function timesheet_karyawan()
     {
+        $task = DB::table('task_timesheet')
+        ->select('*')
+        ->get();
+
+        $email = session('email');
+        $id_user = DB::table('Users')
+        ->where('email', $email)
+        ->pluck('id')
+        ->first();
+        $timesheet = DB::table('timesheet')
+        ->where('id_user',$id_user)
+        ->select('*')
+        ->get();
         return view('timesheet.karyawan', [
             'title' => 'Timesheet',
             'active' => 'timesheet_karyawan',
+            'task' => $task,
+            'timesheet' => $timesheet
         ]);
+    }
+    public function submitTimesheet(Request $request)
+    {
+        $task = $request->task;
+        $category = $request->category;
+        $date = $request->date;
+        $start_time = $request->start_time;
+        $end_time = $request->end_time;
+
+        $email = session('email');
+        $id_user = DB::table('Users')
+        ->where('email', $email)
+        ->pluck('id')
+        ->first();
+
+        Timesheet::create([
+            'id_user' => $id_user,
+            'task' => $task,
+            'category' => $category,
+            'date' => $date,
+            'start_time' => $start_time,
+            'end_time' => $end_time,
+        ]);
+
+
+        return redirect('/timesheet/time-tracker');  
     }
 
     public function timesheet_executive()
@@ -42,6 +84,13 @@ class TimesheetController extends Controller
         TaskTimesheet::create([
             'jenis_task' => $task,
         ]);
+        return redirect('/admin/task-timesheet');  
+    }
+
+    public function deleteTask($id)
+    {
+        $decryptedId = decrypt($id);
+        TaskTimesheet::where('id', $decryptedId)->delete();
         return redirect('/admin/task-timesheet');  
     }
 }

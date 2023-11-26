@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:karyawan']], function () {
     route::post('/employee/absensi/datang/{status}', [AbsensiController::class, 'absensi_karyawan_datang'])->name('absenDatang');
     route::post('/employee/absensi/pulang/{status}', [AbsensiController::class, 'absensi_karyawan_pulang'])->name('absenPulang');
     route::get('/timesheet/time-tracker', [TimesheetController::class, 'timesheet_karyawan']);
+    route::post('/timesheet/time-tracker/submit', [TimesheetController::class, 'submitTimesheet'])->name('submitTimesheet');
     route::get('/employee/kpi', [PenilaianController::class, 'kpi_karyawan']);
     route::get('/employee/okr', [PenilaianController::class, 'okr_karyawan']);
 });
@@ -47,4 +48,5 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::post('/tambahUser', [ManagementController::class, 'store'])->middleware('auth');
     route::get('/admin/task-timesheet', [TimesheetController::class, 'task_timesheet'])->middleware('auth');
     route::post('/admin/task-timesheet/addTask', [TimesheetController::class, 'addTask'])->name('addTask')->middleware('auth');
+    route::get('/admin/task-timesheet/deleteTask/{id}', [TimesheetController::class, 'deleteTask'])->name('deleteTask')->middleware('auth');
 });

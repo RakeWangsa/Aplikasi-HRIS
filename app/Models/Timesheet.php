@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Timesheet extends Model
 {
     use HasFactory;
+    protected $table = "timesheet";
+    public $timestamps = false;
+
     protected $fillable = [
         'id_user',
         'task',
