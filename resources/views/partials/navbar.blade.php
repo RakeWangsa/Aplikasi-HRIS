@@ -1,6 +1,7 @@
 @include('layouts.head')
 
 @php
+   date_default_timezone_set('Asia/Jakarta');
     $hariIni = date('d-m-Y');
     $notif = DB::table('pengumuman')
         ->where('waktu', 'LIKE', $hariIni . '%')

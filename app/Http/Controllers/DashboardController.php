@@ -13,11 +13,24 @@ class DashboardController extends Controller
         $pengumuman = DB::table('pengumuman')
         ->select('*')
         ->get();
+        date_default_timezone_set('Asia/Jakarta');
+        $tanggal = date('l, d F');
+        $jam = date('H');
+        if ($jam < 11) {
+            $greetings = "Good Morning";
+        } elseif ($jam < 17) {
+            $greetings = "Good Afternoon";
+        } else {
+            $greetings = "Good Evening";
+        }
+
 
         return view('dashboard.karyawan', [
             'title' => 'Dashboard',
             'active' => 'dash_karyawan',
             'pengumuman' => $pengumuman,
+            'tanggal' => $tanggal,
+            'greetings' => $greetings
         ]);
     }
 

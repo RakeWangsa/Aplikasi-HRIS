@@ -26,18 +26,13 @@ class AbsensiController extends Controller
         $lokasi = $request->lokasi1;
         if($status=="Hadir"){
             if ($lokasi=="di kantor"){
-                $email = session('email');
-                $name = DB::table('Users')
-                ->where('email', $email)
-                ->pluck('name')
-                ->first();
                 date_default_timezone_set('Asia/Jakarta');
                 $hariIni = date('Y-m-d');
                 $waktu = date('H:i:s');
     
                 //cek sudah absen apa belum
                 $cekAbsensi = DB::table('absensi')
-                ->where('email', $email)
+                ->where('id_user', auth()->user()->id)
                 ->where('absensi', 'Datang')
                 ->where('date', $hariIni)
                 ->select('*')
@@ -50,7 +45,7 @@ class AbsensiController extends Controller
                     $gambar->move(public_path('img'), $namaGambar); //file gambar di pindah ke folder "public/img"
 
                     Absensi::create([
-                        'id' => auth()->user()->id,
+                        'id_user' => auth()->user()->id,
                         'absensi' => 'Datang',
                         'date' => $hariIni,
                         'time' => $waktu,
@@ -62,18 +57,13 @@ class AbsensiController extends Controller
                 }
             } 
         }else{
-            $email = session('email');
-            $name = DB::table('Users')
-            ->where('email', $email)
-            ->pluck('name')
-            ->first();
             date_default_timezone_set('Asia/Jakarta');
             $hariIni = date('Y-m-d');
             $waktu = date('H:i:s');
 
             //cek sudah absen apa belum
             $cekAbsensi = DB::table('absensi')
-            ->where('email', $email)
+            ->where('id_user', auth()->user()->id)
             ->where('absensi', 'Datang')
             ->where('date', $hariIni)
             ->select('*')
@@ -86,7 +76,7 @@ class AbsensiController extends Controller
                 $gambar->move(public_path('img'), $namaGambar);
 
                 Absensi::create([
-                    'id' => auth()->user()->id,
+                    'id_user' => auth()->user()->id,
                     'absensi' => 'Datang',
                     'date' => $hariIni,
                     'time' => $waktu,
@@ -105,18 +95,13 @@ class AbsensiController extends Controller
         $lokasi = $request->lokasi2;
         if($status=="Hadir"){
             if ($lokasi=="di kantor"){
-                $email = session('email');
-                $name = DB::table('Users')
-                ->where('email', $email)
-                ->pluck('name')
-                ->first();
                 date_default_timezone_set('Asia/Jakarta');
                 $hariIni = date('Y-m-d');
                 $waktu = date('H:i:s');
     
                 //cek sudah absen apa belum
                 $cekAbsensi = DB::table('absensi')
-                ->where('email', $email)
+                ->where('id_user', auth()->user()->id)
                 ->where('absensi', 'Pulang')
                 ->where('date', $hariIni)
                 ->select('*')
@@ -129,7 +114,7 @@ class AbsensiController extends Controller
                     $gambar->move(public_path('img'), $namaGambar);
 
                     Absensi::create([
-                        'id' => auth()->user()->id,
+                        'id_user' => auth()->user()->id,
                         'absensi' => 'Pulang',
                         'date' => $hariIni,
                         'time' => $waktu,
@@ -141,18 +126,13 @@ class AbsensiController extends Controller
                 }
             }
         }else{
-            $email = session('email');
-            $name = DB::table('Users')
-            ->where('email', $email)
-            ->pluck('name')
-            ->first();
             date_default_timezone_set('Asia/Jakarta');
             $hariIni = date('Y-m-d');
             $waktu = date('H:i:s');
 
             //cek sudah absen apa belum
             $cekAbsensi = DB::table('absensi')
-            ->where('email', $email)
+            ->where('id_user', auth()->user()->id)
             ->where('absensi', 'Pulang')
             ->where('date', $hariIni)
             ->select('*')
@@ -165,7 +145,7 @@ class AbsensiController extends Controller
                 $gambar->move(public_path('img'), $namaGambar);
 
                 Absensi::create([
-                    'id' => auth()->user()->id,
+                    'id_user' => auth()->user()->id,
                     'absensi' => 'Pulang',
                     'date' => $hariIni,
                     'time' => $waktu,
@@ -182,7 +162,8 @@ class AbsensiController extends Controller
     public function daftar_absensi()
     {
         $absensi = DB::table('absensi')
-        ->select('*')
+        ->select('absensi.*', 'users.name')
+        ->join('users', 'absensi.id_user', '=', 'users.id')
         ->get();
         return view('absensi.admin', [
             'title' => 'Absensi',

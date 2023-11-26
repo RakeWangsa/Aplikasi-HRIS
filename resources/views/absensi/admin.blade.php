@@ -45,7 +45,7 @@
                         @foreach($absensi as $row)
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td>{{ $row->nama }}</td>
+                            <td>{{ $row->name }}</td>
                             <td>{{ $row->absensi }}</td>
                             <td>{{ \Carbon\Carbon::parse($row->date)->format('d-m-Y') }}</td>
                             <td>{{ $row->time }}</td>

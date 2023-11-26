@@ -90,8 +90,8 @@
                 <div class="col-xxl-4 col-md-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Good evening, Auliya Putri!</h5>
-                            <p>It's Saturday, 28 October</p>
+                            <h5 class="card-title">{{ $greetings }}, {{ auth()->user()->name }}!</h5>
+                            <p>It's {{ $tanggal }}</p>
                         </div>
                     </div>
                 </div>
