@@ -15,9 +15,10 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    <form method="POST" action="{{ route('addTask') }}">
+                        @csrf
                         <div class="row my-4">
-                            <div class="col-xxl-9 col-md-3">  <input type="text" class="form-control" placeholder="Tambah Jenis Task"></div>
+                            <div class="col-xxl-9 col-md-3">  <input type="text" class="form-control" name="task" placeholder="Tambah Jenis Task"></div>
                             <div class="col-xxl-3 col-md-3 button-timesheet">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
@@ -32,11 +33,14 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php($no=1)
+                            @foreach($task as $row)
                             <tr>
-                                <td scope="row">1</td>
-                                <td>Membuat timeline</td>
-                                <td><span class='bx bxs-trash bx-border-circle bg-danger text-white'></span></td>
+                                <td scope="row">{{ $no++ }}</td>
+                                <td>{{ $row->jenis_task }}</td>
+                                <td><a href="{{ route('deleteTask') }}"><span class='bx bxs-trash bx-border-circle bg-danger text-white'></span></a></td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

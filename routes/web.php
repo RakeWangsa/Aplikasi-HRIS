@@ -45,5 +45,6 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     Route::get('/hapusUser/{id}', [ManagementController::class, 'hapusUser'])->name('hapusUser')->middleware('auth');
     Route::get('/tambahUser/{level}', [ManagementController::class, 'tambah'])->name('tambahUser')->middleware('auth');
     Route::post('/tambahUser', [ManagementController::class, 'store'])->middleware('auth');
-    route::get('/admin/task_timesheet', [TimesheetController::class, 'task_timesheet'])->middleware('auth');
+    route::get('/admin/task-timesheet', [TimesheetController::class, 'task_timesheet'])->middleware('auth');
+    route::post('/admin/task-timesheet/addTask', [TimesheetController::class, 'addTask'])->name('addTask')->middleware('auth');
 });
