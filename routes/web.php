@@ -17,7 +17,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::group(['middleware' => ['auth', 'ceklevel:karyawan']], function () {
     route::get('/employee/dashboard', [DashboardController::class, 'dash_karyawan']);
-    route::get('/employee/profile', [ProfileController::class, 'profile_karyawan']);
+    route::get('/profile', [ProfileController::class, 'profile_karyawan']);
     route::get('/employee/absensi', [AbsensiController::class, 'absensi_karyawan']);
     route::post('/employee/absensi/datang/{status}', [AbsensiController::class, 'absensi_karyawan_datang'])->name('absenDatang');
     route::post('/employee/absensi/pulang/{status}', [AbsensiController::class, 'absensi_karyawan_pulang'])->name('absenPulang');
@@ -25,6 +25,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:karyawan']], function () {
     route::post('/timesheet/time-tracker/submit', [TimesheetController::class, 'submitTimesheet'])->name('submitTimesheet');
     route::get('/employee/kpi', [PenilaianController::class, 'kpi_karyawan']);
     route::get('/employee/okr', [PenilaianController::class, 'okr_karyawan']);
+    route::post('/profile/edit', [ProfileController::class, 'editProfile'])->name('editProfile');
+    route::post('/profile/changePassword', [ProfileController::class, 'changePassword'])->name('changePassword');
+    route::post('/profile/changeImage', [ProfileController::class, 'changeImage'])->name('changeImage');
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:executive']], function () {

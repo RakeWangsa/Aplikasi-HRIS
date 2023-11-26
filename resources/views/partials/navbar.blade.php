@@ -69,7 +69,7 @@
                <li>
                   <hr class="dropdown-divider">
                </li>
-               <li> <a class="dropdown-item d-flex align-items-center" {{ ($active === "profile_karyawan") ? 'active' : '' }}" href="/employee/profile"> <i class="bi bi-person"></i> <span>My Profile</span> </a></li>
+               <li> <a class="dropdown-item d-flex align-items-center" {{ ($active === "profile_karyawan") ? 'active' : '' }} href="/profile"> <i class="bi bi-person"></i> <span>My Profile</span> </a></li>
                <hr class="dropdown-divider">
                <li>
                   <form action="/logout" method="post">
