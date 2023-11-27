@@ -37,7 +37,6 @@ class ProfileController extends Controller
             'name' => $request->fullName,
             'about' => $request->about,
             'company' => $request->company,
-            'job' => $request->job,
             'country' => $request->country,
             'address' => $request->address,
             'phone' => $request->phone,

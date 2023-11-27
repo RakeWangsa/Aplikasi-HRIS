@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
-                                    <div class="col-md-8 col-lg-9"> <input name="job" type="text" class="form-control" id="Job" value="{{ $user->job }}" required></div>
+                                    <div class="col-md-8 col-lg-9"> <input name="job" type="text" class="form-control" id="Job" value="{{ $user->job }}" readonly></div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
