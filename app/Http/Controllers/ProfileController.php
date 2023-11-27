@@ -126,9 +126,13 @@ class ProfileController extends Controller
 
     public function profile_admin()
     {
+        $users = DB::table('Users')
+        ->select('*')
+        ->get();
         return view('profiles.admin', [
             'title' => 'Profiles',
             'active' => 'profile_admin',
+            'users' => $users
         ]);
     }
 }
