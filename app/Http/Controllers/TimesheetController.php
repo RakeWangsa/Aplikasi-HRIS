@@ -65,13 +65,19 @@ class TimesheetController extends Controller
         ->get();
         $employee = DB::table('Users')
         ->where('level','karyawan')
-        ->select('*')
+        ->select('name')
+        ->get();
+        $job = DB::table('Users')
+        ->where('level','karyawan')
+        ->select('job')
+        ->distinct()
         ->get();
         return view('timesheet.executive', [
             'title' => 'Timesheet',
             'active' => 'timesheet_executive',
             'timesheet' => $timesheet,
             'employee' => $employee,
+            'job' => $job,
         ]);
     }
 

@@ -35,8 +35,17 @@
                                 </div>
                             </div>
                             <div class="col-xxl-3 col-md-3">
-                                <input type="date" class="form-control">
+                                <div class="col-sm-12">
+                                    <select class="form-select" aria-label="Default select example">
+                                        @foreach($job as $row)
+                                            <option value="{{ $row->job }}">{{ $row->job }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
+                            {{-- <div class="col-xxl-3 col-md-3">
+                                <input type="date" class="form-control">
+                            </div> --}}
                             <div class="col-xxl-3 col-md-3">
                                 <input type="date" class="form-control">
                             </div>
