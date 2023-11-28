@@ -135,4 +135,14 @@ class ProfileController extends Controller
             'users' => $users
         ]);
     }
+
+    public function updateJob(Request $request)
+    {
+        $id_user = $request->id_user;
+        $profile = User::find($id_user);
+        $profile->update([
+            'job' => $request->job
+        ]);
+        return redirect('/admin/profiles');  
+    }
 }

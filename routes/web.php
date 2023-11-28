@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     route::get('/admin/dashboard', [DashboardController::class, 'dash_admin'])->middleware('auth');
     route::get('/daftar/absensi', [AbsensiController::class, 'daftar_absensi'])->middleware('auth');
     route::get('/admin/profiles', [ProfileController::class, 'profile_admin'])->middleware('auth');
+    route::post('/admin/profiles/updateJob', [ProfileController::class, 'updateJob'])->name('updateJob')->middleware('auth');
     route::get('/user/management', [ManagementController::class, 'index'])->middleware('auth');
     route::get('/admin/kpi', [PenilaianController::class, 'kpi_admin'])->middleware('auth');
     route::get('/admin/okr', [PenilaianController::class, 'okr_admin'])->middleware('auth');
