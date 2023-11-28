@@ -20,9 +20,17 @@
                             <div class="col-xxl-3 col-md-3">
                                 <div class="col-sm-12">
                                     <select class="form-select" aria-label="Default select example">
-                                        <option selected>Group by project</option>
                                         <option value="1">Group by task</option>
                                         <option value="2">Group by employee</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-md-3">
+                                <div class="col-sm-12">
+                                    <select class="form-select" aria-label="Default select example">
+                                        @foreach($employee as $row)
+                                            <option value="{{ $row->name }}">{{ $row->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
