@@ -20,7 +20,7 @@
         <div class="col-xxl-3 col-md-3">
             <div class="card">
                 <div class="card-body profiles-card pt-4 d-flex flex-column align-items-center">
-                    <img src="{{ asset('img/' . $row->image) }}" alt="Profile" class="rounded-circle">
+                    <img src="{{ asset('img/' . $row->image) }}" style="width:100px;height:100px" alt="Profile" class="rounded-circle">
                     <h2>{{ $row->name }}</h2>
                     <div class="btn-profile"> <button class="btn text-white" data-toggle="modal" data-target="#job{{ $row->id }}">{{ $row->job }}</button></div>
                 </div>

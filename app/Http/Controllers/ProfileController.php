@@ -118,9 +118,13 @@ class ProfileController extends Controller
 
     public function profile_executive()
     {
+        $users = DB::table('Users')
+        ->select('*')
+        ->get();
         return view('profiles.executive', [
             'title' => 'Daftar Karyawan',
             'active' => 'profile_executive',
+            'users' => $users
         ]);
     }
 
