@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PenilaianController extends Controller
 {
@@ -24,9 +25,15 @@ class PenilaianController extends Controller
 
     public function kpi_admin()
     {
+        $job = DB::table('Users')
+        ->where('level','karyawan')
+        ->select('job')
+        ->distinct()
+        ->get();
         return view('penilaian.kpi-admin', [
             'title' => 'KPI',
             'active' => 'kpi_admin',
+            'job' => $job
         ]);
     }
 

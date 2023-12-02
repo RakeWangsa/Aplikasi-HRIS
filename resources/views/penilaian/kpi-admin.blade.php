@@ -28,10 +28,9 @@
 
             <!-- Dropdown items -->
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="">Sales and Marketing</a></li>
-                <li><a class="dropdown-item" href="">Data Analyst</a></li>
-                <li><a class="dropdown-item" href="">Farming</a></li>
-                <li><a class="dropdown-item" href="">Finance</a></li>
+                @foreach($job as $row)
+                    <li><a class="dropdown-item" href="">{{ $row->job }}</a></li>
+                @endforeach
             </ul>
         </div>
     </nav>
@@ -48,10 +47,6 @@
                             <th scope="col">Key Performance Indikator</th>
                             <th scope="col">Bobot</th>
                             <th scope="col">Target</th>
-                            <th scope="col">Realisasi</th>
-                            <th scope="col">Score</th>
-                            <th scope="col">Nilai Akhir</th>
-                            <th scope="col">Sumber Dokumen Penilaian</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -62,10 +57,6 @@
                             <td>Waktu pemenuhan barang di outlet max (hari) setelah stock habis</td>
                             <td>9</td>
                             <td>2</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Draft laporan pemenuhan barang</td>
                             <td>
                                 <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
                                 <a class="btn btn-danger" style="border-radius: 100px;" a href=""><i class="bi bi-trash text-white"></i></a>
@@ -75,10 +66,6 @@
                             <td>Waktu penjualan hasil panen max (hari)</td>
                             <td>9</td>
                             <td>2</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Draft hasil panen</td>
                             <td>
                                 <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
                             </td>
@@ -87,10 +74,6 @@
                             <td>% tingkat keberhasilan promo yang dibuat min</td>
                             <td>6</td>
                             <td>7</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Draft pembayaran</td>
                             <td>
                                 <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
                             </td>
