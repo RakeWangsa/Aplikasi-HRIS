@@ -42,6 +42,26 @@ class PenilaianController extends Controller
         ]);
     }
 
+    public function kpi_admin_filter($divisi)
+    {
+        $job = DB::table('Users')
+        ->where('level','karyawan')
+        ->select('job')
+        ->distinct()
+        ->get();
+        $kpi = DB::table('kpi_admin')
+        ->where('divisi',$divisi)
+        ->select('*')
+        ->get();
+        return view('penilaian.kpi-admin', [
+            'title' => 'KPI',
+            'active' => 'kpi_admin',
+            'job' => $job,
+            'kpi' => $kpi,
+            'divisi' => $divisi
+        ]);
+    }
+
     public function add_KPI(Request $request)
     {
         KPI_admin::create([

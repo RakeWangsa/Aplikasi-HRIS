@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     route::post('/admin/profiles/updateJob', [ProfileController::class, 'updateJob'])->name('updateJob')->middleware('auth');
     route::get('/user/management', [ManagementController::class, 'index'])->middleware('auth');
     route::get('/admin/kpi', [PenilaianController::class, 'kpi_admin'])->middleware('auth');
+    route::get('/admin/kpi/{divisi}', [PenilaianController::class, 'kpi_admin_filter'])->name('kpi_admin_filter')->middleware('auth');
     route::post('/admin/kpi/addKPI', [PenilaianController::class, 'add_KPI'])->name('addKPI')->middleware('auth');
     route::get('/admin/okr', [PenilaianController::class, 'okr_admin'])->middleware('auth');
     Route::get('/editUser/{id}', [ManagementController::class, 'editUser'])->name('editUser')->middleware('auth');

@@ -20,20 +20,34 @@
             <li class="breadcrumb-item active">Penilaian</li>
             <li class="breadcrumb-item active">KPI</li>
         </ol>
-        <!-- Dropdown menu -->
-        <div class="dropdown">
-            <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                Tambah Indikator KPI
-            </a>
-
-            <!-- Dropdown items -->
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                @foreach($job as $row)
-                    <li><button class="dropdown-item" data-toggle="modal" data-target="#exampleModal{{ $row->job }}">{{ $row->job }}</button></li>
-                @endforeach
-
-            </ul>
+        <div class="d-flex justify-content-between">
+            <div class="dropdown">
+                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filter @if(isset($divisi)) {{ $divisi }} @endif
+                </a>
+        
+                <!-- Dropdown items -->
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    @foreach($job as $row)
+                        <li><a class="dropdown-item" href="{{ route('kpi_admin_filter', ['divisi' => $row->job]) }}">{{ $row->job }}</a></li>
+                    @endforeach
+                </ul>
+            </div>
+            
+            <div class="dropdown">
+                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Tambah Indikator KPI
+                </a>
+        
+                <!-- Dropdown items -->
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    @foreach($job as $row)
+                        <li><button class="dropdown-item" data-toggle="modal" data-target="#exampleModal{{ $row->job }}">{{ $row->job }}</button></li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
+        
     </nav>
 </div>
 
