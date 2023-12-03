@@ -56,20 +56,20 @@
                     <input type="text" class="form-control" id="divisi" name="divisi" value="{{ $row->job }}" readonly>
                 </div>
                 <div class="form-group mb-3">
-                    <label for="tanggungjawabpekerjaan">Tanggung Jawab Pekerjaan :</label>
-                    <input type="text" class="form-control" id="tanggungjawabpekerjaan" name="tanggungjawabpekerjaan" placeholder="Masukkan Tanggung Jawab Pekerjaan">
+                    <label for="tanggung_jawab_pekerjaan">Tanggung Jawab Pekerjaan :</label>
+                    <input type="text" class="form-control" id="tanggung_jawab_pekerjaan" name="tanggung_jawab_pekerjaan" placeholder="Masukkan Tanggung Jawab Pekerjaan">
                 </div>
                 <div class="form-group mb-3">
-                    <label for="keyperformanceindikator">Key Performance Indikator :</label>
-                    <input type="text" class="form-control" id="keyperformanceindikator" name="keyperformanceindikator" placeholder="Masukkan Key Performance Indikator">
+                    <label for="key_performance_indikator">Key Performance Indikator :</label>
+                    <input type="text" class="form-control" id="key_performance_indikator" name="key_performance_indikator" placeholder="Masukkan Key Performance Indikator">
                 </div>
                 <div class="form-group mb-3">
                     <label for="bobot">Bobot :</label>
-                    <input type="text" class="form-control" id="bobot" name="bobot" placeholder="Masukkan Bobot">
+                    <input type="number" class="form-control" id="bobot" name="bobot" placeholder="Masukkan Bobot">
                 </div>
                 <div class="form-group mb-3">
                     <label for="target">Target :</label>
-                    <input type="text" class="form-control" id="target" name="target" placeholder="Masukkan Target">
+                    <input type="number" class="form-control" id="target" name="target" placeholder="Masukkan Target">
                 </div>
             </div>
             <div class="modal-footer">
@@ -97,6 +97,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php($i=1)
+                        @foreach($kpi as $row)
+                        <tr>
+                            <th>{{ $i++ }}</th>
+                            <td>{{ $row->tanggung_jawab_pekerjaan }}</td>
+                            <td>{{ $row->key_performance_indikator }}</td>
+                            <td>{{ $row->bobot }}</td>
+                            <td>{{ $row->target }}</td>
+                            <td>
+                                <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
+                                <a class="btn btn-danger" style="border-radius: 100px;" a href=""><i class="bi bi-trash text-white"></i></a>
+                            </td>
+                        </tr>
+                        @endforeach
                         <tr>
                             <th scope="row" rowspan="3">1</th>
                             <td rowspan="3">Mendistribusikan produk-produk panen The Farmhill</td>

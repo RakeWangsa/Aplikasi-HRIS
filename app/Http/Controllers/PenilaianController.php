@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\KPI_admin;
 
 class PenilaianController extends Controller
 {
@@ -30,11 +31,27 @@ class PenilaianController extends Controller
         ->select('job')
         ->distinct()
         ->get();
+        $kpi = DB::table('kpi_admin')
+        ->select('*')
+        ->get();
         return view('penilaian.kpi-admin', [
             'title' => 'KPI',
             'active' => 'kpi_admin',
-            'job' => $job
+            'job' => $job,
+            'kpi' => $kpi
         ]);
+    }
+
+    public function add_KPI(Request $request)
+    {
+        KPI_admin::create([
+            'divisi' => $request->divisi,
+            'tanggung_jawab_pekerjaan' => $request->tanggung_jawab_pekerjaan,
+            'key_performance_indikator' => $request->key_performance_indikator,
+            'bobot' => $request->bobot,
+            'target' => $request->target,
+        ]);
+        return redirect('/admin/kpi');
     }
 
     public function okr_admin()
