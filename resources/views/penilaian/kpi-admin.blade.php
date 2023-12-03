@@ -29,12 +29,58 @@
             <!-- Dropdown items -->
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 @foreach($job as $row)
-                    <li><a class="dropdown-item" href="">{{ $row->job }}</a></li>
+                    <li><button class="dropdown-item" data-toggle="modal" data-target="#exampleModal{{ $row->job }}">{{ $row->job }}</button></li>
                 @endforeach
+
             </ul>
         </div>
     </nav>
 </div>
+
+@foreach($job as $row)
+<!-- Modal -->
+<div class="modal fade" id="exampleModal{{ $row->job }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ $row->job }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form action="{{ route('addKPI') }}" method="post">
+            @csrf
+            <div class="modal-body">
+                <div class="form-group mb-3">
+                    <label for="divisi">Divisi :</label>
+                    <input type="text" class="form-control" id="divisi" name="divisi" value="{{ $row->job }}" readonly>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="tanggungjawabpekerjaan">Tanggung Jawab Pekerjaan :</label>
+                    <input type="text" class="form-control" id="tanggungjawabpekerjaan" name="tanggungjawabpekerjaan" placeholder="Masukkan Tanggung Jawab Pekerjaan">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="keyperformanceindikator">Key Performance Indikator :</label>
+                    <input type="text" class="form-control" id="keyperformanceindikator" name="keyperformanceindikator" placeholder="Masukkan Key Performance Indikator">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="bobot">Bobot :</label>
+                    <input type="text" class="form-control" id="bobot" name="bobot" placeholder="Masukkan Bobot">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="target">Target :</label>
+                    <input type="text" class="form-control" id="target" name="target" placeholder="Masukkan Target">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Kirim</button>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+    @endforeach
+
 <section class="section dashboard">
     <div class="row">
         <div class="col-lg-12">
