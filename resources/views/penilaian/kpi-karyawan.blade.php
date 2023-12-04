@@ -74,24 +74,21 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                         </div>
-                                        <form action="{{ route('updateKPI', ['id' => $row->id]) }}" method="post">
+                                        <form action="{{ route('isiKPI') }}" method="post">
                                             @csrf
+                                            <input type="text" class="form-control" style="display:none" id="id_kpi_admin" name="id_kpi_admin" value="{{ $row->id }}">
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <label for="update_tanggung_jawab_pekerjaan">Tanggung Jawab Pekerjaan:</label>
-                                                    <input type="text" class="form-control" id="update_tanggung_jawab_pekerjaan" name="update_tanggung_jawab_pekerjaan" value="{{ $row->tanggung_jawab_pekerjaan }}">
+                                                    <label for="realisasi">Realisasi:</label>
+                                                    <input type="text" class="form-control" id="realisasi" name="realisasi">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="update_key_performance_indikator">Key Performance Indikator:</label>
-                                                    <input type="text" class="form-control" id="update_key_performance_indikator" name="update_key_performance_indikator" value="{{ $row->key_performance_indikator }}">
+                                                    <label for="score">Score:</label>
+                                                    <input type="text" class="form-control" id="score" name="score">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="update_bobot">Bobot:</label>
-                                                    <input type="text" class="form-control" id="update_bobot" name="update_bobot" value="{{ $row->bobot }}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="update_target">Target:</label>
-                                                    <input type="text" class="form-control" id="update_target" name="update_target" value="{{ $row->target }}">
+                                                    <label for="sumber">Sumber Dokumen Penilaian:</label>
+                                                    <input type="file" class="form-control" id="sumber" name="sumber">
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -104,45 +101,6 @@
     
                             @endforeach
                             @endif
-
-                            {{-- <tr>
-                                <th scope="row" rowspan="3">1</th>
-                                <td rowspan="3">Mendistribusikan produk-produk panen The Farmhill</td>
-                                <td>Waktu pemenuhan barang di outlet max (hari) setelah stock habis</td>
-                                <td>9</td>
-                                <td>2</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>Draft laporan pemenuhan barang</td>
-                                <td>
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Waktu penjualan hasil panen max (hari)</td>
-                                <td>9</td>
-                                <td>2</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>Draft hasil panen</td>
-                                <td>
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>% tingkat keberhasilan promo yang dibuat min</td>
-                                <td>6</td>
-                                <td>7</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>Draft pembayaran</td>
-                                <td>
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </td>
-                            </tr> --}}
                         </tbody>
                     </table>
                 </div>

@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:karyawan']], function () {
     route::get('/timesheet/time-tracker', [TimesheetController::class, 'timesheet_karyawan']);
     route::post('/timesheet/time-tracker/submit', [TimesheetController::class, 'submitTimesheet'])->name('submitTimesheet');
     route::get('/employee/kpi', [PenilaianController::class, 'kpi_karyawan']);
+    route::post('/employee/kpi/isiKPI', [PenilaianController::class, 'isi_KPI'])->name('isiKPI');
     route::get('/employee/okr', [PenilaianController::class, 'okr_karyawan']);
 });
 

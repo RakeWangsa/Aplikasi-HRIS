@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\KPI_admin;
+use App\Models\KPI_karyawan;
 
 class PenilaianController extends Controller
 {
@@ -20,6 +21,21 @@ class PenilaianController extends Controller
             'active' => 'kpi_karyawan',
             'kpi' => $kpi,
         ]);
+    }
+
+    public function isi_KPI(Request $request)
+    {
+        $nilai_akhir="100";
+        $sumber="iya"; 
+        KPI_karyawan::create([
+            'id_user' => auth()->user()->id,
+            'id_kpi_admin' => $request->id_kpi_admin,
+            'realisasi' => $request->realisasi,
+            'score' => $request->score,
+            'nilai_akhir' => $nilai_akhir,
+            'sumber' => $sumber,
+        ]);
+        return redirect('/admin/kpi');
     }
 
     public function okr_karyawan()
