@@ -80,6 +80,24 @@ class PenilaianController extends Controller
         return redirect('/admin/kpi')->with('success', 'Data KPI berhasil dihapus');
     }
 
+    public function update_KPI(Request $request, $id)
+{
+    // Temukan data berdasarkan ID
+    $kpi = KPI_admin::find($id);
+
+
+    // Update data
+    $kpi->update([
+        'tanggung_jawab_pekerjaan' => $request->update_tanggung_jawab_pekerjaan,
+        'key_performance_indikator' => $request->update_key_performance_indikator,
+        'bobot' => $request->update_bobot,
+        'target' => $request->update_target,
+    ]);
+
+    return redirect('/admin/kpi')->with('success', 'Data KPI berhasil diperbarui');
+}
+
+
     public function okr_admin()
     {
         return view('penilaian.okr-admin', [

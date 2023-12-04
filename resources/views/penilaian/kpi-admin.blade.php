@@ -124,10 +124,49 @@
                                 <td>{{ $row->bobot }}</td>
                                 <td>{{ $row->target }}</td>
                                 <td>
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
+                                    <a class="btn btn-warning" style="border-radius: 100px;" data-toggle="modal" data-target="#update{{ $row->id }}"><i class="bi bi-pencil-square text-white"></i></a>
                                     <a class="btn btn-danger" style="border-radius: 100px;" a href="{{ route('hapusKPI', ['id' => $row->id]) }}"><i class="bi bi-trash text-white"></i></a>
                                 </td>
                             </tr>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="update{{ $row->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Update KPI</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <form action="{{ route('updateKPI', ['id' => $row->id]) }}" method="post">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="update_tanggung_jawab_pekerjaan">Tanggung Jawab Pekerjaan:</label>
+                                                <input type="text" class="form-control" id="update_tanggung_jawab_pekerjaan" name="update_tanggung_jawab_pekerjaan" value="{{ $row->tanggung_jawab_pekerjaan }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="update_key_performance_indikator">Key Performance Indikator:</label>
+                                                <input type="text" class="form-control" id="update_key_performance_indikator" name="update_key_performance_indikator" value="{{ $row->key_performance_indikator }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="update_bobot">Bobot:</label>
+                                                <input type="text" class="form-control" id="update_bobot" name="update_bobot" value="{{ $row->bobot }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="update_target">Target:</label>
+                                                <input type="text" class="form-control" id="update_target" name="update_target" value="{{ $row->target }}">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Kirim</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+
                         @endforeach
                         @endif
                     </tbody>
