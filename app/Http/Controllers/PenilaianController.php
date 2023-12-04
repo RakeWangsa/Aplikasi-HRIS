@@ -73,6 +73,13 @@ class PenilaianController extends Controller
         return redirect('/admin/kpi');
     }
 
+    public function hapus_KPI($id)
+    {
+        KPI_admin::find($id)->delete();
+
+        return redirect('/admin/kpi')->with('success', 'Data KPI berhasil dihapus');
+    }
+
     public function okr_admin()
     {
         return view('penilaian.okr-admin', [

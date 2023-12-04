@@ -125,40 +125,11 @@
                                 <td>{{ $row->target }}</td>
                                 <td>
                                     <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                    <a class="btn btn-danger" style="border-radius: 100px;" a href=""><i class="bi bi-trash text-white"></i></a>
+                                    <a class="btn btn-danger" style="border-radius: 100px;" a href="{{ route('hapusKPI', ['id' => $row->id]) }}"><i class="bi bi-trash text-white"></i></a>
                                 </td>
                             </tr>
                         @endforeach
-                        
-                        
                         @endif
-                        {{-- <tr>
-                            <th scope="row" rowspan="3">1</th>
-                            <td rowspan="3">Mendistribusikan produk-produk panen The Farmhill</td>
-                            <td>Waktu pemenuhan barang di outlet max (hari) setelah stock habis</td>
-                            <td>9</td>
-                            <td>2</td>
-                            <td>
-                                <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                <a class="btn btn-danger" style="border-radius: 100px;" a href=""><i class="bi bi-trash text-white"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Waktu penjualan hasil panen max (hari)</td>
-                            <td>9</td>
-                            <td>2</td>
-                            <td>
-                                <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>% tingkat keberhasilan promo yang dibuat min</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>
-                                <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                            </td>
-                        </tr> --}}
                     </tbody>
                 </table>
             </div>
