@@ -10,9 +10,15 @@ class PenilaianController extends Controller
 {
     public function kpi_karyawan()
     {
+        $kpi = DB::table('kpi_admin')
+        ->where('divisi',auth()->user()->job)
+        ->select('*')
+        ->orderBy('tanggung_jawab_pekerjaan')
+        ->get();
         return view('penilaian.kpi-karyawan', [
             'title' => 'KPI',
             'active' => 'kpi_karyawan',
+            'kpi' => $kpi,
         ]);
     }
 
