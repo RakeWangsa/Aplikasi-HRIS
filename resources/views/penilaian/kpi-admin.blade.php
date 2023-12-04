@@ -23,7 +23,7 @@
         <div class="d-flex justify-content-between">
             <div class="dropdown">
                 <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    Filter @if(isset($divisi)) {{ $divisi }} @endif
+                    @if(isset($divisi)) {{ $divisi }} @else Pilih Divisi @endif
                 </a>
         
                 <!-- Dropdown items -->
@@ -111,21 +111,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php($i=1)
-                        @foreach($kpi as $row)
-                        <tr>
-                            <th>{{ $i++ }}</th>
-                            <td>{{ $row->tanggung_jawab_pekerjaan }}</td>
-                            <td>{{ $row->key_performance_indikator }}</td>
-                            <td>{{ $row->bobot }}</td>
-                            <td>{{ $row->target }}</td>
-                            <td>
-                                <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                <a class="btn btn-danger" style="border-radius: 100px;" a href=""><i class="bi bi-trash text-white"></i></a>
-                            </td>
-                        </tr>
+                        @if(isset($kpi))
+                        @php($i = 1)
+                        @foreach($kpi as $index => $row)
+                            <tr>
+                                @if ($index == 0 || $row->tanggung_jawab_pekerjaan != $kpi[$index - 1]->tanggung_jawab_pekerjaan)
+                                    @php($rowspan = $kpi->where('tanggung_jawab_pekerjaan', $row->tanggung_jawab_pekerjaan)->count())
+                                    <th rowspan="{{ $rowspan }}">{{ $i++ }}</th>
+                                    <td rowspan="{{ $rowspan }}">{{ $row->tanggung_jawab_pekerjaan }}</td>
+                                @endif
+                                <td>{{ $row->key_performance_indikator }}</td>
+                                <td>{{ $row->bobot }}</td>
+                                <td>{{ $row->target }}</td>
+                                <td>
+                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
+                                    <a class="btn btn-danger" style="border-radius: 100px;" a href=""><i class="bi bi-trash text-white"></i></a>
+                                </td>
+                            </tr>
                         @endforeach
-                        <tr>
+                        
+                        
+                        @endif
+                        {{-- <tr>
                             <th scope="row" rowspan="3">1</th>
                             <td rowspan="3">Mendistribusikan produk-produk panen The Farmhill</td>
                             <td>Waktu pemenuhan barang di outlet max (hari) setelah stock habis</td>
@@ -151,7 +158,7 @@
                             <td>
                                 <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
                             </td>
-                        </tr>
+                        </tr> --}}
                     </tbody>
                 </table>
             </div>
