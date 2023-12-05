@@ -55,10 +55,10 @@
                                     <td>{{ $row->key_performance_indikator }}</td>
                                     <td>{{ $row->bobot }}</td>
                                     <td>{{ $row->target }}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $row->realisasi }}</td>
+                                    <td>{{ $row->score }}</td>
+                                    <td>{{ $row->nilai_akhir }}</td>
+                                    <td>{{ $row->sumber }}</td>
                                     <td>
                                         <a class="btn btn-warning" style="border-radius: 100px;" data-toggle="modal" data-target="#update{{ $row->id }}"><i class="bi bi-pencil-square text-white"></i></a>
                                     </td>
@@ -69,7 +69,7 @@
                                     <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Update KPI</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Isi KPI</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
