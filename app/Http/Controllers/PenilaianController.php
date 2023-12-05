@@ -12,12 +12,14 @@ class PenilaianController extends Controller
     public function kpi_karyawan()
     {
         $kpi = DB::table('kpi_admin')
-        ->leftJoin('kpi_karyawan', 'kpi_admin.id', '=', 'kpi_karyawan.id_kpi_admin')
+        ->leftJoin('kpi_karyawan', function ($join) {
+            $join->on('kpi_admin.id', '=', 'kpi_karyawan.id_kpi_admin')
+                 ->where('kpi_karyawan.id_user', '=', auth()->user()->id);
+        })
         ->where('kpi_admin.divisi', auth()->user()->job)
-        ->select('kpi_admin.*', 'kpi_karyawan.id_user','kpi_karyawan.realisasi','kpi_karyawan.score','kpi_karyawan.nilai_akhir','kpi_karyawan.sumber',)
+        ->select('kpi_admin.*', 'kpi_karyawan.id_user', 'kpi_karyawan.realisasi', 'kpi_karyawan.score', 'kpi_karyawan.nilai_akhir', 'kpi_karyawan.sumber')
         ->orderBy('kpi_admin.tanggung_jawab_pekerjaan')
         ->get();
-    
     
         return view('penilaian.kpi-karyawan', [
             'title' => 'KPI',
@@ -28,17 +30,30 @@ class PenilaianController extends Controller
 
     public function isi_KPI(Request $request)
     {
-        $nilai_akhir=100;
-        $sumber="iya"; 
-        dd($request->id_kpi_admin);
-        KPI_karyawan::create([
+
+        $sumber = "iya"; 
+        $kpi_admin = DB::table('kpi_admin')
+        ->where('id',$request->id_kpi_admin,)
+        ->select('*')
+        ->first();
+
+        $score=$request->realisasi/$kpi_admin->target*100;
+        $nilai_akhir = $score*$kpi_admin->bobot/100;
+    
+        $data = [
             'id_user' => auth()->user()->id,
             'id_kpi_admin' => $request->id_kpi_admin,
+        ];
+    
+        $updateData = [
             'realisasi' => $request->realisasi,
-            'score' => $request->score,
+            'score' => $score,
             'nilai_akhir' => $nilai_akhir,
             'sumber' => $sumber,
-        ]);
+        ];
+    
+        KPI_karyawan::updateOrInsert($data, $updateData);
+    
         return redirect('/employee/kpi');
     }
 
