@@ -74,17 +74,13 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                         </div>
-                                        <form action="{{ route('isiKPI') }}" method="post">
+                                        <form action="{{ route('isiKPI') }}" method="post" enctype="multipart/form-data">
                                             @csrf
                                             <input type="text" class="form-control" style="display:none" id="id_kpi_admin" name="id_kpi_admin" value="{{ $row->id }}">
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label for="realisasi">Realisasi:</label>
                                                     <input type="text" class="form-control" id="realisasi" name="realisasi">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="score">Score:</label>
-                                                    <input type="text" class="form-control" id="score" name="score">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="sumber">Sumber Dokumen Penilaian:</label>

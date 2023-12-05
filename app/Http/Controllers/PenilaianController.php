@@ -30,8 +30,6 @@ class PenilaianController extends Controller
 
     public function isi_KPI(Request $request)
     {
-
-        $sumber = "iya"; 
         $kpi_admin = DB::table('kpi_admin')
         ->where('id',$request->id_kpi_admin,)
         ->select('*')
@@ -39,7 +37,11 @@ class PenilaianController extends Controller
 
         $score=$request->realisasi/$kpi_admin->target*100;
         $nilai_akhir = $score*$kpi_admin->bobot/100;
-    
+
+        $sumber = $request->file('sumber');
+        $namaSumber = uniqid() . '.' . $sumber->getClientOriginalExtension();
+        $sumber->move(public_path('img'), $namaSumber);
+
         $data = [
             'id_user' => auth()->user()->id,
             'id_kpi_admin' => $request->id_kpi_admin,
@@ -49,7 +51,7 @@ class PenilaianController extends Controller
             'realisasi' => $request->realisasi,
             'score' => $score,
             'nilai_akhir' => $nilai_akhir,
-            'sumber' => $sumber,
+            'sumber' => $namaSumber,
         ];
     
         KPI_karyawan::updateOrInsert($data, $updateData);
