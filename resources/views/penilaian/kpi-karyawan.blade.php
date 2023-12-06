@@ -58,7 +58,10 @@
                                     <td>{{ $row->realisasi }}</td>
                                     <td>{{ $row->score }}</td>
                                     <td>{{ $row->nilai_akhir }}</td>
-                                    <td>{{ $row->sumber }}</td>
+                                    <td>
+                                        <a href="{{ asset('img/'.$row->sumber) }}" target="_blank">{{ $row->sumber }}</a>
+                                    </td>
+                                    
                                     <td>
                                         <a class="btn btn-warning" style="border-radius: 100px;" data-toggle="modal" data-target="#update{{ $row->id }}"><i class="bi bi-pencil-square text-white"></i></a>
                                     </td>
@@ -80,11 +83,11 @@
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label for="realisasi">Realisasi:</label>
-                                                    <input type="text" class="form-control" id="realisasi" name="realisasi">
+                                                    <input type="text" class="form-control" id="realisasi" name="realisasi" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="sumber">Sumber Dokumen Penilaian:</label>
-                                                    <input type="file" class="form-control" id="sumber" name="sumber">
+                                                    <input type="file" class="form-control" id="sumber" name="sumber" required>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">

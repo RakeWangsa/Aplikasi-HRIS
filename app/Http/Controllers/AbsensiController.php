@@ -178,10 +178,21 @@ class AbsensiController extends Controller
         ->select('absensi.*', 'users.name')
         ->join('users', 'absensi.id_user', '=', 'users.id')
         ->get();
+        $setting = DB::table('batas_absen')
+        ->where('id',1)
+        ->select('*')
+        ->first();
         return view('absensi.admin', [
             'title' => 'Absensi',
             'active' => 'daftar_absensi',
             'absensi' => $absensi,
+            'setting' => $setting,
         ]);
+    }
+
+    public function settingBatasAbsen(Request $request)
+    {
+
+        return redirect('/daftar/absensi'); 
     }
 }
