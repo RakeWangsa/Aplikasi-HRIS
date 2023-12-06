@@ -81,7 +81,7 @@
 
         // Periksa apakah opsi yang dipilih adalah opsi pertama (disabled)
         if (selectedValue === selectElement.options[0].value) {
-            alert('Pilih task selain opsi pertama.');
+            alert('"Category Task" harus diisi!');
             event.preventDefault(); // Mencegah pengiriman formulir jika tidak valid
         }
     });

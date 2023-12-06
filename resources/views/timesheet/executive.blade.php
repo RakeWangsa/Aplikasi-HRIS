@@ -37,10 +37,10 @@
                                 </div>
                             </div>
                             <div class="col-xxl-2 col-md-3">
-                                <input type="date" name="start_date" class="form-control" @if(isset($startDate)) value="{{ $startDate }}" @endif required>
+                                <input type="date" name="start_date" class="form-control" @if(isset($startDate)) value="{{ $startDate }}" @endif required title="start date">
                             </div>
                             <div class="col-xxl-2 col-md-3">
-                                <input type="date" name="end_date" class="form-control" @if(isset($endDate)) value="{{ $endDate }}" @endif required>
+                                <input type="date" name="end_date" class="form-control" @if(isset($endDate)) value="{{ $endDate }}" @endif required title="end date">
                             </div>
                             <div class="col-xxl-2 col-md-3">
                                 <button type="submit" class="btn btn-primary">
@@ -48,13 +48,13 @@
                                 </button>
                             </div>
                             <div class="col-xxl-2 col-md-3">
-                                <button class="btn btn-outline-secondary">
+                                <button id="exportBtn" class="btn btn-outline-secondary">
                                     <i class='bi bi-download'></i> Export XLS
                                 </button>
                             </div>
                         </div>
                     </form>
-                    <table class="table datatable">
+                    <table class="table datatable" id="timesheetTable">
                         <thead>
                             <tr>
                                 <th scope="col">Name</th>
@@ -96,7 +96,6 @@
         // Bersihkan opsi sebelum menambahkan yang baru
         optionsSelect.innerHTML = '';
         
-        // Tambahkan opsi sesuai dengan pilihan elemen pertama
         if (groupSelect.value === 'employee') {
             @foreach($employee as $row)
                 optionsSelect.options.add(new Option('{{ $row->name }}', '{{ $row->name }}'));
@@ -108,11 +107,41 @@
         }
     }
 
-    // Tambahkan event listener untuk memanggil fungsi ketika pilihan elemen pertama berubah
+    // untuk memanggil fungsi ketika pilihan elemen pertama berubah
     document.getElementById('groupSelect').addEventListener('change', updateOptions);
 
     // Panggil fungsi pertama kali untuk menetapkan opsi awal
     updateOptions();
+</script>
+
+<!-- script untuk SheetJS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+
+<script>
+    // Fungsi untuk mengumpulkan data dari tabel dan membuat file Excel
+    function exportToXLS() {
+        // Ambil tabel berdasarkan ID
+        var table = document.getElementById('timesheetTable');
+
+        // Dapatkan semua baris dan kolom dari tabel
+        var rows = Array.from(table.querySelectorAll('tr'));
+        var data = rows.map(function (row) {
+            return Array.from(row.querySelectorAll('th, td')).map(function (cell) {
+                return cell.textContent.trim();
+            });
+        });
+
+        // Buat objek workbook dan worksheet menggunakan SheetJS
+        var ws = XLSX.utils.aoa_to_sheet(data);
+        var wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Timesheet');
+
+        // Simpan workbook sebagai file XLS
+        XLSX.writeFile(wb, 'timesheet.xlsx');
+    }
+
+    // event listener untuk tombol "Export XLS"
+    document.getElementById('exportBtn').addEventListener('click', exportToXLS);
 </script>
 
 
