@@ -138,13 +138,13 @@
                                     new ApexCharts(document.querySelector("#columnChart"), {
                                         series: [{
                                             name: 'Hadir',
-                                            data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+                                            data: [44, 55, 57, 56, 61, 58, 63, 60, 66, 50, 60, 70]
                                         }, {
                                             name: 'Sakit',
-                                            data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+                                            data: [76, 85, 101, 98, 87, 105, 91, 114, 94, 50, 60, 70]
                                         }, {
                                             name: 'Izin',
-                                            data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+                                            data: [35, 41, 36, 26, 45, 48, 52, 53, 41, 50, 60, 70]
                                         }],
                                         chart: {
                                             type: 'bar',
@@ -166,7 +166,7 @@
                                             colors: ['transparent']
                                         },
                                         xaxis: {
-                                            categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct','Nov','Dec'],
                                         },
                                         yaxis: {
                                             title: {

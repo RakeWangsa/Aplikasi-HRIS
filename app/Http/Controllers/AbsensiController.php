@@ -29,11 +29,15 @@ class AbsensiController extends Controller
 
     public function absensi_karyawan_datang(Request $request,$status)
     {
+        $batas = DB::table('batas_absen')
+        ->where('id', 1)
+        ->select('*')
+        ->first();
         date_default_timezone_set('Asia/Jakarta');
-        $cekWaktu = date('H:i');
-        if ($cekWaktu <= '07:45' || $cekWaktu >= '08:00') {
-            // Waktu berada di luar jam 07.45 dan 08.00
-            return redirect()->back()->with('error', 'Absen datang hanya dapat dilakukan pada pukul 07.45 - 08.00');
+        $cekWaktu = date('H:i:s');
+        if ($cekWaktu <= $batas->batas_awal_datang || $cekWaktu >= $batas->batas_akhir_datang) {
+            // Jika waktu berada di luar batas absen
+            return redirect()->back()->with('error', 'Absen datang hanya dapat dilakukan pada pukul ' . $batas->batas_awal_datang . ' - ' . $batas->batas_akhir_datang);
         }
 
         $lokasi = $request->lokasi1;
@@ -104,11 +108,15 @@ class AbsensiController extends Controller
 
     public function absensi_karyawan_pulang(Request $request,$status)
     {
+        $batas = DB::table('batas_absen')
+        ->where('id', 1)
+        ->select('*')
+        ->first();
         date_default_timezone_set('Asia/Jakarta');
         $cekWaktu = date('H:i');
-        if ($cekWaktu <= '15:45' || $cekWaktu >= '16:00') {
-            // Waktu berada di luar jam 07.45 dan 08.00
-            return redirect()->back()->with('error', 'Absen pulang hanya dapat dilakukan pada pukul 15.45 - 16.00');
+        if ($cekWaktu <= $batas->batas_awal_pulang || $cekWaktu >= $batas->batas_akhir_pulang) {
+            // Jika waktu berada di luar batas absen
+            return redirect()->back()->with('error', 'Absen datang hanya dapat dilakukan pada pukul ' . $batas->batas_awal_datang . ' - ' . $batas->batas_akhir_datang);
         }
 
         $lokasi = $request->lokasi2;
