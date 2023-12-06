@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Absensi;
+use App\Models\BatasAbsen;
 
 class AbsensiController extends Controller
 {
@@ -14,10 +15,15 @@ class AbsensiController extends Controller
         ->where('id_user', auth()->user()->id)
         ->select('*')
         ->get();
+        $batas = DB::table('batas_absen')
+        ->where('id',1)
+        ->select('*')
+        ->first();
         return view('absensi.karyawan', [
             'title' => 'Absensi',
             'active' => 'absensi_karyawan',
             'absensi' => $absensi,
+            'batas' => $batas,
         ]);
     }
 
@@ -192,7 +198,17 @@ class AbsensiController extends Controller
 
     public function settingBatasAbsen(Request $request)
     {
+        $setting = BatasAbsen::find(1);
 
+
+        // Update data
+        $setting->update([
+            'batas_awal_datang' => $request->batas_awal_datang,
+            'batas_akhir_datang' => $request->batas_akhir_datang,
+            'batas_awal_pulang' => $request->batas_awal_pulang,
+            'batas_akhir_pulang' => $request->batas_akhir_pulang,
+
+        ]);
         return redirect('/daftar/absensi'); 
     }
 }

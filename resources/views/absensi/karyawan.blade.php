@@ -57,7 +57,7 @@
                         <div class="card-body">
                             <form method="POST" action="{{ route('absenDatang', ['status' => 'Hadir']) }}" id="absenDatang" enctype="multipart/form-data">
                                 @csrf
-                            <h5 class="card-title">Absensi Datang</h5>
+                            <h5 class="card-title">Absensi Datang <span>({{ $batas->batas_awal_datang }} - {{ $batas->batas_akhir_datang }})</span></h5>
                             <div class="row">
 
                                     <div class="col-sm-12"> <input class="form-control" type="file" accept="image/*" name="gambar1" id="formFile" required> <input class="form-control" style="display:none" type="text" name="lokasi1" id="inputLokasi1"></div>
@@ -77,7 +77,7 @@
                         <div class="card-body">
                             <form method="POST" action="{{ route('absenPulang', ['status' => 'Hadir']) }}" id="absenPulang" enctype="multipart/form-data">
                                 @csrf
-                            <h5 class="card-title">Absensi Pulang</h5>
+                            <h5 class="card-title">Absensi Pulang <span>({{ $batas->batas_awal_pulang }} - {{ $batas->batas_akhir_pulang }})</span></h5>
                             <div class="row">
 
                                     <div class="col-sm-12"> <input class="form-control" type="file" accept="image/*" name="gambar2" id="formFile" required> <input class="form-control" style="display:none" type="text" name="lokasi2" id="inputLokasi2"></div>

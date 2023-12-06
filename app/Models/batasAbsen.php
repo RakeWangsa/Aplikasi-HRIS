@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class batasAbsen extends Model
+class BatasAbsen extends Model
 {
     use HasFactory;
     protected $table = "batas_absen";
