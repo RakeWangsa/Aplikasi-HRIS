@@ -61,8 +61,9 @@ class TimesheetController extends Controller
     public function timesheet_executive()
     {
         $timesheet = DB::table('timesheet')
-        ->select('*')
-        ->get();
+        ->select('timesheet.*', 'users.name', 'users.job')
+        ->join('users', 'timesheet.id_user', '=', 'users.id')
+        ->get();    
         $employee = DB::table('Users')
         ->where('level','karyawan')
         ->select('name')
