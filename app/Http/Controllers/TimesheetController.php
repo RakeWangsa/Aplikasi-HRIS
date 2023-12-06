@@ -82,6 +82,52 @@ class TimesheetController extends Controller
         ]);
     }
 
+    public function filterTimesheet(Request $request)
+    {
+        $groupBy=$request->groupBy;
+        $filter=$request->filter;
+        $startDate=$request->start_date;
+        $endDate=$request->end_date;
+        
+        if($groupBy=="job"){
+            $timesheet = DB::table('timesheet')     
+            ->whereBetween('date', [$startDate, $endDate])
+            ->select('timesheet.*', 'users.name', 'users.job')
+            ->join('users', 'timesheet.id_user', '=', 'users.id')
+            ->where('users.job', '=', $filter)
+            ->get();  
+        }else{
+            $timesheet = DB::table('timesheet')     
+            ->whereBetween('date', [$startDate, $endDate])
+            ->select('timesheet.*', 'users.name', 'users.job')
+            ->join('users', 'timesheet.id_user', '=', 'users.id')
+            ->where('users.name', '=', $filter)
+            ->get(); 
+        }
+
+  
+        $employee = DB::table('Users')
+        ->where('level','karyawan')
+        ->select('name')
+        ->get();
+        $job = DB::table('Users')
+        ->where('level','karyawan')
+        ->select('job')
+        ->distinct()
+        ->get();
+        return view('timesheet.executive', [
+            'title' => 'Timesheet',
+            'active' => 'timesheet_executive',
+            'timesheet' => $timesheet,
+            'employee' => $employee,
+            'job' => $job,
+            'groupBy' => $groupBy,
+            'filter' => $filter,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+        ]);
+    }
+
     public function task_timesheet()
     {
         $task = DB::table('task_timesheet')

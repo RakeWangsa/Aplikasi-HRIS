@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:executive']], function () {
     route::get('/executive/profile', [ProfileController::class, 'profile_karyawan']);
     route::get('/daftar/karyawan', [ProfileController::class, 'profile_executive']);
     route::get('/executive/timesheet', [TimesheetController::class, 'timesheet_executive']);
+    route::post('/executive/timesheet/filter', [TimesheetController::class, 'filterTimesheet'])->name('filterTimesheet');
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
