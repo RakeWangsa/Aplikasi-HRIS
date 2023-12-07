@@ -116,7 +116,7 @@ class AbsensiController extends Controller
         $cekWaktu = date('H:i');
         if ($cekWaktu <= $batas->batas_awal_pulang || $cekWaktu >= $batas->batas_akhir_pulang) {
             // Jika waktu berada di luar batas absen
-            return redirect()->back()->with('error', 'Absen datang hanya dapat dilakukan pada pukul ' . $batas->batas_awal_datang . ' - ' . $batas->batas_akhir_datang);
+            return redirect()->back()->with('error', 'Absen datang hanya dapat dilakukan pada pukul ' . $batas->batas_awal_pulang . ' - ' . $batas->batas_akhir_pulang);
         }
 
         $lokasi = $request->lokasi2;
