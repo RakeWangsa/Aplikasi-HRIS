@@ -99,6 +99,12 @@
                                 </div>
     
                             @endforeach
+
+                            <tr>
+                                <td colspan="7">Total Nilai Akhir</td>
+                                <td colspan="3">{{ $totalNilaiAkhir }}</td>
+                            </tr>
+
                             @endif
                         </tbody>
                     </table>

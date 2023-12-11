@@ -40,447 +40,272 @@
     }
 </style>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    function toggleIcon(iconId) {
-        const icon = document.getElementById(iconId);
-        if (icon.classList.contains('bi-arrow-right-square')) {
-            icon.classList.remove('bi-arrow-right-square');
-            icon.classList.add('bi-arrow-down-square');
-        } else {
-            icon.classList.remove('bi-arrow-down-square');
-            icon.classList.add('bi-arrow-right-square');
-        }
-    }
-
-    function toggleAllLists() {
-        const collapsibleButtons = document.querySelectorAll('.list-group-item-action button');
-        collapsibleButtons.forEach(button => {
-            if (!button.getAttribute('aria-expanded') || button.getAttribute('aria-expanded') === 'false') {
-                button.click();
-            } else {
-                button.click();
-            }
-        });
-    }
-</script>
 
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
+  </head>
 
-<div class="container">
-    <ul class="list-group">
-        <li class="list-group-item text-center">
-            <div class="row">
-                <div class="col-xxl-8 col-md-8">
-                    OKR KBL
-                </div>
-                <div class="col-xxl-2 col-md-2 text-center">
-                    Status
-                </div>
-                <div class="col-xxl-2 col-md-2 text-center">
-                    Action
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item list-group-item-action">
-            <div class="row">
-                <div class="col-xxl-8 col-md-8">
-                    <button class="icon-button" data-toggle="collapse" href="#list1" onclick="toggleIcon('icon1')">
-                        <i id="icon1" class="bi bi-arrow-right-square"></i>
-                    </button>
-                    Mencapai Profit 24 M
-                </div>
-                <div class="col-xxl-2 col-md-2 text-center">
-                    Pending
-                </div>
-                <div class="col-xxl-2 col-md-2 text-center">
-                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                </div>
-            </div>
-        </li>
-        <div id="list1" class="collapse">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action">
-                    <div class="row">
-                        <div class="col-xxl-8 col-md-8">
-                            <button class="icon-button" data-toggle="collapse" href="#sublist1-1" onclick="toggleIcon('icon1-1')" style="margin-left:10px">
-                                <i id="icon1-1" class="bi bi-arrow-right-square"></i>
-                            </button>
-                            Menjadi market leader penyedia produk buah dan sayur di Indonesia
-                        </div>
-                        <div class="col-xxl-2 col-md-2 text-center">
-                            Pending
-                        </div>
-                        <div class="col-xxl-2 col-md-2 text-center">
-                            <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                        </div>
-                    </div>
-                </li>
-                <div id="sublist1-1" class="collapse">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> Minimal 60% produk ada di seluruh Indonesia
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> Produk masuk ke segala jenis pasar dengan daya beli yang berbeda-beda (ow-end, middle-end, and high-end)
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> Menjalin kerja sama dengan minimal 5 mitra per bulan
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> Survei kepercayaan & kepuasan pelanggan minimal 95% positif
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <li class="list-group-item list-group-item-action">
-                    <div class="row">
-                        <div class="col-xxl-8 col-md-8">
-                            <button class="icon-button" data-toggle="collapse" href="#sublist2" onclick="toggleIcon('icon2')" style="margin-left:10px">
-                                <i id="icon2" class="bi bi-arrow-right-square"></i>
-                            </button>
-                            Peningkatan brand awareness
-                        </div>
-                        <div class="col-xxl-2 col-md-2 text-center">
-                            Pending
-                        </div>
-                        <div class="col-xxl-2 col-md-2 text-center">
-                            <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                        </div>
-                    </div>
-                </li>
-                <div id="sublist2" class="collapse">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> Peningkatan brand awareness pada end user 2% - 5% setiap bulan
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div id="sublist2" class="collapse">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> Peningkatan jumlah account reach di media sosial official The Farmhill 10% per bulan
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div id="sublist2" class="collapse">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> Upload minimal 12 konten di media sosial official The Farmhill per minggu
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <li class="list-group-item list-group-item-action">
-                    <div class="row">
-                        <div class="col-xxl-8 col-md-8">
-                            <button class="icon-button" data-toggle="collapse" href="#sublist3" onclick="toggleIcon('icon3')" style="margin-left:10px">
-                                <i id="icon3" class="bi bi-arrow-right-square"></i>
-                            </button>
-                            Meningkatkan angka penjualan
-                        </div>
-                        <div class="col-xxl-2 col-md-2 text-center">
-                            Pending
-                        </div>
-                        <div class="col-xxl-2 col-md-2 text-center">
-                            <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                        </div>
-                    </div>
-                </li>
-                <div id="sublist3" class="collapse">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> Peningkatan persentase PO Outlet existing 10% per bulan
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div id="sublist3" class="collapse">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> Peningkatan harga produk minimal 10% per tahun
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div id="sublist3" class="collapse">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> Peningkatan jumlah pelanggan minimal 10% per tahun
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <li class="list-group-item list-group-item-action">
-                    <div class="row">
-                        <div class="col-xxl-8 col-md-8">
-                            <button class="icon-button" data-toggle="collapse" href="#sublist4" onclick="toggleIcon('icon4')" style="margin-left:10px">
-                                <i id="icon4" class="bi bi-arrow-right-square"></i>
-                            </button>
-                            Provide best product
-                        </div>
-                        <div class="col-xxl-2 col-md-2 text-center">
-                            Pending
-                        </div>
-                        <div class="col-xxl-2 col-md-2 text-center">
-                            <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                        </div>
-                    </div>
-                </li>
-                <div id="sublist4" class="collapse">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> Jumlah retur dibawah 5%
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div id="sublist4" class="collapse">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> 90% jumlah populasi tanaman per greenhouse sehat
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div id="sublist4" class="collapse">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> 85% tanaman terbebas dari OPT
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div id="sublist4" class="collapse">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> Tingkat keberhasilan pemberian nutrisi AB mix terhadap pertumbuhan tanaman minimal 95%
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <li class="list-group-item list-group-item-action">
-                    <div class="row">
-                        <div class="col-xxl-8 col-md-8">
-                            <button class="icon-button" data-toggle="collapse" href="#sublist5" onclick="toggleIcon('icon5')" style="margin-left:10px">
-                                <i id="icon5" class="bi bi-arrow-right-square"></i>
-                            </button>
-                            Mengoptimalkan kinerja karyawan
-                        </div>
-                        <div class="col-xxl-2 col-md-2 text-center">
-                            Pending
-                        </div>
-                        <div class="col-xxl-2 col-md-2 text-center">
-                            <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                        </div>
-                    </div>
-                </li>
-                <div id="sublist5" class="collapse">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> Penambahan jumlah fasilitas/properti yang menunjang efektifitas dan efisiensi kinerja
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div id="sublist5" class="collapse">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> Upgrading skill karyawan dengan program pelatihan minimal 1 tahun sekali
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div id="sublist5" class="collapse">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> Penilaian kinerja rutin setiap kuartal berdasarkan pencapaian OKR dan KPI
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div id="sublist5" class="collapse">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xxl-8 col-md-8">
-                                    <i class="bi bi-arrow-right-circle" style="margin-left:50px"></i> Mengadakan program kultural minimal 4 kali dalam 1 bulan
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    Pending
-                                </div>
-                                <div class="col-xxl-2 col-md-2 text-center">
-                                    <a class="btn btn-warning" style="border-radius: 100px;" a href=""><i class="bi bi-pencil-square text-white"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </ul>
-        </div>
-    </ul>
-</div>
+  <style>
+    .subofsub-icon {
+     width: 6px; /* Lebar ikon bulat */
+     height: 6px; /* Tinggi ikon bulat */
+     background-color: black; /* Warna latar belakang ikon */
+     border-radius: 50%; /* Mengatur ikon menjadi bulat */
+     display: inline-block;
+     margin-right: 3px; /* Jarak antara ikon dan teks */
+   }
+ </style>
+ 
+ <div class="container mt-4">
+ <button onclick="toggleAllLists()" class="btn btn-primary mb-2">Toggle All Lists</button>
+   <ul class="list-group">
+     <li class="list-group-item list-group-item-action">
+     <div class="row">
+ 
+ 
+     <div class="col">
+       <button class="icon-button" data-toggle="collapse" href="#list1" onclick="toggleIcon('icon1')">
+         <i id="icon1" class="fas fa-chevron-right"></i>
+       </button>
+       Order A
+     </div>
+     <div class="col">
+       30 Oktober
+     </div>
+     <div class="col">
+       Action
+     </div>
+   </div>
+     </li>
+     <div id="list1" class="collapse">
+       <ul class="list-group list-group-flush">
+         <li class="list-group-item list-group-item-action">
+ 
+           <div class="row">
+             <div class="col">
+               <button class="icon-button" data-toggle="collapse" href="#sublist1-1" onclick="toggleIcon('icon1-1')" style="margin-left:10px">
+                 <i id="icon1-1" class="fas fa-chevron-right"></i>
+               </button>
+               Meja Makan
+             </div>
+             <div class="col">
+               29 Oktober
+             </div>
+             <div class="col">
+               Action
+             </div>
+         </div>
+         </li>
+         <div id="sublist1-1" class="collapse">
+           <ul class="list-group list-group-flush">
+             <li class="list-group-item">
+ 
+                 <div class="row">
+                   <div class="col">
+                     <i class="subofsub-icon" style="margin-left:50px"></i>Rangka
+                   </div>
+                   <div class="col">
+                     25 Oktober
+                   </div>
+                   <div class="col">
+                     Action
+                   </div>
+                 </div>
+ 
+             </li>
+             <li class="list-group-item">
+ 
+                 <div class="row">
+                   <div class="col">
+                     <i class="subofsub-icon" style="margin-left:50px"></i>Finishing
+                   </div>
+                   <div class="col">
+                     26 Oktober
+                   </div>
+                   <div class="col">
+                     Action
+                   </div>
+                 </div>
+ 
+             </li>
+           </ul>
+         </div>
+         <li class="list-group-item list-group-item-action">
+ 
+           <div class="row">
+             <div class="col">
+               <button class="icon-button" data-toggle="collapse" href="#sublist1-2" onclick="toggleIcon('icon1-2')" style="margin-left:10px">
+                 <i id="icon1-2" class="fas fa-chevron-right"></i>
+               </button>
+               Kursi Makan
+             </div>
+             <div class="col">
+               28 Oktober
+             </div>
+             <div class="col">
+               Action
+             </div>
+         </div>
+         </li>
+         <div id="sublist1-2" class="collapse">
+           <ul class="list-group list-group-flush">
+             <li class="list-group-item">
+ 
+                 <div class="row">
+                   <div class="col">
+                     <i class="subofsub-icon" style="margin-left:50px"></i>Rangka
+                   </div>
+                   <div class="col">
+                     24 Oktober
+                   </div>
+                   <div class="col">
+                     Action
+                   </div>
+                 </div>
+ 
+             </li>
+           </ul>
+         </div>
+       </ul>
+     </div>
+     <li class="list-group-item list-group-item-action">
+     <div class="row">
+ 
+ 
+     <div class="col">
+       <button class="icon-button" data-toggle="collapse" href="#list2" onclick="toggleIcon('icon2')">
+         <i id="icon2" class="fas fa-chevron-right"></i>
+       </button>
+       Order B
+     </div>
+     <div class="col">
+       5 November
+     </div>
+     <div class="col">
+       Action
+     </div>
+   </div>
+     </li>
+     <div id="list2" class="collapse">
+       <ul class="list-group list-group-flush">
+         <li class="list-group-item list-group-item-action">
+ 
+           <div class="row">
+             <div class="col">
+               <button class="icon-button" data-toggle="collapse" href="#sublist2-1" onclick="toggleIcon('icon2-1')" style="margin-left:10px">
+                 <i id="icon2-1" class="fas fa-chevron-right"></i>
+               </button>
+               Lemari
+             </div>
+             <div class="col">
+               3 November
+             </div>
+             <div class="col">
+               Action
+             </div>
+         </div>
+         </li>
+         <div id="sublist2-1" class="collapse">
+           <ul class="list-group list-group-flush">
+             <li class="list-group-item">
+ 
+                 <div class="row">
+                   <div class="col">
+                     <i class="subofsub-icon" style="margin-left:50px"></i>Rangka
+                   </div>
+                   <div class="col">
+                     1 November
+                   </div>
+                   <div class="col">
+                     Action
+                   </div>
+                 </div>
+ 
+             </li>
+             <li class="list-group-item">
+ 
+                 <div class="row">
+                   <div class="col">
+                     <i class="subofsub-icon" style="margin-left:50px"></i>Finishing
+                   </div>
+                   <div class="col">
+                     2 November
+                   </div>
+                   <div class="col">
+                     Action
+                   </div>
+                 </div>
+ 
+             </li>
+           </ul>
+         </div>
+         <li class="list-group-item list-group-item-action">
+ 
+           <div class="row">
+             <div class="col">
+               <button class="icon-button" data-toggle="collapse" href="#sublist2-2" onclick="toggleIcon('icon2-2')" style="margin-left:10px">
+                 <i id="icon2-2" class="fas fa-chevron-right"></i>
+               </button>
+               Buffet
+             </div>
+             <div class="col">
+               6 November
+             </div>
+             <div class="col">
+               Action
+             </div>
+         </div>
+         </li>
+         <div id="sublist2-2" class="collapse">
+           <ul class="list-group list-group-flush">
+             <li class="list-group-item">
+ 
+                 <div class="row">
+                   <div class="col">
+                     <i class="subofsub-icon" style="margin-left:50px"></i>Rangka
+                   </div>
+                   <div class="col">
+                     4 November
+                   </div>
+                   <div class="col">
+                     Action
+                   </div>
+                 </div>
+ 
+             </li>
+           </ul>
+         </div>
+       </ul>
+     </div>
+   </ul>
+ </div>
+ 
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ <script>
+   function toggleIcon(iconId) {
+     const icon = document.getElementById(iconId);
+     if (icon.classList.contains('fa-chevron-right')) {
+       icon.classList.remove('fa-chevron-right');
+       icon.classList.add('fa-chevron-down');
+     } else {
+       icon.classList.remove('fa-chevron-down');
+       icon.classList.add('fa-chevron-right');
+     }
+   }
+ 
+   function toggleAllLists() {
+     const collapsibleButtons = document.querySelectorAll('.list-group-item-action button');
+     collapsibleButtons.forEach(button => {
+       if (!button.getAttribute('aria-expanded') || button.getAttribute('aria-expanded') === 'false') {
+         button.click();
+       } else {
+         button.click();
+       }
+     });
+   }
+ </script>
 
 @endsection
