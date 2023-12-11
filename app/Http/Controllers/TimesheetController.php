@@ -133,6 +133,7 @@ class TimesheetController extends Controller
     {
         $task = DB::table('task_timesheet')
         ->select('*')
+        ->orderBy('divisi')
         ->get();
         return view('timesheet.admin', [
             'title' => 'Task Timesheet',

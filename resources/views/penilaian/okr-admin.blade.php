@@ -5,23 +5,32 @@
 <div class="pagetitle mt-3">
     <h1>Penilaian OKR</h1>
     <nav>
-        <ol class="breadcrumb">
+        <ol class="breadcrumb mr-auto">
             <li class="breadcrumb-item"><a href="/admin/dashboard">Home</a></li>
             <li class="breadcrumb-item active">Penilaian</li>
             <li class="breadcrumb-item active">OKR</li>
         </ol>
-        <div class="dropdown">
+        <div class="d-flex justify-content-between align-items-center">
+        <div class="dropdown mr-3">
             <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                 Tambah Indikator OKR
             </a>
-
+    
             <!-- Dropdown items -->
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li><a class="dropdown-item" href="">OKR KBL</a></li>
                 <li><a class="dropdown-item" href="">OKR ASH</a></li>
             </ul>
         </div>
+    
+        <div class="ml-auto">
+            <button onclick="expandAllLists()" class="btn btn-success"><i class="fas fa-arrow-down"></i> Expand</button>
+            <button onclick="collapseAllLists()" class="btn btn-danger"><i class="fas fa-arrow-up"></i> Hide</button>
+        </div>
+
+    </div>
     </nav>
+    
 </div>
 
 <style>
@@ -42,7 +51,6 @@
 
 
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   </head>
 
@@ -58,8 +66,24 @@
  </style>
  
  <div class="container mt-4">
- <button onclick="toggleAllLists()" class="btn btn-primary mb-2">Toggle All Lists</button>
    <ul class="list-group">
+
+    <li class="list-group-item list-group-item-action bg-secondary">
+        <div class="row text-light">
+    
+    
+        <div class="col">
+          OKR KBL
+        </div>
+        <div class="col">
+
+          </div>
+        <div class="col">
+          Action
+        </div>
+      </div>
+        </li>
+
      <li class="list-group-item list-group-item-action">
      <div class="row">
  
@@ -296,16 +320,31 @@
      }
    }
  
-   function toggleAllLists() {
-     const collapsibleButtons = document.querySelectorAll('.list-group-item-action button');
-     collapsibleButtons.forEach(button => {
-       if (!button.getAttribute('aria-expanded') || button.getAttribute('aria-expanded') === 'false') {
-         button.click();
-       } else {
-         button.click();
-       }
-     });
-   }
+   function expandAllLists() {
+    const collapsibleButtons = document.querySelectorAll('.icon-button');
+
+    collapsibleButtons.forEach(button => {
+      const targetId = button.getAttribute('href').replace('#', '');
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement && !targetElement.classList.contains('show')) {
+        button.click(); // Click to expand if not already expanded
+      }
+    });
+  }
+
+  function collapseAllLists() {
+    const collapsibleButtons = document.querySelectorAll('.icon-button');
+
+    collapsibleButtons.forEach(button => {
+      const targetId = button.getAttribute('href').replace('#', '');
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement && targetElement.classList.contains('show')) {
+        button.click(); // Click to collapse if already expanded
+      }
+    });
+  }
  </script>
 
 @endsection
