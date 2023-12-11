@@ -12,6 +12,7 @@ class TimesheetController extends Controller
     public function timesheet_karyawan()
     {
         $task = DB::table('task_timesheet')
+        ->where('divisi', auth()->user()->job)
         ->select('*')
         ->get();
 
@@ -143,7 +144,9 @@ class TimesheetController extends Controller
     public function addTask(Request $request)
     {
         $task = $request->task;
+        $divisi = $request->divisi;
         TaskTimesheet::create([
+            'divisi' => $divisi,
             'jenis_task' => $task,
         ]);
         return redirect('/admin/task-timesheet');  

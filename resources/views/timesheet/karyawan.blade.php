@@ -23,6 +23,9 @@
                                 <div class="col-sm-12">
                                     <select id="taskSelect" class="form-select" name="category" aria-label="Default select example" required>
                                         <option selected disabled>Select task</option>
+                                        @if(count($task)==0)
+                                        <option disabled>Tidak ada opsi</option>
+                                        @endif
                                         @foreach($task as $row)
                                             <option value="{{ $row->jenis_task }}">{{ $row->jenis_task }}</option>
                                         @endforeach

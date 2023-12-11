@@ -11,6 +11,7 @@ class TaskTimesheet extends Model
     protected $table = "task_timesheet";
     public $timestamps = false;
     protected $fillable = [
+        'divisi',
         'jenis_task',
     ];
 }

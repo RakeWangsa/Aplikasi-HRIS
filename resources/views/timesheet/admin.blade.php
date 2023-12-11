@@ -18,16 +18,23 @@
                     <form method="POST" action="{{ route('addTask') }}">
                         @csrf
                         <div class="row my-4">
-                            <div class="col-xxl-9 col-md-3">  <input type="text" class="form-control" name="task" placeholder="Tambah Jenis Task"></div>
-                            <div class="col-xxl-3 col-md-3 button-timesheet">
+                            <div class="col-xxl-5 col-md-3">
+                                <input type="text" class="form-control" name="task" placeholder="Tambah Jenis Task" required>
+                            </div>
+                            <div class="col-xxl-5 col-md-3">
+                                <input type="text" class="form-control" name="divisi" placeholder="Divisi" required>
+                            </div>
+                            <div class="col-xxl-2 col-md-3 button-timesheet">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div>
                     </form>
+                    
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
+                                <th scope="col">Divisi</th>
                                 <th scope="col">Jenis Task</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -37,6 +44,7 @@
                             @foreach($task as $row)
                             <tr>
                                 <td scope="row">{{ $no++ }}</td>
+                                <td>{{ $row->divisi }}</td>
                                 <td>{{ $row->jenis_task }}</td>
                                 <td><a href="{{ route('deleteTask', ['id' => encrypt($row->id)]) }}" onclick="return confirm('Apakah Anda yakin?')"><span class='bx bxs-trash bx-border-circle bg-danger text-white'></span></a></td>
                             </tr>
