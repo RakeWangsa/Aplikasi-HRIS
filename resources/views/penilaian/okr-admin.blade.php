@@ -155,7 +155,7 @@
     
     
         <div class="col">
-          OKR KBL
+          <strong>OKR KBL</strong>
         </div>
         <div class="col">
 
@@ -164,10 +164,10 @@
 
           </div>
         <div class="col">
-          Status
+          <strong>Status</strong>
         </div>
         <div class="col">
-          Action
+          <strong>Action</strong>
         </div>
       </div>
         </li>
@@ -280,7 +280,7 @@
     
     
         <div class="col">
-          OKR ASH
+          <strong>OKR ASH</strong>
         </div>
         <div class="col">
 
@@ -289,10 +289,10 @@
 
           </div>
         <div class="col">
-          Status
+          <strong>Status</strong>
         </div>
         <div class="col">
-          Action    
+          <strong>Action</strong>    
         </div>
       </div>
         </li>

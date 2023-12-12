@@ -32,7 +32,11 @@
                         <li><a class="dropdown-item" href="{{ route('kpi_admin_filter', ['divisi' => $row->job]) }}">{{ $row->job }}</a></li>
                     @endforeach
                 </ul>
+                @if(isset($divisi))
+                <a class="btn btn-success" href="{{ route('hasilKPI', ['divisi' => $divisi]) }}">Hasil KPI</a>
+                @endif
             </div>
+
             
             <div class="dropdown">
                 <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">

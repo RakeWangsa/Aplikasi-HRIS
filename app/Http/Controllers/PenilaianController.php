@@ -118,6 +118,53 @@ class PenilaianController extends Controller
         ]);
     }
 
+    public function hasil_KPI($divisi)
+    {
+        $user = DB::table('Users')
+            ->where('job', $divisi)
+            ->select('name', 'id')
+            ->get();
+    
+        $data = [];
+    
+        $i = 1;
+        foreach ($user as $userData) {
+            $namaKey = "nama" . $i;
+            $kpiKey = "kpi" . $i;
+            $totalNilaiKey = "totalNilaiAkhir" . $i;
+    
+            ${$namaKey} = $userData->name;
+            $id = $userData->id;
+    
+            ${$kpiKey} = DB::table('kpi_admin')
+                ->leftJoin('kpi_karyawan', function ($join) use ($id) {
+                    $join->on('kpi_admin.id', '=', 'kpi_karyawan.id_kpi_admin')
+                        ->where('kpi_karyawan.id_user', '=', $id);
+                })
+                ->where('kpi_admin.divisi', $divisi)
+                ->select('kpi_admin.*', 'kpi_karyawan.id_user', 'kpi_karyawan.realisasi', 'kpi_karyawan.score', 'kpi_karyawan.nilai_akhir', 'kpi_karyawan.sumber')
+                ->orderBy('kpi_admin.tanggung_jawab_pekerjaan')
+                ->get();
+    
+            ${$totalNilaiKey} = ${$kpiKey}->sum('nilai_akhir');
+    
+            $data[] = [
+                'nama' => ${$namaKey},
+                'kpi' => ${$kpiKey},
+                'totalNilaiAkhir' => ${$totalNilaiKey},
+            ];
+    
+            $i++;
+        }
+    
+        return view('penilaian.kpi-hasil', [
+            'title' => 'KPI',
+            'active' => 'kpi_admin',
+            'data' => $data,
+        ]);
+    }
+    
+
     public function add_KPI(Request $request)
     {
         KPI_admin::create([
