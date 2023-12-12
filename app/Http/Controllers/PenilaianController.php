@@ -65,6 +65,14 @@ class PenilaianController extends Controller
 
     public function okr_karyawan()
     {
+        $OKR_KBL = DB::table('OKR')
+        ->where('jenis','OKR KBL')
+        ->select('*')
+        ->get();
+        $OKR_ASH = DB::table('OKR')
+        ->where('jenis','OKR ASH')
+        ->select('*')
+        ->get();
         return view('penilaian.okr-karyawan', [
             'title' => 'OKR',
             'active' => 'okr_karyawan'
@@ -151,10 +159,19 @@ class PenilaianController extends Controller
         ->where('jenis','OKR KBL')
         ->select('*')
         ->get();
+        $OKR_ASH = DB::table('OKR')
+        ->where('jenis','OKR ASH')
+        ->select('*')
+        ->get();
+        $OKR = DB::table('OKR')
+        ->select('*')
+        ->get();
         return view('penilaian.okr-admin', [
             'title' => 'OKR',
             'active' => 'okr_admin',
-            'OKR_KBL' => $OKR_KBL
+            'OKR' => $OKR,           
+            'OKR_KBL' => $OKR_KBL,
+            'OKR_ASH' => $OKR_ASH,
         ]);
     }
 

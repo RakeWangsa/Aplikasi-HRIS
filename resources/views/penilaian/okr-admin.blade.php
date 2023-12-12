@@ -68,18 +68,38 @@
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">OKR ASH</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Indikator OKR ASH</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
+                  <form action="{{ route('addOKR') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                      <div class="form-group mb-3">
+                        <label for="jenis">Jenis :</label>
+                        <input type="text" class="form-control" id="jenis" name="jenis" value="OKR ASH" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="parent">Parent :</label>
+                        <select class="form-control" id="parent" name="parent" required>
+                            <option value="0">-</option>
+                            @foreach($OKR_ASH as $row)
+                            @if($row->level!="subofsub")
+                              <option value="{{ $row->id }}">{{ $row->indikator }}</option>
+                            @endif
+                            @endforeach
+                        </select>
+                    </div>
+                        <div class="form-group mb-3">
+                          <label for="indikator">Indikator :</label>
+                          <input type="text" class="form-control" id="indikator" name="indikator" required>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
                 </div>
               </div>
             </div>
@@ -129,10 +149,11 @@
  </style>
  
  <div class="container mt-4">
+  {{-- OKR KBL --}}
    <ul class="list-group">
 
-    <li class="list-group-item list-group-item-action bg-secondary">
-        <div class="row text-light">
+    <li class="list-group-item list-group-item-action" style="background-color:#57de57">
+        <div class="row">
     
     
         <div class="col">
@@ -142,7 +163,7 @@
 
           </div>
         <div class="col">
-          Action
+          Status
         </div>
       </div>
         </li>
@@ -163,7 +184,7 @@
 
      </div>
      <div class="col">
-      <span class="badge @if($row->status == 'Pending') bg-warning @elseif($row->status == 'Rejected') bg-danger @elseif($row->status == 'Tercapai') bg-success @endif" data-toggle="modal" data-target="#modal{{ $row->id }}">
+      <span class="badge @if($row->status == 'Pending') bg-warning @elseif($row->status == 'Failed') bg-danger @elseif($row->status == 'Complete') bg-success @endif" data-toggle="modal" data-target="#modal{{ $row->id }}">
         {{ $row->status }}
       </span>
      </div>
@@ -186,7 +207,7 @@
 
              </div>
              <div class="col">
-              <span class="badge @if($sublist->status == 'Pending') bg-warning @elseif($sublist->status == 'Rejected') bg-danger @elseif($sublist->status == 'Tercapai') bg-success @endif" data-toggle="modal" data-target="#modal{{ $sublist->id }}">
+              <span class="badge @if($sublist->status == 'Pending') bg-warning @elseif($sublist->status == 'Failed') bg-danger @elseif($sublist->status == 'Complete') bg-success @endif" data-toggle="modal" data-target="#modal{{ $sublist->id }}">
                 {{ $sublist->status }}
               </span>
              </div>
@@ -208,7 +229,7 @@
                      
                    </div>
                    <div class="col">
-                    <span class="badge @if($subofsub->status == 'Pending') bg-warning @elseif($subofsub->status == 'Rejected') bg-danger @elseif($subofsub->status == 'Tercapai') bg-success @endif" data-toggle="modal" data-target="#modal{{ $subofsub->id }}">
+                    <span class="badge @if($subofsub->status == 'Pending') bg-warning @elseif($subofsub->status == 'Failed') bg-danger @elseif($subofsub->status == 'Complete') bg-success @endif" data-toggle="modal" data-target="#modal{{ $subofsub->id }}">
                       {{ $subofsub->status }}
                     </span>
                    </div>
@@ -228,9 +249,111 @@
      @endforeach
 
    </ul>
+
+   {{-- OKR ASH --}}
+   <ul class="list-group mt-4">
+
+    <li class="list-group-item list-group-item-action" style="background-color:#57de57">
+        <div class="row">
+    
+    
+        <div class="col">
+          OKR ASH
+        </div>
+        <div class="col">
+
+          </div>
+        <div class="col">
+          Status
+        </div>
+      </div>
+        </li>
+
+        @foreach($OKR_ASH as $row)
+        @if($row->parent=="0")
+     <li class="list-group-item list-group-item-action">
+     <div class="row">
+ 
+ 
+     <div class="col">
+       <button class="icon-button" data-toggle="collapse" href="#list{{ $row->id }}" onclick="toggleIcon('{{ $row->id }}')">
+         <i id="{{ $row->id }}" class="fas fa-chevron-right"></i>
+       </button>
+       {{ $row->indikator }}
+     </div>
+     <div class="col">
+
+     </div>
+     <div class="col">
+      <span class="badge @if($row->status == 'Pending') bg-warning @elseif($row->status == 'Failed') bg-danger @elseif($row->status == 'Complete') bg-success @endif" data-toggle="modal" data-target="#modal{{ $row->id }}">
+        {{ $row->status }}
+      </span>
+     </div>
+   </div>
+     </li>
+     <div id="list{{ $row->id }}" class="collapse">
+       <ul class="list-group list-group-flush">
+
+        @foreach($OKR_ASH as $sublist)
+        @if($sublist->parent==$row->id)
+         <li class="list-group-item list-group-item-action">
+           <div class="row">
+             <div class="col">
+               <button class="icon-button" data-toggle="collapse" href="#sublist{{ $sublist->id }}" onclick="toggleIcon('{{ $sublist->id }}')" style="margin-left:10px">
+                 <i id="{{ $sublist->id }}" class="fas fa-chevron-right"></i>
+               </button>
+               {{ $sublist->indikator }}
+             </div>
+             <div class="col">
+
+             </div>
+             <div class="col">
+              <span class="badge @if($sublist->status == 'Pending') bg-warning @elseif($sublist->status == 'Failed') bg-danger @elseif($sublist->status == 'Complete') bg-success @endif" data-toggle="modal" data-target="#modal{{ $sublist->id }}">
+                {{ $sublist->status }}
+              </span>
+             </div>
+         </div>
+         </li>
+
+
+         <div id="sublist{{ $sublist->id }}" class="collapse">
+           <ul class="list-group list-group-flush">
+            @foreach($OKR_ASH as $subofsub)
+            @if($subofsub->parent==$sublist->id)
+             <li class="list-group-item">
+ 
+                 <div class="row">
+                   <div class="col">
+                     <i class="subofsub-icon" style="margin-left:50px"></i>{{ $subofsub->indikator }}
+                   </div>
+                   <div class="col">
+                     
+                   </div>
+                   <div class="col">
+                    <span class="badge @if($subofsub->status == 'Pending') bg-warning @elseif($subofsub->status == 'Failed') bg-danger @elseif($subofsub->status == 'Complete') bg-success @endif" data-toggle="modal" data-target="#modal{{ $subofsub->id }}">
+                      {{ $subofsub->status }}
+                    </span>
+                   </div>
+                 </div>
+ 
+             </li>
+             @endif
+             @endforeach
+
+           </ul>
+         </div>
+         @endif
+         @endforeach
+       </ul>
+     </div>
+     @endif
+     @endforeach
+
+   </ul>
+
  </div>
 
- @foreach($OKR_KBL as $row)
+ @foreach($OKR as $row)
              <!-- Modal Status -->
              <div class="modal fade" id="modal{{ $row->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
@@ -248,9 +371,9 @@
                         <input style="display:none" type="text" class="form-control" id="id_okr" name="id_okr" value="{{ $row->id }}" readonly>
                         <label for="status">Status :</label>
                         <select class="form-control" id="status" name="status" required>
-                              <option value="Tercapai" @if($row->status=="Tercapai") selected @endif>Tercapai</option>
+                              <option value="Complete" @if($row->status=="Complete") selected @endif>Complete</option>
                               <option value="Pending" @if($row->status=="Pending") selected @endif>Pending</option>
-                              <option value="Rejected" @if($row->status=="Rejected") selected @endif>Rejected</option>
+                              <option value="Failed" @if($row->status=="Failed") selected @endif>Failed</option>
                         </select>
                     </div>
                     </div>
