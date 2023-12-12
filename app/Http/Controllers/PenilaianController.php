@@ -75,7 +75,9 @@ class PenilaianController extends Controller
         ->get();
         return view('penilaian.okr-karyawan', [
             'title' => 'OKR',
-            'active' => 'okr_karyawan'
+            'active' => 'okr_karyawan',
+            'OKR_KBL' => $OKR_KBL,
+            'OKR_ASH' => $OKR_ASH,
         ]);
     }
 
@@ -208,4 +210,25 @@ class PenilaianController extends Controller
         ]);
         return redirect('/admin/okr')->with('success', 'status OKR berhasil diupdate');
     }
+
+    public function deleteOKR($id)
+    {
+        $decryptedId = decrypt($id);
+    
+        $child = DB::table('OKR')
+            ->where('parent', $decryptedId)
+            ->pluck('id')
+            ->toArray();
+    
+        $child2 = DB::table('OKR')
+            ->whereIn('parent', $child)
+            ->pluck('id')
+            ->toArray();
+    
+        $idsToDelete = array_merge([$decryptedId], $child, $child2);
+        OKR::whereIn('id', $idsToDelete)->delete();
+    
+        return redirect('/admin/okr')->with('success', 'OKR berhasil dihapus');
+    }
+    
 }

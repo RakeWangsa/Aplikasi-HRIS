@@ -116,21 +116,6 @@
     
 </div>
 
-<style>
-    .container {
-        margin: 0;
-        padding: 0;
-    }
-
-    .icon-button {
-        border-style: none;
-        background-color: white;
-    }
-
-    .table-bordered {
-        background: white;
-    }
-</style>
 
 
 <head>
@@ -146,6 +131,19 @@
      display: inline-block;
      margin-right: 3px; /* Jarak antara ikon dan teks */
    }
+   .container {
+        margin: 0;
+        padding: 0;
+    }
+
+    .icon-button {
+        border-style: none;
+        background-color: white;
+    }
+
+    .table-bordered {
+        background: white;
+    }
  </style>
  
  <div class="container mt-4">
@@ -162,8 +160,14 @@
         <div class="col">
 
           </div>
+          <div class="col">
+
+          </div>
         <div class="col">
           Status
+        </div>
+        <div class="col">
+          Action
         </div>
       </div>
         </li>
@@ -184,9 +188,15 @@
 
      </div>
      <div class="col">
+
+     </div>
+     <div class="col">
       <span class="badge @if($row->status == 'Pending') bg-warning @elseif($row->status == 'Failed') bg-danger @elseif($row->status == 'Complete') bg-success @endif" data-toggle="modal" data-target="#modal{{ $row->id }}">
         {{ $row->status }}
       </span>
+     </div>
+     <div class="col">
+      <a href="{{ route('deleteOKR', ['id' => encrypt($row->id)]) }}" onclick="return confirm('Apakah Anda yakin?')"><span class='bx bxs-trash bx-border-circle bg-danger text-white'></span></a>
      </div>
    </div>
      </li>
@@ -207,9 +217,15 @@
 
              </div>
              <div class="col">
+
+             </div>
+             <div class="col">
               <span class="badge @if($sublist->status == 'Pending') bg-warning @elseif($sublist->status == 'Failed') bg-danger @elseif($sublist->status == 'Complete') bg-success @endif" data-toggle="modal" data-target="#modal{{ $sublist->id }}">
                 {{ $sublist->status }}
               </span>
+             </div>
+             <div class="col">
+              <a href="{{ route('deleteOKR', ['id' => encrypt($sublist->id)]) }}" onclick="return confirm('Apakah Anda yakin?')"><span class='bx bxs-trash bx-border-circle bg-danger text-white'></span></a>
              </div>
          </div>
          </li>
@@ -229,9 +245,15 @@
                      
                    </div>
                    <div class="col">
+                     
+                   </div>
+                   <div class="col">
                     <span class="badge @if($subofsub->status == 'Pending') bg-warning @elseif($subofsub->status == 'Failed') bg-danger @elseif($subofsub->status == 'Complete') bg-success @endif" data-toggle="modal" data-target="#modal{{ $subofsub->id }}">
                       {{ $subofsub->status }}
                     </span>
+                   </div>
+                   <div class="col">
+                    <a href="{{ route('deleteOKR', ['id' => encrypt($subofsub->id)]) }}" onclick="return confirm('Apakah Anda yakin?')"><span class='bx bxs-trash bx-border-circle bg-danger text-white'></span></a>
                    </div>
                  </div>
  
@@ -263,8 +285,14 @@
         <div class="col">
 
           </div>
+          <div class="col">
+
+          </div>
         <div class="col">
           Status
+        </div>
+        <div class="col">
+          Action    
         </div>
       </div>
         </li>
@@ -285,9 +313,15 @@
 
      </div>
      <div class="col">
+                     
+     </div>
+     <div class="col">
       <span class="badge @if($row->status == 'Pending') bg-warning @elseif($row->status == 'Failed') bg-danger @elseif($row->status == 'Complete') bg-success @endif" data-toggle="modal" data-target="#modal{{ $row->id }}">
         {{ $row->status }}
       </span>
+     </div>
+     <div class="col">
+      <a href="{{ route('deleteOKR', ['id' => encrypt($row->id)]) }}" onclick="return confirm('Apakah Anda yakin?')"><span class='bx bxs-trash bx-border-circle bg-danger text-white'></span></a>
      </div>
    </div>
      </li>
@@ -308,9 +342,15 @@
 
              </div>
              <div class="col">
+                     
+             </div>
+             <div class="col">
               <span class="badge @if($sublist->status == 'Pending') bg-warning @elseif($sublist->status == 'Failed') bg-danger @elseif($sublist->status == 'Complete') bg-success @endif" data-toggle="modal" data-target="#modal{{ $sublist->id }}">
                 {{ $sublist->status }}
               </span>
+             </div>
+             <div class="col">
+              <a href="{{ route('deleteOKR', ['id' => encrypt($sublist->id)]) }}" onclick="return confirm('Apakah Anda yakin?')"><span class='bx bxs-trash bx-border-circle bg-danger text-white'></span></a>
              </div>
          </div>
          </li>
@@ -330,9 +370,15 @@
                      
                    </div>
                    <div class="col">
+                     
+                   </div>
+                   <div class="col">
                     <span class="badge @if($subofsub->status == 'Pending') bg-warning @elseif($subofsub->status == 'Failed') bg-danger @elseif($subofsub->status == 'Complete') bg-success @endif" data-toggle="modal" data-target="#modal{{ $subofsub->id }}">
                       {{ $subofsub->status }}
                     </span>
+                   </div>
+                   <div class="col">
+                    <a href="{{ route('deleteOKR', ['id' => encrypt($subofsub->id)]) }}" onclick="return confirm('Apakah Anda yakin?')"><span class='bx bxs-trash bx-border-circle bg-danger text-white'></span></a>
                    </div>
                  </div>
  
