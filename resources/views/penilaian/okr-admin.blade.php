@@ -18,9 +18,70 @@
     
             <!-- Dropdown items -->
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="">OKR KBL</a></li>
-                <li><a class="dropdown-item" href="">OKR ASH</a></li>
+                <li><a class="dropdown-item" data-toggle="modal" data-target="#okr_kbl">OKR KBL</a></li>
+                <li><a class="dropdown-item" data-toggle="modal" data-target="#okr_ash">OKR ASH</a></li>
             </ul>
+
+            <!-- Modal OKR KBL -->
+            <div class="modal fade" id="okr_kbl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Indikator OKR KBL</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form action="{{ route('addOKR') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                      <div class="form-group mb-3">
+                        <label for="jenis">Jenis :</label>
+                        <input type="text" class="form-control" id="jenis" name="jenis" value="OKR KBL" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="parent">Parent :</label>
+                        <select class="form-control" id="parent" name="parent" required>
+                            <option value="0">-</option>
+                            @foreach($OKR_KBL as $row)
+                              <option value="{{ $row->id }}">{{ $row->indikator }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                        <div class="form-group mb-3">
+                          <label for="indikator">Indikator :</label>
+                          <input type="text" class="form-control" id="indikator" name="indikator" required>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal OKR ASH -->
+            <div class="modal fade" id="okr_ash" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">OKR ASH</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    ...
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
         </div>
     
         <div class="ml-auto">

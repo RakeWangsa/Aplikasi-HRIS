@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\KPI_admin;
 use App\Models\KPI_karyawan;
+use App\Models\OKR;
 
 class PenilaianController extends Controller
 {
@@ -146,9 +147,25 @@ class PenilaianController extends Controller
 
     public function okr_admin()
     {
+        $OKR_KBL = DB::table('OKR')
+        ->where('jenis','OKR KBL')
+        ->select('*')
+        ->get();
         return view('penilaian.okr-admin', [
             'title' => 'OKR',
-            'active' => 'okr_admin'
+            'active' => 'okr_admin',
+            'OKR_KBL' => $OKR_KBL
         ]);
+    }
+
+    public function addOKR(Request $request)
+    {
+        OKR::create([
+            'jenis' => $request->jenis,
+            'parent' => $request->parent,
+            'indikator' => $request->indikator,
+            'status' => 'pending',
+        ]);
+        return redirect('/admin/okr')->with('success', 'OKR berhasil ditambahkan');
     }
 }
