@@ -163,7 +163,7 @@
 
      </div>
      <div class="col">
-      <span class="badge @if($row->status == 'Pending') bg-warning @elseif($row->status == 'Rejected') bg-danger @elseif($row->status == 'Tercapai') bg-success @endif">
+      <span class="badge @if($row->status == 'Pending') bg-warning @elseif($row->status == 'Rejected') bg-danger @elseif($row->status == 'Tercapai') bg-success @endif" data-toggle="modal" data-target="#modal{{ $row->id }}">
         {{ $row->status }}
       </span>
      </div>
@@ -186,7 +186,7 @@
 
              </div>
              <div class="col">
-              <span class="badge @if($sublist->status == 'Pending') bg-warning @elseif($sublist->status == 'Rejected') bg-danger @elseif($sublist->status == 'Tercapai') bg-success @endif">
+              <span class="badge @if($sublist->status == 'Pending') bg-warning @elseif($sublist->status == 'Rejected') bg-danger @elseif($sublist->status == 'Tercapai') bg-success @endif" data-toggle="modal" data-target="#modal{{ $sublist->id }}">
                 {{ $sublist->status }}
               </span>
              </div>
@@ -208,7 +208,7 @@
                      
                    </div>
                    <div class="col">
-                    <span class="badge @if($subofsub->status == 'Pending') bg-warning @elseif($subofsub->status == 'Rejected') bg-danger @elseif($subofsub->status == 'Tercapai') bg-success @endif">
+                    <span class="badge @if($subofsub->status == 'Pending') bg-warning @elseif($subofsub->status == 'Rejected') bg-danger @elseif($subofsub->status == 'Tercapai') bg-success @endif" data-toggle="modal" data-target="#modal{{ $subofsub->id }}">
                       {{ $subofsub->status }}
                     </span>
                    </div>
@@ -229,6 +229,39 @@
 
    </ul>
  </div>
+
+ @foreach($OKR_KBL as $row)
+             <!-- Modal Status -->
+             <div class="modal fade" id="modal{{ $row->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ $row->indikator }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form action="{{ route('updateStatusOKR') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                    <div class="form-group mb-3">
+                        <input style="display:none" type="text" class="form-control" id="id_okr" name="id_okr" value="{{ $row->id }}" readonly>
+                        <label for="status">Status :</label>
+                        <select class="form-control" id="status" name="status" required>
+                              <option value="Tercapai" @if($row->status=="Tercapai") selected @endif>Tercapai</option>
+                              <option value="Pending" @if($row->status=="Pending") selected @endif>Pending</option>
+                              <option value="Rejected" @if($row->status=="Rejected") selected @endif>Rejected</option>
+                        </select>
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+                </div>
+              </div>
+            </div>
+@endforeach
  
  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

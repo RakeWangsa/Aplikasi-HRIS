@@ -182,4 +182,13 @@ class PenilaianController extends Controller
         ]);
         return redirect('/admin/okr')->with('success', 'OKR berhasil ditambahkan');
     }
+
+    public function updateStatusOKR(Request $request)
+    {
+        $OKR = OKR::find($request->id_okr);
+        $OKR->update([
+            'status' => $request->status
+        ]);
+        return redirect('/admin/okr')->with('success', 'status OKR berhasil diupdate');
+    }
 }
