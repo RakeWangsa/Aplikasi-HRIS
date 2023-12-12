@@ -14,6 +14,7 @@ class OKR extends Model
         'jenis',
         'parent',
         'indikator',
+        'level',
         'status',
     ];
 }

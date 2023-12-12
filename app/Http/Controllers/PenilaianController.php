@@ -160,11 +160,25 @@ class PenilaianController extends Controller
 
     public function addOKR(Request $request)
     {
+        if($request->parent==0){
+            $level="list";
+        }else{
+            $cek = DB::table('OKR')
+            ->where('id',$request->parent)
+            ->pluck('parent')
+            ->first();
+            if($cek==0){
+                $level="sublist";
+            }else{
+                $level="subofsub";
+            }
+        }
         OKR::create([
             'jenis' => $request->jenis,
             'parent' => $request->parent,
             'indikator' => $request->indikator,
-            'status' => 'pending',
+            'level' => $level,
+            'status' => 'Pending',
         ]);
         return redirect('/admin/okr')->with('success', 'OKR berhasil ditambahkan');
     }

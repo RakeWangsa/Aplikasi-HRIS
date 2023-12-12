@@ -44,7 +44,9 @@
                         <select class="form-control" id="parent" name="parent" required>
                             <option value="0">-</option>
                             @foreach($OKR_KBL as $row)
+                            @if($row->level!="subofsub")
                               <option value="{{ $row->id }}">{{ $row->indikator }}</option>
+                            @endif
                             @endforeach
                         </select>
                     </div>
@@ -145,224 +147,86 @@
       </div>
         </li>
 
+        @foreach($OKR_KBL as $row)
+        @if($row->parent=="0")
      <li class="list-group-item list-group-item-action">
      <div class="row">
  
  
      <div class="col">
-       <button class="icon-button" data-toggle="collapse" href="#list1" onclick="toggleIcon('icon1')">
-         <i id="icon1" class="fas fa-chevron-right"></i>
+       <button class="icon-button" data-toggle="collapse" href="#list{{ $row->id }}" onclick="toggleIcon('{{ $row->id }}')">
+         <i id="{{ $row->id }}" class="fas fa-chevron-right"></i>
        </button>
-       Order A
+       {{ $row->indikator }}
      </div>
      <div class="col">
-       30 Oktober
+
      </div>
      <div class="col">
-       Action
+      <span class="badge @if($row->status == 'Pending') bg-warning @elseif($row->status == 'Rejected') bg-danger @elseif($row->status == 'Tercapai') bg-success @endif">
+        {{ $row->status }}
+      </span>
      </div>
    </div>
      </li>
-     <div id="list1" class="collapse">
+     <div id="list{{ $row->id }}" class="collapse">
        <ul class="list-group list-group-flush">
+
+        @foreach($OKR_KBL as $sublist)
+        @if($sublist->parent==$row->id)
          <li class="list-group-item list-group-item-action">
- 
            <div class="row">
              <div class="col">
-               <button class="icon-button" data-toggle="collapse" href="#sublist1-1" onclick="toggleIcon('icon1-1')" style="margin-left:10px">
-                 <i id="icon1-1" class="fas fa-chevron-right"></i>
+               <button class="icon-button" data-toggle="collapse" href="#sublist{{ $sublist->id }}" onclick="toggleIcon('{{ $sublist->id }}')" style="margin-left:10px">
+                 <i id="{{ $sublist->id }}" class="fas fa-chevron-right"></i>
                </button>
-               Meja Makan
+               {{ $sublist->indikator }}
              </div>
              <div class="col">
-               29 Oktober
+
              </div>
              <div class="col">
-               Action
+              <span class="badge @if($sublist->status == 'Pending') bg-warning @elseif($sublist->status == 'Rejected') bg-danger @elseif($sublist->status == 'Tercapai') bg-success @endif">
+                {{ $sublist->status }}
+              </span>
              </div>
          </div>
          </li>
-         <div id="sublist1-1" class="collapse">
+
+
+         <div id="sublist{{ $sublist->id }}" class="collapse">
            <ul class="list-group list-group-flush">
+            @foreach($OKR_KBL as $subofsub)
+            @if($subofsub->parent==$sublist->id)
              <li class="list-group-item">
  
                  <div class="row">
                    <div class="col">
-                     <i class="subofsub-icon" style="margin-left:50px"></i>Rangka
+                     <i class="subofsub-icon" style="margin-left:50px"></i>{{ $subofsub->indikator }}
                    </div>
                    <div class="col">
-                     25 Oktober
+                     
                    </div>
                    <div class="col">
-                     Action
+                    <span class="badge @if($subofsub->status == 'Pending') bg-warning @elseif($subofsub->status == 'Rejected') bg-danger @elseif($subofsub->status == 'Tercapai') bg-success @endif">
+                      {{ $subofsub->status }}
+                    </span>
                    </div>
                  </div>
  
              </li>
-             <li class="list-group-item">
- 
-                 <div class="row">
-                   <div class="col">
-                     <i class="subofsub-icon" style="margin-left:50px"></i>Finishing
-                   </div>
-                   <div class="col">
-                     26 Oktober
-                   </div>
-                   <div class="col">
-                     Action
-                   </div>
-                 </div>
- 
-             </li>
+             @endif
+             @endforeach
+
            </ul>
          </div>
-         <li class="list-group-item list-group-item-action">
- 
-           <div class="row">
-             <div class="col">
-               <button class="icon-button" data-toggle="collapse" href="#sublist1-2" onclick="toggleIcon('icon1-2')" style="margin-left:10px">
-                 <i id="icon1-2" class="fas fa-chevron-right"></i>
-               </button>
-               Kursi Makan
-             </div>
-             <div class="col">
-               28 Oktober
-             </div>
-             <div class="col">
-               Action
-             </div>
-         </div>
-         </li>
-         <div id="sublist1-2" class="collapse">
-           <ul class="list-group list-group-flush">
-             <li class="list-group-item">
- 
-                 <div class="row">
-                   <div class="col">
-                     <i class="subofsub-icon" style="margin-left:50px"></i>Rangka
-                   </div>
-                   <div class="col">
-                     24 Oktober
-                   </div>
-                   <div class="col">
-                     Action
-                   </div>
-                 </div>
- 
-             </li>
-           </ul>
-         </div>
+         @endif
+         @endforeach
        </ul>
      </div>
-     <li class="list-group-item list-group-item-action">
-     <div class="row">
- 
- 
-     <div class="col">
-       <button class="icon-button" data-toggle="collapse" href="#list2" onclick="toggleIcon('icon2')">
-         <i id="icon2" class="fas fa-chevron-right"></i>
-       </button>
-       Order B
-     </div>
-     <div class="col">
-       5 November
-     </div>
-     <div class="col">
-       Action
-     </div>
-   </div>
-     </li>
-     <div id="list2" class="collapse">
-       <ul class="list-group list-group-flush">
-         <li class="list-group-item list-group-item-action">
- 
-           <div class="row">
-             <div class="col">
-               <button class="icon-button" data-toggle="collapse" href="#sublist2-1" onclick="toggleIcon('icon2-1')" style="margin-left:10px">
-                 <i id="icon2-1" class="fas fa-chevron-right"></i>
-               </button>
-               Lemari
-             </div>
-             <div class="col">
-               3 November
-             </div>
-             <div class="col">
-               Action
-             </div>
-         </div>
-         </li>
-         <div id="sublist2-1" class="collapse">
-           <ul class="list-group list-group-flush">
-             <li class="list-group-item">
- 
-                 <div class="row">
-                   <div class="col">
-                     <i class="subofsub-icon" style="margin-left:50px"></i>Rangka
-                   </div>
-                   <div class="col">
-                     1 November
-                   </div>
-                   <div class="col">
-                     Action
-                   </div>
-                 </div>
- 
-             </li>
-             <li class="list-group-item">
- 
-                 <div class="row">
-                   <div class="col">
-                     <i class="subofsub-icon" style="margin-left:50px"></i>Finishing
-                   </div>
-                   <div class="col">
-                     2 November
-                   </div>
-                   <div class="col">
-                     Action
-                   </div>
-                 </div>
- 
-             </li>
-           </ul>
-         </div>
-         <li class="list-group-item list-group-item-action">
- 
-           <div class="row">
-             <div class="col">
-               <button class="icon-button" data-toggle="collapse" href="#sublist2-2" onclick="toggleIcon('icon2-2')" style="margin-left:10px">
-                 <i id="icon2-2" class="fas fa-chevron-right"></i>
-               </button>
-               Buffet
-             </div>
-             <div class="col">
-               6 November
-             </div>
-             <div class="col">
-               Action
-             </div>
-         </div>
-         </li>
-         <div id="sublist2-2" class="collapse">
-           <ul class="list-group list-group-flush">
-             <li class="list-group-item">
- 
-                 <div class="row">
-                   <div class="col">
-                     <i class="subofsub-icon" style="margin-left:50px"></i>Rangka
-                   </div>
-                   <div class="col">
-                     4 November
-                   </div>
-                   <div class="col">
-                     Action
-                   </div>
-                 </div>
- 
-             </li>
-           </ul>
-         </div>
-       </ul>
-     </div>
+     @endif
+     @endforeach
+
    </ul>
  </div>
  
