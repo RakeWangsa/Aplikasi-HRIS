@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     route::get('/user/management', [ManagementController::class, 'index'])->middleware('auth');
     route::get('/admin/kpi', [PenilaianController::class, 'kpi_admin'])->middleware('auth');
     route::get('/admin/kpi/{divisi}', [PenilaianController::class, 'kpi_admin_filter'])->name('kpi_admin_filter')->middleware('auth');
+    route::get('/admin/kpi/{jabatan}', [PenilaianController::class, 'kpi_admin_filter2'])->name('kpi_admin_filter2')->middleware('auth');
     route::post('/admin/kpi/addKPI', [PenilaianController::class, 'add_KPI'])->name('addKPI')->middleware('auth');
     route::post('/admin/kpi/updateKPI/{id}', [PenilaianController::class, 'update_KPI'])->name('updateKPI')->middleware('auth');
     route::get('/admin/kpi/hapusKPI/{id}', [PenilaianController::class, 'hapus_KPI'])->name('hapusKPI')->middleware('auth');

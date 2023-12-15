@@ -33,6 +33,16 @@
                     @endforeach
                 </ul>
                 @if(isset($divisi))
+                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">
+                    Pilih Jabatan
+                </a>
+        
+                <!-- Dropdown items -->
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                    @foreach($jabatan as $row)
+                        <li><a class="dropdown-item" href="{{ route('kpi_admin_filter2', ['jabatan' => $row->jabatan]) }}">{{ $row->jabatan }}</a></li>
+                    @endforeach
+                </ul>
                 <a class="btn btn-success" href="{{ route('hasilKPI', ['divisi' => $divisi]) }}">Hasil KPI</a>
                 @endif
             </div>
