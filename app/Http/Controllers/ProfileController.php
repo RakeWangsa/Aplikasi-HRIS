@@ -145,7 +145,8 @@ class ProfileController extends Controller
         $id_user = $request->id_user;
         $profile = User::find($id_user);
         $profile->update([
-            'job' => $request->job
+            'job' => $request->job,
+            'jabatan' => $request->jabatan
         ]);
         return redirect('/admin/profiles');  
     }

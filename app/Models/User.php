@@ -26,6 +26,7 @@ class User extends Authenticatable
         'about',
         'company',
         'job',
+        'jabatan',
         'country',
         'address',
         'phone',

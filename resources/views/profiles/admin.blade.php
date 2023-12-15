@@ -22,7 +22,7 @@
                 <div class="card-body profiles-card pt-4 d-flex flex-column align-items-center">
                     <img src="{{ asset('img/' . $row->image) }}" style="width:100px;height:100px" alt="Profile" class="rounded-circle">
                     <h2>{{ $row->name }}</h2>
-                    <div class="btn-profile"> <button class="btn text-white" data-toggle="modal" data-target="#job{{ $row->id }}">{{ $row->job }}</button></div>
+                    <div class="btn-profile"> <button class="btn text-white" data-toggle="modal" data-target="#job{{ $row->id }}">{{ $row->job }}<br>{{ $row->jabatan }}</button></div>
                 </div>
             </div>
         </div>
@@ -45,10 +45,14 @@
       <form action="{{ route('updateJob') }}" method="post">
         @csrf
         <div class="modal-body">
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="job">Job:</label>
                 <input type="text" class="form-control" id="job" name="job" value="{{ $row->job }}">
                 <input type="text" style="display:none" class="form-control" id="id_user" name="id_user" value="{{ $row->id }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="jabatan">Jabatan:</label>
+                <input type="text" class="form-control" id="jabatan" name="jabatan" value="{{ $row->jabatan }}">
             </div>
         </div>
         <div class="modal-footer">
