@@ -23,33 +23,34 @@
         <div class="d-flex justify-content-between">
             <div class="dropdown">
                 <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    @if(isset($divisi)) {{ $divisi }} @else Pilih Divisi @endif
+                    @if(isset($filter)) @if($jenis=='divisi') {{ $filter }} @else Pilih Divisi @endif @else Pilih Divisi @endif
                 </a>
         
                 <!-- Dropdown items -->
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     @foreach($job as $row)
-                        <li><a class="dropdown-item" href="{{ route('kpi_admin_filter', ['divisi' => $row->job]) }}">{{ $row->job }}</a></li>
+                        <li><a class="dropdown-item" href="{{ route('kpi_admin_filter', ['jenis' => 'divisi', 'filter' => $row->job]) }}">{{ $row->job }}</a></li>
                     @endforeach
                 </ul>
-                @if(isset($divisi))
-                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="false">
-                    Pilih Jabatan
+
+                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    @if(isset($filter)) @if($jenis=='jabatan') {{ $filter }} @else Pilih Jabatan @endif @else Pilih Jabatan @endif
                 </a>
         
                 <!-- Dropdown items -->
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     @foreach($jabatan as $row)
-                        <li><a class="dropdown-item" href="{{ route('kpi_admin_filter2', ['jabatan' => $row->jabatan]) }}">{{ $row->jabatan }}</a></li>
+                        <li><a class="dropdown-item" href="{{ route('kpi_admin_filter', ['jenis' => 'jabatan', 'filter' => $row->jabatan]) }}">{{ $row->jabatan }}</a></li>
                     @endforeach
                 </ul>
-                <a class="btn btn-success" href="{{ route('hasilKPI', ['divisi' => $divisi]) }}">Hasil KPI</a>
+                @if(isset($filter))
+                <a class="btn btn-success" href="{{ route('hasilKPI', ['divisi' => $filter]) }}">Hasil KPI</a>
                 @endif
             </div>
 
             
             <div class="dropdown">
-                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                     Tambah Indikator KPI
                 </a>
         
