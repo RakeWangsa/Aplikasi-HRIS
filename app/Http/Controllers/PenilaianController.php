@@ -127,13 +127,18 @@ class PenilaianController extends Controller
         ->select('*')
         ->orderBy('tanggung_jawab_pekerjaan')
         ->get();
+        $totalBobot=0;
+        foreach($kpi as $data){
+            $totalBobot=$totalBobot+$data->bobot;
+        }
         return view('penilaian.kpi-admin', [
             'title' => 'KPI',
             'active' => 'kpi_admin',
             'job' => $job,
             'jabatan' => $jabatan,
             'kpi' => $kpi,
-            'divisi' => $divisi
+            'divisi' => $divisi,
+            'totalBobot' => $totalBobot
         ]);
     }
 
@@ -153,6 +158,7 @@ class PenilaianController extends Controller
             foreach ($user as $userData) {
                 $namaKey = "nama" . $i;
                 $kpiKey = "kpi" . $i;
+                $totalBobot = "totalBobot" . $i;
                 $totalNilaiKey = "totalNilaiAkhir" . $i;
         
                 ${$namaKey} = $userData->name;
@@ -168,6 +174,7 @@ class PenilaianController extends Controller
                     ->orderBy('kpi_admin.tanggung_jawab_pekerjaan')
                     ->get();
         
+                ${$totalBobot} = ${$kpiKey}->sum('bobot');
                 ${$totalNilaiKey} = ${$kpiKey}->sum('nilai_akhir');
         
                 $data[] = [
@@ -175,16 +182,17 @@ class PenilaianController extends Controller
                     'job' => $userData->job,
                     'jabatan' => $userData->jabatan,
                     'kpi' => ${$kpiKey},
+                    'totalBobot' => ${$totalBobot},
                     'totalNilaiAkhir' => ${$totalNilaiKey},
                 ];
         
                 $i++;
             }
         }else{
-            $divisi=$request->filter;
+            $jabatan=$request->filter;
             $user = DB::table('Users')
                 ->where('level', 'karyawan')
-                ->where('jabatan', $divisi)
+                ->where('jabatan', $jabatan)
                 ->select('name', 'id', 'job', 'jabatan')
                 ->get();
         
@@ -194,6 +202,7 @@ class PenilaianController extends Controller
             foreach ($user as $userData) {
                 $namaKey = "nama" . $i;
                 $kpiKey = "kpi" . $i;
+                $totalBobot = "totalBobot" . $i;
                 $totalNilaiKey = "totalNilaiAkhir" . $i;
         
                 ${$namaKey} = $userData->name;
@@ -209,6 +218,7 @@ class PenilaianController extends Controller
                     ->orderBy('kpi_admin.tanggung_jawab_pekerjaan')
                     ->get();
         
+                ${$totalBobot} = ${$kpiKey}->sum('bobot');
                 ${$totalNilaiKey} = ${$kpiKey}->sum('nilai_akhir');
         
                 $data[] = [
@@ -216,6 +226,7 @@ class PenilaianController extends Controller
                     'job' => $userData->job,
                     'jabatan' => $userData->jabatan,
                     'kpi' => ${$kpiKey},
+                    'totalBobot' => ${$totalBobot},
                     'totalNilaiAkhir' => ${$totalNilaiKey},
                 ];
         
