@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
     route::post('/admin/kpi/addKPI', [PenilaianController::class, 'add_KPI'])->name('addKPI')->middleware('auth');
     route::post('/admin/kpi/updateKPI/{id}', [PenilaianController::class, 'update_KPI'])->name('updateKPI')->middleware('auth');
     route::get('/admin/kpi/hapusKPI/{id}', [PenilaianController::class, 'hapus_KPI'])->name('hapusKPI')->middleware('auth');
-    route::get('/admin/kpi/hasilKPI', [PenilaianController::class, 'hasil_KPI'])->name('hasilKPI')->middleware('auth');
+    route::post('/admin/kpi/hasilKPI', [PenilaianController::class, 'hasil_KPI'])->name('hasilKPI')->middleware('auth');
     route::get('/admin/okr', [PenilaianController::class, 'okr_admin'])->middleware('auth');
     route::post('/admin/okr/addOKR', [PenilaianController::class, 'addOKR'])->name('addOKR')->middleware('auth');
     route::post('/admin/okr/updateStatusOKR', [PenilaianController::class, 'updateStatusOKR'])->name('updateStatusOKR')->middleware('auth');

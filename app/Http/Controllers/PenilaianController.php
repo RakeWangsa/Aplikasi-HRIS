@@ -86,11 +86,13 @@ class PenilaianController extends Controller
         $job = DB::table('Users')
         ->where('level','karyawan')
         ->select('job')
+        ->orderBy('job')
         ->distinct()
         ->get();
         $jabatan = DB::table('Users')
         ->where('level','karyawan')
         ->select('jabatan')
+        ->orderBy('jabatan')
         ->distinct()
         ->get();
 
@@ -107,6 +109,13 @@ class PenilaianController extends Controller
         $job = DB::table('Users')
         ->where('level','karyawan')
         ->select('job')
+        ->orderBy('job')
+        ->distinct()
+        ->get();
+        $jabatan = DB::table('Users')
+        ->where('level','karyawan')
+        ->select('jabatan')
+        ->orderBy('jabatan')
         ->distinct()
         ->get();
         $kpi = DB::table('kpi_admin')
@@ -118,49 +127,92 @@ class PenilaianController extends Controller
             'title' => 'KPI',
             'active' => 'kpi_admin',
             'job' => $job,
+            'jabatan' => $jabatan,
             'kpi' => $kpi,
             'divisi' => $divisi
         ]);
     }
 
-    public function hasil_KPI($divisi)
+    public function hasil_KPI(Request $request)
     {
-        $user = DB::table('Users')
-            ->where('job', $divisi)
-            ->select('name', 'id')
-            ->get();
-    
-        $data = [];
-    
-        $i = 1;
-        foreach ($user as $userData) {
-            $namaKey = "nama" . $i;
-            $kpiKey = "kpi" . $i;
-            $totalNilaiKey = "totalNilaiAkhir" . $i;
-    
-            ${$namaKey} = $userData->name;
-            $id = $userData->id;
-    
-            ${$kpiKey} = DB::table('kpi_admin')
-                ->leftJoin('kpi_karyawan', function ($join) use ($id) {
-                    $join->on('kpi_admin.id', '=', 'kpi_karyawan.id_kpi_admin')
-                        ->where('kpi_karyawan.id_user', '=', $id);
-                })
-                ->where('kpi_admin.divisi', $divisi)
-                ->select('kpi_admin.*', 'kpi_karyawan.id_user', 'kpi_karyawan.realisasi', 'kpi_karyawan.score', 'kpi_karyawan.nilai_akhir', 'kpi_karyawan.sumber')
-                ->orderBy('kpi_admin.tanggung_jawab_pekerjaan')
+        if($request->jenis=="divisi"){
+            $divisi=$request->filter;
+            $user = DB::table('Users')
+                ->where('job', $divisi)
+                ->select('name', 'id')
                 ->get();
-    
-            ${$totalNilaiKey} = ${$kpiKey}->sum('nilai_akhir');
-    
-            $data[] = [
-                'nama' => ${$namaKey},
-                'kpi' => ${$kpiKey},
-                'totalNilaiAkhir' => ${$totalNilaiKey},
-            ];
-    
-            $i++;
+        
+            $data = [];
+        
+            $i = 1;
+            foreach ($user as $userData) {
+                $namaKey = "nama" . $i;
+                $kpiKey = "kpi" . $i;
+                $totalNilaiKey = "totalNilaiAkhir" . $i;
+        
+                ${$namaKey} = $userData->name;
+                $id = $userData->id;
+        
+                ${$kpiKey} = DB::table('kpi_admin')
+                    ->leftJoin('kpi_karyawan', function ($join) use ($id) {
+                        $join->on('kpi_admin.id', '=', 'kpi_karyawan.id_kpi_admin')
+                            ->where('kpi_karyawan.id_user', '=', $id);
+                    })
+                    ->where('kpi_admin.divisi', $divisi)
+                    ->select('kpi_admin.*', 'kpi_karyawan.id_user', 'kpi_karyawan.realisasi', 'kpi_karyawan.score', 'kpi_karyawan.nilai_akhir', 'kpi_karyawan.sumber')
+                    ->orderBy('kpi_admin.tanggung_jawab_pekerjaan')
+                    ->get();
+        
+                ${$totalNilaiKey} = ${$kpiKey}->sum('nilai_akhir');
+        
+                $data[] = [
+                    'nama' => ${$namaKey},
+                    'kpi' => ${$kpiKey},
+                    'totalNilaiAkhir' => ${$totalNilaiKey},
+                ];
+        
+                $i++;
+            }
+        }else{
+            $divisi=$request->filter;
+            $user = DB::table('Users')
+                ->where('jabatan', $divisi)
+                ->select('name', 'id', 'job')
+                ->get();
+        
+            $data = [];
+        
+            $i = 1;
+            foreach ($user as $userData) {
+                $namaKey = "nama" . $i;
+                $kpiKey = "kpi" . $i;
+                $totalNilaiKey = "totalNilaiAkhir" . $i;
+        
+                ${$namaKey} = $userData->name;
+                $id = $userData->id;
+        
+                ${$kpiKey} = DB::table('kpi_admin')
+                    ->leftJoin('kpi_karyawan', function ($join) use ($id) {
+                        $join->on('kpi_admin.id', '=', 'kpi_karyawan.id_kpi_admin')
+                            ->where('kpi_karyawan.id_user', '=', $id);
+                    })
+                    ->where('kpi_admin.divisi', $userData->job)
+                    ->select('kpi_admin.*', 'kpi_karyawan.id_user', 'kpi_karyawan.realisasi', 'kpi_karyawan.score', 'kpi_karyawan.nilai_akhir', 'kpi_karyawan.sumber')
+                    ->orderBy('kpi_admin.tanggung_jawab_pekerjaan')
+                    ->get();
+        
+                ${$totalNilaiKey} = ${$kpiKey}->sum('nilai_akhir');
+        
+                $data[] = [
+                    'nama' => ${$namaKey},
+                    'kpi' => ${$kpiKey},
+                    'totalNilaiAkhir' => ${$totalNilaiKey},
+                ];
+        
+                $i++;
+            }
         }
+        
     
         return view('penilaian.kpi-hasil', [
             'title' => 'KPI',

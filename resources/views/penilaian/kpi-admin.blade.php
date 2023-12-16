@@ -47,14 +47,14 @@
                         <form action="{{ route('hasilKPI') }}" method="post" id="kpiForm">
                           @csrf
                           <div class="modal-body">
-                              <div class="form-group">
+                              <div class="form-group mb-3">
                                 <label for="jenis">jenis :</label>
                                 <select class="form-control" id="jenis" name="jenis" required>
-                                    <option value="divisi">divisi</option>
-                                    <option value="jabatan">jabatan</option>
+                                    <option value="divisi">Divisi</option>
+                                    <option value="jabatan">Jabatan</option>
                                 </select>
                               </div>
-                              <div class="form-group">
+                              <div class="form-group mb-3">
                                 <label for="filter">Filter :</label>
                                 <select class="form-control" id="filter" name="filter" required>
 
