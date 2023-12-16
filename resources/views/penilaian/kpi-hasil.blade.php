@@ -12,7 +12,7 @@
     }
 </style>
 <div class="pagetitle mt-3">
-    <h1>Penilaian KPI</h1>
+    <h1>Hasil Penilaian KPI ( {{ $jenis }} : {{ $filter }} )</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/employee/dashboard">Home</a></li>

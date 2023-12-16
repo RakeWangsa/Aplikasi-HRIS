@@ -48,14 +48,14 @@
                           @csrf
                           <div class="modal-body">
                               <div class="form-group mb-3">
-                                <label for="jenis">jenis :</label>
+                                <label for="jenis">Pilih Jenis :</label>
                                 <select class="form-control" id="jenis" name="jenis" required>
-                                    <option value="divisi">Divisi</option>
-                                    <option value="jabatan">Jabatan</option>
+                                    <option value="Divisi">Divisi</option>
+                                    <option value="Jabatan">Jabatan</option>
                                 </select>
                               </div>
                               <div class="form-group mb-3">
-                                <label for="filter">Filter :</label>
+                                <label for="filter">Pilih Filter :</label>
                                 <select class="form-control" id="filter" name="filter" required>
 
                                 </select>
@@ -222,8 +222,8 @@
     
     // Definisikan opsi untuk masing-masing jenis
     var options = {
-        'divisi': {!! json_encode($job->pluck('job')) !!},
-        'jabatan': {!! json_encode($jabatan->pluck('jabatan')) !!}
+        'Divisi': {!! json_encode($job->pluck('job')) !!},
+        'Jabatan': {!! json_encode($jabatan->pluck('jabatan')) !!}
     };
 
     // Fungsi untuk mengganti opsi filter berdasarkan jenis yang dipilih

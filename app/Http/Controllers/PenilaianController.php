@@ -92,6 +92,7 @@ class PenilaianController extends Controller
         $jabatan = DB::table('Users')
         ->where('level','karyawan')
         ->select('jabatan')
+        ->whereNotNull('jabatan')
         ->orderBy('jabatan')
         ->distinct()
         ->get();
@@ -114,6 +115,7 @@ class PenilaianController extends Controller
         ->get();
         $jabatan = DB::table('Users')
         ->where('level','karyawan')
+        ->whereNotNull('jabatan')
         ->select('jabatan')
         ->orderBy('jabatan')
         ->distinct()
@@ -135,9 +137,10 @@ class PenilaianController extends Controller
 
     public function hasil_KPI(Request $request)
     {
-        if($request->jenis=="divisi"){
+        if($request->jenis=="Divisi"){
             $divisi=$request->filter;
             $user = DB::table('Users')
+                ->where('level', 'karyawan')
                 ->where('job', $divisi)
                 ->select('name', 'id')
                 ->get();
@@ -176,6 +179,7 @@ class PenilaianController extends Controller
         }else{
             $divisi=$request->filter;
             $user = DB::table('Users')
+                ->where('level', 'karyawan')
                 ->where('jabatan', $divisi)
                 ->select('name', 'id', 'job')
                 ->get();
@@ -218,6 +222,8 @@ class PenilaianController extends Controller
             'title' => 'KPI',
             'active' => 'kpi_admin',
             'data' => $data,
+            'jenis' => $request->jenis,
+            'filter' => $request->filter,
         ]);
     }
     
