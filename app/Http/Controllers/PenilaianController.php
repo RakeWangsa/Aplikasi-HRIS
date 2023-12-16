@@ -86,6 +86,7 @@ class PenilaianController extends Controller
         $job = DB::table('Users')
         ->where('level','karyawan')
         ->select('job')
+        ->whereNotNull('job')
         ->orderBy('job')
         ->distinct()
         ->get();
@@ -110,6 +111,7 @@ class PenilaianController extends Controller
         $job = DB::table('Users')
         ->where('level','karyawan')
         ->select('job')
+        ->whereNotNull('job')
         ->orderBy('job')
         ->distinct()
         ->get();
@@ -142,7 +144,7 @@ class PenilaianController extends Controller
             $user = DB::table('Users')
                 ->where('level', 'karyawan')
                 ->where('job', $divisi)
-                ->select('name', 'id')
+                ->select('name', 'id', 'job', 'jabatan')
                 ->get();
         
             $data = [];
@@ -170,6 +172,8 @@ class PenilaianController extends Controller
         
                 $data[] = [
                     'nama' => ${$namaKey},
+                    'job' => $userData->job,
+                    'jabatan' => $userData->jabatan,
                     'kpi' => ${$kpiKey},
                     'totalNilaiAkhir' => ${$totalNilaiKey},
                 ];
@@ -181,7 +185,7 @@ class PenilaianController extends Controller
             $user = DB::table('Users')
                 ->where('level', 'karyawan')
                 ->where('jabatan', $divisi)
-                ->select('name', 'id', 'job')
+                ->select('name', 'id', 'job', 'jabatan')
                 ->get();
         
             $data = [];
@@ -209,6 +213,8 @@ class PenilaianController extends Controller
         
                 $data[] = [
                     'nama' => ${$namaKey},
+                    'job' => $userData->job,
+                    'jabatan' => $userData->jabatan,
                     'kpi' => ${$kpiKey},
                     'totalNilaiAkhir' => ${$totalNilaiKey},
                 ];

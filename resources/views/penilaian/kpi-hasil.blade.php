@@ -31,7 +31,7 @@
 
                             
                             @foreach ($data as $item)
-                            <div class="mt-4"><strong>{{ $item['nama'] }}</strong></div>
+                            <div class="mt-4"><strong>{{ $item['nama'] }}</strong><p>{{ $item['job'] }}, {{ $item['jabatan'] }}</p></div>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
