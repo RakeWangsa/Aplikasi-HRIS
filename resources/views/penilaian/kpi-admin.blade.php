@@ -23,34 +23,56 @@
         <div class="d-flex justify-content-between">
             <div class="dropdown">
                 <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    @if(isset($filter)) @if($jenis=='divisi') {{ $filter }} @else Pilih Divisi @endif @else Pilih Divisi @endif
+                    @if(isset($divisi)) {{ $divisi }} @else Pilih Divisi @endif
                 </a>
         
                 <!-- Dropdown items -->
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     @foreach($job as $row)
-                        <li><a class="dropdown-item" href="{{ route('kpi_admin_filter', ['jenis' => 'divisi', 'filter' => $row->job]) }}">{{ $row->job }}</a></li>
+                        <li><a class="dropdown-item" href="{{ route('kpi_admin_filter', ['divisi' => $row->job]) }}">{{ $row->job }}</a></li>
                     @endforeach
                 </ul>
+                <button class="btn btn-success" data-toggle="modal" data-target="#hasilKPI">Hasil KPI</button>
 
-                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    @if(isset($filter)) @if($jenis=='jabatan') {{ $filter }} @else Pilih Jabatan @endif @else Pilih Jabatan @endif
-                </a>
-        
-                <!-- Dropdown items -->
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    @foreach($jabatan as $row)
-                        <li><a class="dropdown-item" href="{{ route('kpi_admin_filter', ['jenis' => 'jabatan', 'filter' => $row->jabatan]) }}">{{ $row->jabatan }}</a></li>
-                    @endforeach
-                </ul>
-                @if(isset($filter))
-                <a class="btn btn-success" href="{{ route('hasilKPI', ['divisi' => $filter]) }}">Hasil KPI</a>
-                @endif
+                <!-- Modal -->
+                <div class="modal fade" id="hasilKPI" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Hasil KPI</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <form action="{{ route('hasilKPI') }}" method="post" id="kpiForm">
+                          @csrf
+                          <div class="modal-body">
+                              <div class="form-group">
+                                <label for="jenis">jenis :</label>
+                                <select class="form-control" id="jenis" name="jenis" required>
+                                    <option value="divisi">divisi</option>
+                                    <option value="jabatan">jabatan</option>
+                                </select>
+                              </div>
+                              <div class="form-group">
+                                <label for="filter">Filter :</label>
+                                <select class="form-control" id="filter" name="filter" required>
+
+                                </select>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="submit" class="btn btn-primary">Submit</button>
+                          </div>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
             </div>
 
             
             <div class="dropdown">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                     Tambah Indikator KPI
                 </a>
         
@@ -192,4 +214,36 @@
     </div>
     </div>
 </section>
+
+<script>
+    // Ambil elemen-elemen form
+    var jenisSelect = document.getElementById('jenis');
+    var filterSelect = document.getElementById('filter');
+    
+    // Definisikan opsi untuk masing-masing jenis
+    var options = {
+        'divisi': {!! json_encode($job->pluck('job')) !!},
+        'jabatan': {!! json_encode($jabatan->pluck('jabatan')) !!}
+    };
+
+    // Fungsi untuk mengganti opsi filter berdasarkan jenis yang dipilih
+    function updateFilterOptions() {
+        var selectedJenis = jenisSelect.value;
+        filterSelect.innerHTML = ''; // Kosongkan opsi filter terlebih dahulu
+
+        // Tambahkan opsi filter berdasarkan jenis yang dipilih
+        options[selectedJenis].forEach(function(option) {
+            var optionElement = document.createElement('option');
+            optionElement.value = option;
+            optionElement.text = option;
+            filterSelect.add(optionElement);
+        });
+    }
+
+    // Panggil fungsi pertama kali untuk menginisialisasi opsi filter
+    updateFilterOptions();
+
+    // Tambahkan event listener untuk mengubah opsi filter saat jenis berubah
+    jenisSelect.addEventListener('change', updateFilterOptions);
+</script>
 @endsection

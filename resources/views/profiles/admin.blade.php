@@ -45,7 +45,7 @@
       <form action="{{ route('updateJob') }}" method="post">
         @csrf
         <div class="modal-body">
-            <div class="form-group mb-3">
+            <div class="form-group">
                 <label for="job">Job:</label>
                 <input type="text" class="form-control" id="job" name="job" value="{{ $row->job }}">
                 <input type="text" style="display:none" class="form-control" id="id_user" name="id_user" value="{{ $row->id }}" readonly>

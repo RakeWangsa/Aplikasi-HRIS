@@ -102,20 +102,15 @@ class PenilaianController extends Controller
         ]);
     }
 
-    public function kpi_admin_filter($jenis,$filter)
+    public function kpi_admin_filter($divisi)
     {
         $job = DB::table('Users')
         ->where('level','karyawan')
         ->select('job')
         ->distinct()
         ->get();
-        $jabatan = DB::table('Users')
-        ->where('level','karyawan')
-        ->select('jabatan')
-        ->distinct()
-        ->get();
         $kpi = DB::table('kpi_admin')
-        ->where('divisi',$filter)
+        ->where('divisi',$divisi)
         ->select('*')
         ->orderBy('tanggung_jawab_pekerjaan')
         ->get();
@@ -123,33 +118,10 @@ class PenilaianController extends Controller
             'title' => 'KPI',
             'active' => 'kpi_admin',
             'job' => $job,
-            'jabatan' => $jabatan,
             'kpi' => $kpi,
-            'filter' => $filter,
-            'jenis' => $jenis,
+            'divisi' => $divisi
         ]);
     }
-
-    // public function kpi_admin_filter2($divisi,$jabatan)
-    // {
-    //     $job = DB::table('Users')
-    //     ->where('level','karyawan')
-    //     ->select('job')
-    //     ->distinct()
-    //     ->get();
-    //     $kpi = DB::table('kpi_admin')
-    //     ->where('divisi',$divisi)
-    //     ->select('*')
-    //     ->orderBy('tanggung_jawab_pekerjaan')
-    //     ->get();
-    //     return view('penilaian.kpi-admin', [
-    //         'title' => 'KPI',
-    //         'active' => 'kpi_admin',
-    //         'job' => $job,
-    //         'kpi' => $kpi,
-    //         'divisi' => $divisi
-    //     ]);
-    // }
 
     public function hasil_KPI($divisi)
     {
