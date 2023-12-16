@@ -14,7 +14,7 @@
 <div class="pagetitle mt-3">
     <div class="d-flex justify-content-between align-items-center">
         <h1>Hasil Penilaian KPI ( {{ $jenis }} : {{ $filter }} )</h1>
-        <a class="btn btn-secondary" href=""><i class="bi bi-printer-fill"></i> Cetak Hasil KPI</a>
+        <a class="btn btn-secondary" href="{{ route('printKPI', ['jenis' => $jenis, 'filter' => $filter]) }}"><i class="bi bi-printer-fill"></i> Cetak Hasil KPI</a>
     </div>
     
     <nav>
