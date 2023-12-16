@@ -36,17 +36,29 @@ class DashboardController extends Controller
 
     public function dash_executive()
     {
+        $karyawan = DB::table('Users')
+        ->where('level', 'karyawan')
+        ->select('name')
+        ->get();
+        $jumlahKaryawan=count($karyawan);
         return view('dashboard.executive', [
             'title' => 'Dashboard',
             'active' => 'dash_executive',
+            'jumlahKaryawan' => $jumlahKaryawan
         ]);
     }
 
     public function dash_admin()
     {
+        $karyawan = DB::table('Users')
+        ->where('level', 'karyawan')
+        ->select('name')
+        ->get();
+        $jumlahKaryawan=count($karyawan);
         return view('dashboard.admin', [
             'title' => 'Dashboard',
             'active' => 'dash_admin',
+            'jumlahKaryawan' => $jumlahKaryawan
         ]);
     }
 

@@ -205,6 +205,15 @@
                             </div>
 
                         @endforeach
+                        <tr>
+                            <td colspan="3">
+                                Total Bobot
+                            </td>
+                            <td colspan="3">
+                                <a class="btn btn-warning" style="border-radius: 100px;" data-toggle="modal" data-target="#update{{ $row->id }}"><i class="bi bi-pencil-square text-white"></i></a>
+                                <a class="btn btn-danger" style="border-radius: 100px;" a href="{{ route('hapusKPI', ['id' => $row->id]) }}"><i class="bi bi-trash text-white"></i></a>
+                            </td>
+                        </tr>
                         @endif
                     </tbody>
                 </table>
