@@ -66,10 +66,10 @@
                             </ul>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Progress Project</h5>
+                            <h5 class="card-title">Jumlah Admin</h5>
                             <div class="d-flex align-items-center">
                                 <div class="text-h6">
-                                    <h6>75%</h6>
+                                    <h6>{{ $jumlahAdmin }}</h6>
                                 </div>
                             </div>
                         </div>
@@ -89,10 +89,10 @@
                             </ul>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Skor KPI</h5>
+                            <h5 class="card-title">Jumlah Executive</h5>
                             <div class="d-flex align-items-center">
                                 <div class="text-h6">
-                                    <h6>65%</h6>
+                                    <h6>{{ $jumlahExecutive }}</h6>
                                 </div>
                             </div>
                         </div>

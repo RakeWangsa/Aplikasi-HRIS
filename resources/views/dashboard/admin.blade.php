@@ -135,7 +135,7 @@
         </div>
         <div class="col-lg-12">
             <div class="row">
-                <div class="col-xxl-9 col-md-9">
+                <div class="col-xxl-12 col-md-12">
                     <div class="card">
                         <div class="filter">
                             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
