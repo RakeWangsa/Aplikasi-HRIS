@@ -40,11 +40,14 @@ class DashboardController extends Controller
         ->where('level', 'karyawan')
         ->select('name')
         ->get();
+
         $jumlahKaryawan=count($karyawan);
+
         return view('dashboard.executive', [
             'title' => 'Dashboard',
             'active' => 'dash_executive',
-            'jumlahKaryawan' => $jumlahKaryawan
+            'jumlahKaryawan' => $jumlahKaryawan,
+
         ]);
     }
 
@@ -54,11 +57,23 @@ class DashboardController extends Controller
         ->where('level', 'karyawan')
         ->select('name')
         ->get();
+        $admin = DB::table('Users')
+        ->where('level', 'admin')
+        ->select('name')
+        ->get();
+        $executive = DB::table('Users')
+        ->where('level', 'executive')
+        ->select('name')
+        ->get();
         $jumlahKaryawan=count($karyawan);
+        $jumlahAdmin=count($admin);
+        $jumlahExecutive=count($executive);
         return view('dashboard.admin', [
             'title' => 'Dashboard',
             'active' => 'dash_admin',
-            'jumlahKaryawan' => $jumlahKaryawan
+            'jumlahKaryawan' => $jumlahKaryawan,
+            'jumlahAdmin' => $jumlahAdmin,
+            'jumlahExecutive' => $jumlahExecutive
         ]);
     }
 

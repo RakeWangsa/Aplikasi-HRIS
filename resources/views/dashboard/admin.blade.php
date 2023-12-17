@@ -58,10 +58,10 @@
                             </ul>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Total Project</h5>
+                            <h5 class="card-title">Jumlah Admin</h5>
                             <div class="d-flex align-items-center">
                                 <div class="text-h6">
-                                    <h6>75%</h6>
+                                    <h6>{{ $jumlahAdmin }}</h6>
                                 </div>
                             </div>
                         </div>
@@ -81,37 +81,55 @@
                             </ul>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Skor KPI</h5>
+                            <h5 class="card-title">Jumlah Executive</h5>
                             <div class="d-flex align-items-center">
                                 <div class="text-h6">
-                                    <h6>65%</h6>
+                                    <h6>{{ $jumlahExecutive }}</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xxl-3 col-md-3">
-                    <div class="card info-card revenue-card">
-                        <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                <li class="dropdown-header text-start">
-                                    <h6>Filter</h6>
-                                </li>
-                                <li><a class="dropdown-item" href="#">Today</a></li>
-                                <li><a class="dropdown-item" href="#">This Month</a></li>
-                                <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
+                    <div class="card" data-toggle="modal" data-target="#pengumumanModal">
+                        <div class="notif">
+                            <a class="icon"><i class='bx bx-bell'></i></a>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Skor OKR</h5>
+                            <h5 class="card-title-notif">Pengumuman</h5>
                             <div class="d-flex align-items-center">
-                                <div class="text-h6">
-                                    <h6>65%</h6>
+                                <div class="pengumuman">
+                                    <span class="announce">What do you want to announce?</span>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="pengumumanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Buat Pengumuman</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <form action="{{ route('submitPengumuman') }}" method="post">
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="announcementText">Isi Pengumuman:</label>
+                                        <input type="text" class="form-control" id="announcementText" name="pengumuman" placeholder="What do you want to announce?">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Kirim</button>
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -192,47 +210,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xxl-3 col-md-3">
-                    <div class="card" data-toggle="modal" data-target="#pengumumanModal">
-                        <div class="notif">
-                            <a class="icon"><i class='bx bx-bell'></i></a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title-notif">Pengumuman</h5>
-                            <div class="d-flex align-items-center">
-                                <div class="pengumuman">
-                                    <span class="announce">What do you want to announce?</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="pengumumanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Buat Pengumuman</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                            <form action="{{ route('submitPengumuman') }}" method="post">
-                                @csrf
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label for="announcementText">Isi Pengumuman:</label>
-                                        <input type="text" class="form-control" id="announcementText" name="pengumuman" placeholder="What do you want to announce?">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Kirim</button>
-                                </div>
-                            </form>
-                        </div>
-                        </div>
-                    </div>
 
-                </div>
             </div>
         </div>
     </div>
