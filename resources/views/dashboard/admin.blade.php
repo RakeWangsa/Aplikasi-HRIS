@@ -159,10 +159,10 @@
                                             data: [{{ $jumlahHadirJanuari }}, {{ $jumlahHadirFebruari }}, {{ $jumlahHadirMaret }}, {{ $jumlahHadirApril }}, {{ $jumlahHadirMei }}, {{ $jumlahHadirJuni }}, {{ $jumlahHadirJuli }}, {{ $jumlahHadirAgustus }}, {{ $jumlahHadirSeptember }}, {{ $jumlahHadirOktober }}, {{ $jumlahHadirNovember }}, {{ $jumlahHadirDesember }}]
                                         }, {
                                             name: 'Sakit',
-                                            data: [{{ $jumlahIzinJanuari }}, {{ $jumlahIzinFebruari }}, {{ $jumlahIzinMaret }}, {{ $jumlahIzinApril }}, {{ $jumlahIzinMei }}, {{ $jumlahIzinJuni }}, {{ $jumlahIzinJuli }}, {{ $jumlahIzinAgustus }}, {{ $jumlahIzinSeptember }}, {{ $jumlahIzinOktober }}, {{ $jumlahIzinNovember }}, {{ $jumlahIzinDesember }}]
+                                            data: [{{ $jumlahSakitJanuari }}, {{ $jumlahSakitFebruari }}, {{ $jumlahSakitMaret }}, {{ $jumlahSakitApril }}, {{ $jumlahSakitMei }}, {{ $jumlahSakitJuni }}, {{ $jumlahSakitJuli }}, {{ $jumlahSakitAgustus }}, {{ $jumlahSakitSeptember }}, {{ $jumlahSakitOktober }}, {{ $jumlahSakitNovember }}, {{ $jumlahSakitDesember }}]
                                         }, {
                                             name: 'Izin',
-                                            data: [{{ $jumlahSakitJanuari }}, {{ $jumlahSakitFebruari }}, {{ $jumlahSakitMaret }}, {{ $jumlahSakitApril }}, {{ $jumlahSakitMei }}, {{ $jumlahSakitJuni }}, {{ $jumlahSakitJuli }}, {{ $jumlahSakitAgustus }}, {{ $jumlahSakitSeptember }}, {{ $jumlahSakitOktober }}, {{ $jumlahSakitNovember }}, {{ $jumlahSakitDesember }}]
+                                            data: [{{ $jumlahIzinJanuari }}, {{ $jumlahIzinFebruari }}, {{ $jumlahIzinMaret }}, {{ $jumlahIzinApril }}, {{ $jumlahIzinMei }}, {{ $jumlahIzinJuni }}, {{ $jumlahIzinJuli }}, {{ $jumlahIzinAgustus }}, {{ $jumlahIzinSeptember }}, {{ $jumlahIzinOktober }}, {{ $jumlahIzinNovember }}, {{ $jumlahIzinDesember }}]
                                         }, {
                                             name: 'Tidak Hadir',
                                             data: [0,0,0,0,0,0,0,0,0,0,0,0]
