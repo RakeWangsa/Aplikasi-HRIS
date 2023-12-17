@@ -162,15 +162,187 @@ class DashboardController extends Controller
         $jumlahHadirJanuari = count($absenHadirJanuari);
         $jumlahHadirFebruari = count($absenHadirFebruari);
         $jumlahHadirMaret = count($absenHadirMaret);
-        $jumlahHadirJanuari = count($absenHadirJanuari);
-        $jumlahHadirJanuari = count($absenHadirJanuari);
-        $jumlahHadirJanuari = count($absenHadirJanuari);
-        $jumlahHadirJanuari = count($absenHadirJanuari);
-        $jumlahHadirJanuari = count($absenHadirJanuari);
-        $jumlahHadirJanuari = count($absenHadirJanuari);
-        $jumlahHadirJanuari = count($absenHadirJanuari);
-        $jumlahHadirJanuari = count($absenHadirJanuari);
-        $jumlahHadirJanuari = count($absenHadirJanuari);
+        $jumlahHadirApril = count($absenHadirApril);
+        $jumlahHadirMei = count($absenHadirMei);
+        $jumlahHadirJuni = count($absenHadirJuni);
+        $jumlahHadirJuli = count($absenHadirJuli);
+        $jumlahHadirAgustus = count($absenHadirAgustus);
+        $jumlahHadirSeptember = count($absenHadirSeptember);
+        $jumlahHadirOktober = count($absenHadirOktober);
+        $jumlahHadirNovember = count($absenHadirNovember);
+        $jumlahHadirDesember = count($absenHadirDesember);
+
+        $absenIzinJanuari = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Izin')
+        ->whereRaw("MONTH(`date`) = 1")
+        ->select('*')
+        ->get();
+        $absenIzinFebruari = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Izin')
+        ->whereRaw("MONTH(`date`) = 2")
+        ->select('*')
+        ->get();
+        $absenIzinMaret = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Izin')
+        ->whereRaw("MONTH(`date`) = 3")
+        ->select('*')
+        ->get();
+        $absenIzinApril = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Izin')
+        ->whereRaw("MONTH(`date`) = 4")
+        ->select('*')
+        ->get();
+        $absenIzinMei = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Izin')
+        ->whereRaw("MONTH(`date`) = 5")
+        ->select('*')
+        ->get();
+        $absenIzinJuni = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Izin')
+        ->whereRaw("MONTH(`date`) = 6")
+        ->select('*')
+        ->get();
+        $absenIzinJuli = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Izin')
+        ->whereRaw("MONTH(`date`) = 7")
+        ->select('*')
+        ->get();
+        $absenIzinAgustus = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Izin')
+        ->whereRaw("MONTH(`date`) = 8")
+        ->select('*')
+        ->get();
+        $absenIzinSeptember = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Izin')
+        ->whereRaw("MONTH(`date`) = 9")
+        ->select('*')
+        ->get();
+        $absenIzinOktober = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Izin')
+        ->whereRaw("MONTH(`date`) = 10")
+        ->select('*')
+        ->get();
+        $absenIzinNovember = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Izin')
+        ->whereRaw("MONTH(`date`) = 11")
+        ->select('*')
+        ->get();
+        $absenIzinDesember = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Izin')
+        ->whereRaw("MONTH(`date`) = 12")
+        ->select('*')
+        ->get();
+
+        $jumlahIzinJanuari = count($absenIzinJanuari);
+        $jumlahIzinFebruari = count($absenIzinFebruari);
+        $jumlahIzinMaret = count($absenIzinMaret);
+        $jumlahIzinApril = count($absenIzinApril);
+        $jumlahIzinMei = count($absenIzinMei);
+        $jumlahIzinJuni = count($absenIzinJuni);
+        $jumlahIzinJuli = count($absenIzinJuli);
+        $jumlahIzinAgustus = count($absenIzinAgustus);
+        $jumlahIzinSeptember = count($absenIzinSeptember);
+        $jumlahIzinOktober = count($absenIzinOktober);
+        $jumlahIzinNovember = count($absenIzinNovember);
+        $jumlahIzinDesember = count($absenIzinDesember);
+
+        $absenSakitJanuari = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Sakit')
+        ->whereRaw("MONTH(`date`) = 1")
+        ->select('*')
+        ->get();
+        $absenSakitFebruari = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Sakit')
+        ->whereRaw("MONTH(`date`) = 2")
+        ->select('*')
+        ->get();
+        $absenSakitMaret = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Sakit')
+        ->whereRaw("MONTH(`date`) = 3")
+        ->select('*')
+        ->get();
+        $absenSakitApril = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Sakit')
+        ->whereRaw("MONTH(`date`) = 4")
+        ->select('*')
+        ->get();
+        $absenSakitMei = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Sakit')
+        ->whereRaw("MONTH(`date`) = 5")
+        ->select('*')
+        ->get();
+        $absenSakitJuni = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Sakit')
+        ->whereRaw("MONTH(`date`) = 6")
+        ->select('*')
+        ->get();
+        $absenSakitJuli = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Sakit')
+        ->whereRaw("MONTH(`date`) = 7")
+        ->select('*')
+        ->get();
+        $absenSakitAgustus = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Sakit')
+        ->whereRaw("MONTH(`date`) = 8")
+        ->select('*')
+        ->get();
+        $absenSakitSeptember = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Sakit')
+        ->whereRaw("MONTH(`date`) = 9")
+        ->select('*')
+        ->get();
+        $absenSakitOktober = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Sakit')
+        ->whereRaw("MONTH(`date`) = 10")
+        ->select('*')
+        ->get();
+        $absenSakitNovember = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Sakit')
+        ->whereRaw("MONTH(`date`) = 11")
+        ->select('*')
+        ->get();
+        $absenSakitDesember = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Sakit')
+        ->whereRaw("MONTH(`date`) = 12")
+        ->select('*')
+        ->get();
+
+        $jumlahSakitJanuari = count($absenSakitJanuari);
+        $jumlahSakitFebruari = count($absenSakitFebruari);
+        $jumlahSakitMaret = count($absenSakitMaret);
+        $jumlahSakitApril = count($absenSakitApril);
+        $jumlahSakitMei = count($absenSakitMei);
+        $jumlahSakitJuni = count($absenSakitJuni);
+        $jumlahSakitJuli = count($absenSakitJuli);
+        $jumlahSakitAgustus = count($absenSakitAgustus);
+        $jumlahSakitSeptember = count($absenSakitSeptember);
+        $jumlahSakitOktober = count($absenSakitOktober);
+        $jumlahSakitNovember = count($absenSakitNovember);
+        $jumlahSakitDesember = count($absenSakitDesember);
 
         return view('dashboard.admin', [
             'title' => 'Dashboard',
@@ -178,7 +350,44 @@ class DashboardController extends Controller
             'jumlahKaryawan' => $jumlahKaryawan,
             'jumlahAdmin' => $jumlahAdmin,
             'jumlahExecutive' => $jumlahExecutive,
-            'jumlahHadir' => $jumlahHadir,
+            'jumlahHadirJanuari' => $jumlahHadirJanuari,
+            'jumlahHadirFebruari' => $jumlahHadirFebruari,
+            'jumlahHadirMaret' => $jumlahHadirMaret,
+            'jumlahHadirApril' => $jumlahHadirApril,
+            'jumlahHadirMei' => $jumlahHadirMei,
+            'jumlahHadirJuni' => $jumlahHadirJuni,
+            'jumlahHadirJuli' => $jumlahHadirJuli,
+            'jumlahHadirAgustus' => $jumlahHadirAgustus,
+            'jumlahHadirSeptember' => $jumlahHadirSeptember,
+            'jumlahHadirOktober' => $jumlahHadirOktober,
+            'jumlahHadirNovember' => $jumlahHadirNovember,
+            'jumlahHadirDesember' => $jumlahHadirDesember,
+
+            'jumlahIzinJanuari' => $jumlahIzinJanuari,
+            'jumlahIzinFebruari' => $jumlahIzinFebruari,
+            'jumlahIzinMaret' => $jumlahIzinMaret,
+            'jumlahIzinApril' => $jumlahIzinApril,
+            'jumlahIzinMei' => $jumlahIzinMei,
+            'jumlahIzinJuni' => $jumlahIzinJuni,
+            'jumlahIzinJuli' => $jumlahIzinJuli,
+            'jumlahIzinAgustus' => $jumlahIzinAgustus,
+            'jumlahIzinSeptember' => $jumlahIzinSeptember,
+            'jumlahIzinOktober' => $jumlahIzinOktober,
+            'jumlahIzinNovember' => $jumlahIzinNovember,
+            'jumlahIzinDesember' => $jumlahIzinDesember,
+
+            'jumlahSakitJanuari' => $jumlahSakitJanuari,
+            'jumlahSakitFebruari' => $jumlahSakitFebruari,
+            'jumlahSakitMaret' => $jumlahSakitMaret,
+            'jumlahSakitApril' => $jumlahSakitApril,
+            'jumlahSakitMei' => $jumlahSakitMei,
+            'jumlahSakitJuni' => $jumlahSakitJuni,
+            'jumlahSakitJuli' => $jumlahSakitJuli,
+            'jumlahSakitAgustus' => $jumlahSakitAgustus,
+            'jumlahSakitSeptember' => $jumlahSakitSeptember,
+            'jumlahSakitOktober' => $jumlahSakitOktober,
+            'jumlahSakitNovember' => $jumlahSakitNovember,
+            'jumlahSakitDesember' => $jumlahSakitDesember,
         ]);
     }
 

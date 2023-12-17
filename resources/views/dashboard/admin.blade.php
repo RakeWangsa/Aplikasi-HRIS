@@ -156,16 +156,16 @@
                                     new ApexCharts(document.querySelector("#columnChart"), {
                                         series: [{
                                             name: 'Hadir',
-                                            data: [{{ $jumlahHadir }}, 55, 57, 56, 61, 58, 63, 60, 66, 50, 60, 70]
+                                            data: [{{ $jumlahHadirJanuari }}, {{ $jumlahHadirFebruari }}, {{ $jumlahHadirMaret }}, {{ $jumlahHadirApril }}, {{ $jumlahHadirMei }}, {{ $jumlahHadirJuni }}, {{ $jumlahHadirJuli }}, {{ $jumlahHadirAgustus }}, {{ $jumlahHadirSeptember }}, {{ $jumlahHadirOktober }}, {{ $jumlahHadirNovember }}, {{ $jumlahHadirDesember }}]
                                         }, {
                                             name: 'Sakit',
-                                            data: [76, 85, 101, 98, 87, 105, 91, 114, 94, 50, 60, 70]
+                                            data: [{{ $jumlahIzinJanuari }}, {{ $jumlahIzinFebruari }}, {{ $jumlahIzinMaret }}, {{ $jumlahIzinApril }}, {{ $jumlahIzinMei }}, {{ $jumlahIzinJuni }}, {{ $jumlahIzinJuli }}, {{ $jumlahIzinAgustus }}, {{ $jumlahIzinSeptember }}, {{ $jumlahIzinOktober }}, {{ $jumlahIzinNovember }}, {{ $jumlahIzinDesember }}]
                                         }, {
                                             name: 'Izin',
-                                            data: [35, 41, 36, 26, 45, 48, 52, 53, 41, 50, 60, 70]
+                                            data: [{{ $jumlahSakitJanuari }}, {{ $jumlahSakitFebruari }}, {{ $jumlahSakitMaret }}, {{ $jumlahSakitApril }}, {{ $jumlahSakitMei }}, {{ $jumlahSakitJuni }}, {{ $jumlahSakitJuli }}, {{ $jumlahSakitAgustus }}, {{ $jumlahSakitSeptember }}, {{ $jumlahSakitOktober }}, {{ $jumlahSakitNovember }}, {{ $jumlahSakitDesember }}]
                                         }, {
                                             name: 'Tidak Hadir',
-                                            data: [35, 41, 36, 26, 45, 48, 52, 53, 41, 50, 60, 70]
+                                            data: [0,0,0,0,0,0,0,0,0,0,0,0]
                                         }],
                                         chart: {
                                             type: 'bar',
