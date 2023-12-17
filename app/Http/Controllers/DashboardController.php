@@ -24,13 +24,20 @@ class DashboardController extends Controller
             $greetings = "Good Evening";
         }
 
+        $kpi = DB::table('kpi_karyawan')
+        ->where('id_user',auth()->user()->id)
+        ->select('nilai_akhir')
+        ->get();
+
+        $totalNilaiAkhir = $kpi->sum('nilai_akhir');
 
         return view('dashboard.karyawan', [
             'title' => 'Dashboard',
             'active' => 'dash_karyawan',
             'pengumuman' => $pengumuman,
             'tanggal' => $tanggal,
-            'greetings' => $greetings
+            'greetings' => $greetings,
+            'totalNilaiAkhir' => $totalNilaiAkhir,
         ]);
     }
 

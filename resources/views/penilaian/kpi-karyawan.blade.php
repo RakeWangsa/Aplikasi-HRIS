@@ -101,7 +101,9 @@
                             @endforeach
 
                             <tr>
-                                <td colspan="7">Total Nilai Akhir</td>
+                                <td colspan="3">Total Bobot</td>
+                                <td>{{ $totalBobot }}</td>
+                                <td colspan="3">Total Nilai Akhir</td>
                                 <td colspan="3">{{ $totalNilaiAkhir }}</td>
                             </tr>
 

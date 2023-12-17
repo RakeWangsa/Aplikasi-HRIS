@@ -31,7 +31,7 @@
                             <h5 class="card-title">Skor KPI</h5>
                             <div class="d-flex align-items-center">
                                 <div class="text-h6">
-                                    <h6>80</h6>
+                                    <h6>{{ $totalNilaiAkhir }}</h6>
                                 </div>
                             </div>
                         </div>

@@ -103,6 +103,9 @@ class ProfileController extends Controller
 
         $profile = User::find($id_user);
         $imageName = $profile->image;
+        if($imageName=="blank-profile-picture.png"){
+            return redirect('/profile');  
+        }
 
         $profile->update([
             'image' => 'blank-profile-picture.png'

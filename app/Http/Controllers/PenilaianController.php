@@ -22,12 +22,14 @@ class PenilaianController extends Controller
         ->orderBy('kpi_admin.tanggung_jawab_pekerjaan')
         ->get();
     
+        $totalBobot = $kpi->sum('bobot');
         $totalNilaiAkhir = $kpi->sum('nilai_akhir');
 
         return view('penilaian.kpi-karyawan', [
             'title' => 'KPI',
             'active' => 'kpi_karyawan',
             'kpi' => $kpi,
+            'totalBobot' => $totalBobot,
             'totalNilaiAkhir' => $totalNilaiAkhir,
         ]);
     }
