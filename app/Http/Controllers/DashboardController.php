@@ -85,12 +85,100 @@ class DashboardController extends Controller
         $jumlahKaryawan=count($karyawan);
         $jumlahAdmin=count($admin);
         $jumlahExecutive=count($executive);
+
+        $absenHadirJanuari = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Hadir')
+        ->whereRaw("MONTH(`date`) = 1")
+        ->select('*')
+        ->get();
+        $absenHadirFebruari = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Hadir')
+        ->whereRaw("MONTH(`date`) = 2")
+        ->select('*')
+        ->get();
+        $absenHadirMaret = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Hadir')
+        ->whereRaw("MONTH(`date`) = 3")
+        ->select('*')
+        ->get();
+        $absenHadirApril = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Hadir')
+        ->whereRaw("MONTH(`date`) = 4")
+        ->select('*')
+        ->get();
+        $absenHadirMei = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Hadir')
+        ->whereRaw("MONTH(`date`) = 5")
+        ->select('*')
+        ->get();
+        $absenHadirJuni = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Hadir')
+        ->whereRaw("MONTH(`date`) = 6")
+        ->select('*')
+        ->get();
+        $absenHadirJuli = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Hadir')
+        ->whereRaw("MONTH(`date`) = 7")
+        ->select('*')
+        ->get();
+        $absenHadirAgustus = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Hadir')
+        ->whereRaw("MONTH(`date`) = 8")
+        ->select('*')
+        ->get();
+        $absenHadirSeptember = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Hadir')
+        ->whereRaw("MONTH(`date`) = 9")
+        ->select('*')
+        ->get();
+        $absenHadirOktober = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Hadir')
+        ->whereRaw("MONTH(`date`) = 10")
+        ->select('*')
+        ->get();
+        $absenHadirNovember = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Hadir')
+        ->whereRaw("MONTH(`date`) = 11")
+        ->select('*')
+        ->get();
+        $absenHadirDesember = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Hadir')
+        ->whereRaw("MONTH(`date`) = 12")
+        ->select('*')
+        ->get();
+
+        $jumlahHadirJanuari = count($absenHadirJanuari);
+        $jumlahHadirFebruari = count($absenHadirFebruari);
+        $jumlahHadirMaret = count($absenHadirMaret);
+        $jumlahHadirJanuari = count($absenHadirJanuari);
+        $jumlahHadirJanuari = count($absenHadirJanuari);
+        $jumlahHadirJanuari = count($absenHadirJanuari);
+        $jumlahHadirJanuari = count($absenHadirJanuari);
+        $jumlahHadirJanuari = count($absenHadirJanuari);
+        $jumlahHadirJanuari = count($absenHadirJanuari);
+        $jumlahHadirJanuari = count($absenHadirJanuari);
+        $jumlahHadirJanuari = count($absenHadirJanuari);
+        $jumlahHadirJanuari = count($absenHadirJanuari);
+
         return view('dashboard.admin', [
             'title' => 'Dashboard',
             'active' => 'dash_admin',
             'jumlahKaryawan' => $jumlahKaryawan,
             'jumlahAdmin' => $jumlahAdmin,
-            'jumlahExecutive' => $jumlahExecutive
+            'jumlahExecutive' => $jumlahExecutive,
+            'jumlahHadir' => $jumlahHadir,
         ]);
     }
 

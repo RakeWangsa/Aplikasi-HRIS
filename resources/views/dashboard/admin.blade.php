@@ -156,7 +156,7 @@
                                     new ApexCharts(document.querySelector("#columnChart"), {
                                         series: [{
                                             name: 'Hadir',
-                                            data: [44, 55, 57, 56, 61, 58, 63, 60, 66, 50, 60, 70]
+                                            data: [{{ $jumlahHadir }}, 55, 57, 56, 61, 58, 63, 60, 66, 50, 60, 70]
                                         }, {
                                             name: 'Sakit',
                                             data: [76, 85, 101, 98, 87, 105, 91, 114, 94, 50, 60, 70]
