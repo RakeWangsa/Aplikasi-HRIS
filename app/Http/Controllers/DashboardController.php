@@ -317,6 +317,43 @@ class DashboardController extends Controller
         $jumlahIzinNovember = count($absenIzinNovember);
         $jumlahIzinDesember = count($absenIzinDesember);
 
+        $currentMonth = date('n');  // n: nomor bulan tanpa leading zeros (1-12)
+        $currentYear = date('Y');   // Y: tahun empat digit
+        $currentDay = date('j');    // j: hari dalam sebulan tanpa leading zeros (1-31)
+        
+        // Tanggal yang diinginkan (tanggal hari ini)
+        $desiredDay = $currentDay;
+        
+        // Mendapatkan jumlah hari kerja (Senin-Jumat) dari tanggal 1 hingga tanggal tertentu
+        $jumlahHariKerja = 0;
+        
+        
+        if ($currentMonth == 1) {
+            for ($day = 1; $day <= $desiredDay; $day++) {
+                $currentDate = date('Y-m-d', strtotime("$currentYear-01-$day"));
+                $dayOfWeek = date('N', strtotime($currentDate)); // N: nomor hari dalam seminggu (1: Senin, 2: Selasa, dst.)
+        
+                // Cek apakah hari ini adalah hari kerja (Senin-Jumat)
+                if ($dayOfWeek >= 1 && $dayOfWeek <= 5) {
+                    $jumlahHariKerja++;
+                }
+            }
+        } else {
+            $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $currentMonth, $currentYear);
+
+            // Hitung dari tanggal 1 hingga tanggal maksimum pada bulan tersebut
+            for ($day = 1; $day <= $daysInMonth; $day++) {
+                $currentDate = date('Y-m-d', strtotime("$currentYear-$currentMonth-$day"));
+                $dayOfWeek = date('N', strtotime($currentDate));
+            
+                // Cek apakah hari ini adalah hari kerja (Senin-Jumat)
+                if ($dayOfWeek >= 1 && $dayOfWeek <= 5) {
+                    $jumlahHariKerja++;
+                }
+            }
+        }
+        $jumlahTidakHadirJanuari=$jumlahKaryawan*$jumlahHariKerja-$jumlahHadirJanuari-$jumlahSakitJanuari-$jumlahIzinJanuari;
+
 
         return view('dashboard.executive', [
             'title' => 'Dashboard',
@@ -363,6 +400,8 @@ class DashboardController extends Controller
             'jumlahIzinOktober' => $jumlahIzinOktober,
             'jumlahIzinNovember' => $jumlahIzinNovember,
             'jumlahIzinDesember' => $jumlahIzinDesember,
+
+            'jumlahTidakHadirJanuari' => $jumlahTidakHadirJanuari,
         ]);
     }
 

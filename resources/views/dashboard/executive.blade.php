@@ -175,7 +175,7 @@
                                         data: [{{ $jumlahIzinJanuari }}, {{ $jumlahIzinFebruari }}, {{ $jumlahIzinMaret }}, {{ $jumlahIzinApril }}, {{ $jumlahIzinMei }}, {{ $jumlahIzinJuni }}, {{ $jumlahIzinJuli }}, {{ $jumlahIzinAgustus }}, {{ $jumlahIzinSeptember }}, {{ $jumlahIzinOktober }}, {{ $jumlahIzinNovember }}, {{ $jumlahIzinDesember }}]
                                     }, {
                                         name: 'Tidak Hadir',
-                                        data: [0,0,0,0,0,0,0,0,0,0,0,0]
+                                        data: [{{ $jumlahTidakHadirJanuari }},0,0,0,0,0,0,0,0,0,0,0]
                                     }],
                                     chart: {
                                         type: 'bar',
