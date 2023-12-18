@@ -14,6 +14,7 @@ Route::get('/tes', [LoginController::class, 'tes'])->name('tes')->middleware('gu
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
+Route::get('/gantiHari', [AbsensiController::class, 'gantiHari'])->name('gantiHari')->middleware('guest');
 
 Route::group(['middleware' => ['auth', 'ceklevel:karyawan']], function () {
     route::get('/employee/dashboard', [DashboardController::class, 'dash_karyawan']);

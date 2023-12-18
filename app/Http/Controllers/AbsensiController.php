@@ -27,6 +27,29 @@ class AbsensiController extends Controller
         ]);
     }
 
+    public function gantiHari()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $hariIni = date('Y-m-d');
+        $waktu = date('H:i:s');
+
+        $karyawan = DB::table('Users')
+        ->where('level', 'karyawan')
+        ->select('id')
+        ->get();
+
+        foreach($karyawan as $data){
+            Absensi::create([
+                'id_user' => $data->id,
+                'absensi' => 'Datang',
+                'date' => $hariIni,
+                'time' => $waktu,
+                'keterangan' => 'Tidak Hadir',
+                'file' => '-',
+            ]);
+        }
+    }
+
     public function absensi_karyawan_datang(Request $request,$status)
     {
         $batas = DB::table('batas_absen')

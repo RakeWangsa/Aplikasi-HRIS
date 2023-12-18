@@ -15,7 +15,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            app('App\Http\Controllers\AbsensiController')->gantiHari();
+        })->dailyAt('00:00'); // Menjalankan setiap hari pada pukul 00:00
     }
 
     /**
