@@ -75,28 +75,3 @@
       </div>
    </div>
 </main>
-
-<script>
-   function gantiHari() {
-       // Lakukan logika atau panggil AJAX untuk menjalankan fungsi gantiHari
-       console.log('Menjalankan fungsi gantiHari karena user pertama kali aktif hari ini');
-   }
-   
-   // Fungsi untuk memeriksa apakah user pertama kali aktif hari ini
-   function checkAndRunFunction() {
-       var currentDate = new Date().toDateString();
-       var lastActiveDate = localStorage.getItem('lastActiveDate');
-   
-       // Jika tidak ada tanggal terakhir atau berbeda dengan hari ini
-       if (!lastActiveDate || lastActiveDate !== currentDate) {
-           // Jalankan fungsi gantiHari
-           gantiHari();
-   
-           // Simpan tanggal hari ini di localStorage
-           localStorage.setItem('lastActiveDate', currentDate);
-       }
-   }
-   
-   // Panggil fungsi checkAndRunFunction ketika halaman dimuat
-   document.addEventListener('DOMContentLoaded', checkAndRunFunction);
-   </script>
