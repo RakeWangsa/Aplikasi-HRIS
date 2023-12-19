@@ -14,29 +14,40 @@ class LoginController extends Controller
         date_default_timezone_set('Asia/Jakarta');
         $hariIni = date('Y-m-d');
         $waktu = date('H:i:s');
-        // Query untuk mengecek apakah sudah ada data dengan tanggal $hariIni di tabel 'absensi'
-        $jumlahData = DB::table('absensi')->whereDate('date', $hariIni)->count();
-        if ($jumlahData == 0) {
-            $karyawan = DB::table('Users')
-            ->where('level', 'karyawan')
-            ->select('id')
-            ->get();
     
-            foreach($karyawan as $data){
-                Absensi::create([
-                    'id_user' => $data->id,
-                    'absensi' => 'Datang',
-                    'date' => $hariIni,
-                    'time' => $waktu,
-                    'keterangan' => 'Tidak Hadir',
-                    'file' => '-',
-                ]);
+        // cek hari apakah sekarang hari senin-jumat
+        $dayOfWeek = date('N');
+        if ($dayOfWeek >= 1 && $dayOfWeek <= 5) {
+            // cek apakah db sudah ada data hari ini
+            $jumlahData = DB::table('absensi')->whereDate('date', $hariIni)->count();
+    
+            // jika belum ada isinya
+            if ($jumlahData == 0) {
+                // ambil data karyawan
+                $karyawan = DB::table('users')
+                    ->where('level', 'karyawan')
+                    ->select('id')
+                    ->get();
+    
+                // set absen tidak hadir untuk semua karyawan
+                foreach ($karyawan as $data) {
+                    Absensi::create([
+                        'id_user' => $data->id,
+                        'absensi' => 'Datang',
+                        'date' => $hariIni,
+                        'time' => $waktu,
+                        'keterangan' => 'Tidak Hadir',
+                        'file' => '-',
+                    ]);
+                }
             }
         }
+    
         return view('auth.login', [
             'title' => 'Login'
         ]);
     }
+    
 
     // public function tes()
     // {
