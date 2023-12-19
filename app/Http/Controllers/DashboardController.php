@@ -682,6 +682,92 @@ class DashboardController extends Controller
         $jumlahIzinDesember = count($absenIzinDesember);
 
 
+        $absenTidakHadirJanuari = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 1")
+        ->select('*')
+        ->get();
+        $absenTidakHadirFebruari = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 2")
+        ->select('*')
+        ->get();
+        $absenTidakHadirMaret = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 3")
+        ->select('*')
+        ->get();
+        $absenTidakHadirApril = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 4")
+        ->select('*')
+        ->get();
+        $absenTidakHadirMei = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 5")
+        ->select('*')
+        ->get();
+        $absenTidakHadirJuni = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 6")
+        ->select('*')
+        ->get();
+        $absenTidakHadirJuli = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 7")
+        ->select('*')
+        ->get();
+        $absenTidakHadirAgustus = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 8")
+        ->select('*')
+        ->get();
+        $absenTidakHadirSeptember = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 9")
+        ->select('*')
+        ->get();
+        $absenTidakHadirOktober = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 10")
+        ->select('*')
+        ->get();
+        $absenTidakHadirNovember = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 11")
+        ->select('*')
+        ->get();
+        $absenTidakHadirDesember = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 12")
+        ->select('*')
+        ->get();
+
+        $jumlahTidakHadirJanuari = count($absenTidakHadirJanuari);
+        $jumlahTidakHadirFebruari = count($absenTidakHadirFebruari);
+        $jumlahTidakHadirMaret = count($absenTidakHadirMaret);
+        $jumlahTidakHadirApril = count($absenTidakHadirApril);
+        $jumlahTidakHadirMei = count($absenTidakHadirMei);
+        $jumlahTidakHadirJuni = count($absenTidakHadirJuni);
+        $jumlahTidakHadirJuli = count($absenTidakHadirJuli);
+        $jumlahTidakHadirAgustus = count($absenTidakHadirAgustus);
+        $jumlahTidakHadirSeptember = count($absenTidakHadirSeptember);
+        $jumlahTidakHadirOktober = count($absenTidakHadirOktober);
+        $jumlahTidakHadirNovember = count($absenTidakHadirNovember);
+        $jumlahTidakHadirDesember = count($absenTidakHadirDesember);
+
         return view('dashboard.admin', [
             'title' => 'Dashboard',
             'active' => 'dash_admin',
@@ -727,6 +813,19 @@ class DashboardController extends Controller
             'jumlahIzinOktober' => $jumlahIzinOktober,
             'jumlahIzinNovember' => $jumlahIzinNovember,
             'jumlahIzinDesember' => $jumlahIzinDesember,
+
+            'jumlahTidakHadirJanuari' => $jumlahTidakHadirJanuari,
+            'jumlahTidakHadirFebruari' => $jumlahTidakHadirFebruari,
+            'jumlahTidakHadirMaret' => $jumlahTidakHadirMaret,
+            'jumlahTidakHadirApril' => $jumlahTidakHadirApril,
+            'jumlahTidakHadirMei' => $jumlahTidakHadirMei,
+            'jumlahTidakHadirJuni' => $jumlahTidakHadirJuni,
+            'jumlahTidakHadirJuli' => $jumlahTidakHadirJuli,
+            'jumlahTidakHadirAgustus' => $jumlahTidakHadirAgustus,
+            'jumlahTidakHadirSeptember' => $jumlahTidakHadirSeptember,
+            'jumlahTidakHadirOktober' => $jumlahTidakHadirOktober,
+            'jumlahTidakHadirNovember' => $jumlahTidakHadirNovember,
+            'jumlahTidakHadirDesember' => $jumlahTidakHadirDesember,
         ]);
     }
 
