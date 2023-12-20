@@ -317,42 +317,91 @@ class DashboardController extends Controller
         $jumlahIzinNovember = count($absenIzinNovember);
         $jumlahIzinDesember = count($absenIzinDesember);
 
-        $currentMonth = date('n');  // n: nomor bulan tanpa leading zeros (1-12)
-        $currentYear = date('Y');   // Y: tahun empat digit
-        $currentDay = date('j');    // j: hari dalam sebulan tanpa leading zeros (1-31)
-        
-        // Tanggal yang diinginkan (tanggal hari ini)
-        $desiredDay = $currentDay;
-        
-        // Mendapatkan jumlah hari kerja (Senin-Jumat) dari tanggal 1 hingga tanggal tertentu
-        $jumlahHariKerja = 0;
-        
-        
-        if ($currentMonth == 1) {
-            for ($day = 1; $day <= $desiredDay; $day++) {
-                $currentDate = date('Y-m-d', strtotime("$currentYear-01-$day"));
-                $dayOfWeek = date('N', strtotime($currentDate)); // N: nomor hari dalam seminggu (1: Senin, 2: Selasa, dst.)
-        
-                // Cek apakah hari ini adalah hari kerja (Senin-Jumat)
-                if ($dayOfWeek >= 1 && $dayOfWeek <= 5) {
-                    $jumlahHariKerja++;
-                }
-            }
-        } else {
-            $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $currentMonth, $currentYear);
+        $absenTidakHadirJanuari = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 1")
+        ->select('*')
+        ->get();
+        $absenTidakHadirFebruari = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 2")
+        ->select('*')
+        ->get();
+        $absenTidakHadirMaret = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 3")
+        ->select('*')
+        ->get();
+        $absenTidakHadirApril = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 4")
+        ->select('*')
+        ->get();
+        $absenTidakHadirMei = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 5")
+        ->select('*')
+        ->get();
+        $absenTidakHadirJuni = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 6")
+        ->select('*')
+        ->get();
+        $absenTidakHadirJuli = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 7")
+        ->select('*')
+        ->get();
+        $absenTidakHadirAgustus = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 8")
+        ->select('*')
+        ->get();
+        $absenTidakHadirSeptember = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 9")
+        ->select('*')
+        ->get();
+        $absenTidakHadirOktober = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 10")
+        ->select('*')
+        ->get();
+        $absenTidakHadirNovember = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 11")
+        ->select('*')
+        ->get();
+        $absenTidakHadirDesember = DB::table('absensi')
+        ->where('absensi', 'datang')
+        ->where('keterangan', 'Tidak Hadir')
+        ->whereRaw("MONTH(`date`) = 12")
+        ->select('*')
+        ->get();
 
-            // Hitung dari tanggal 1 hingga tanggal maksimum pada bulan tersebut
-            for ($day = 1; $day <= $daysInMonth; $day++) {
-                $currentDate = date('Y-m-d', strtotime("$currentYear-$currentMonth-$day"));
-                $dayOfWeek = date('N', strtotime($currentDate));
-            
-                // Cek apakah hari ini adalah hari kerja (Senin-Jumat)
-                if ($dayOfWeek >= 1 && $dayOfWeek <= 5) {
-                    $jumlahHariKerja++;
-                }
-            }
-        }
-        $jumlahTidakHadirJanuari=$jumlahKaryawan*$jumlahHariKerja-$jumlahHadirJanuari-$jumlahSakitJanuari-$jumlahIzinJanuari;
+        $jumlahTidakHadirJanuari = count($absenTidakHadirJanuari);
+        $jumlahTidakHadirFebruari = count($absenTidakHadirFebruari);
+        $jumlahTidakHadirMaret = count($absenTidakHadirMaret);
+        $jumlahTidakHadirApril = count($absenTidakHadirApril);
+        $jumlahTidakHadirMei = count($absenTidakHadirMei);
+        $jumlahTidakHadirJuni = count($absenTidakHadirJuni);
+        $jumlahTidakHadirJuli = count($absenTidakHadirJuli);
+        $jumlahTidakHadirAgustus = count($absenTidakHadirAgustus);
+        $jumlahTidakHadirSeptember = count($absenTidakHadirSeptember);
+        $jumlahTidakHadirOktober = count($absenTidakHadirOktober);
+        $jumlahTidakHadirNovember = count($absenTidakHadirNovember);
+        $jumlahTidakHadirDesember = count($absenTidakHadirDesember);
 
 
         return view('dashboard.executive', [
@@ -402,6 +451,17 @@ class DashboardController extends Controller
             'jumlahIzinDesember' => $jumlahIzinDesember,
 
             'jumlahTidakHadirJanuari' => $jumlahTidakHadirJanuari,
+            'jumlahTidakHadirFebruari' => $jumlahTidakHadirFebruari,
+            'jumlahTidakHadirMaret' => $jumlahTidakHadirMaret,
+            'jumlahTidakHadirApril' => $jumlahTidakHadirApril,
+            'jumlahTidakHadirMei' => $jumlahTidakHadirMei,
+            'jumlahTidakHadirJuni' => $jumlahTidakHadirJuni,
+            'jumlahTidakHadirJuli' => $jumlahTidakHadirJuli,
+            'jumlahTidakHadirAgustus' => $jumlahTidakHadirAgustus,
+            'jumlahTidakHadirSeptember' => $jumlahTidakHadirSeptember,
+            'jumlahTidakHadirOktober' => $jumlahTidakHadirOktober,
+            'jumlahTidakHadirNovember' => $jumlahTidakHadirNovember,
+            'jumlahTidakHadirDesember' => $jumlahTidakHadirDesember,
         ]);
     }
 
