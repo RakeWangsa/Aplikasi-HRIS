@@ -33,21 +33,43 @@ class DashboardController extends Controller
 
         $absensi = DB::table('absensi')
         ->where('id_user',auth()->user()->id)
+        ->where('absensi','Datang')
         ->select('*')
         ->get();
 
         $absensiHadir = DB::table('absensi')
         ->where('id_user',auth()->user()->id)
+        ->where('absensi','Datang')
         ->where('keterangan','Hadir')
         ->select('*')
         ->get();
 
         $jumlahAbsensi=count($absensi);
         $jumlahAbsensiHadir=count($absensiHadir);
-        $persentaseAbsensi=$jumlahAbsensiHadir/$jumlahAbsensi*100;
-        $formattedPersentaseAbsensi = number_format($persentaseAbsensi, 2);
-        $totalAkhirKinerja=($totalNilaiAkhir+$persentaseAbsensi)/2;
-        $formattedTotalAkhirKinerja = number_format($totalAkhirKinerja, 2);
+
+        $TotalAbsensiIzinSakit=0;
+        for ($tahun = 2023; $tahun <= 2050; $tahun++) { 
+            for ($bulan = 1; $bulan <= 12; $bulan++) {
+                $absensiIzinSakit = DB::table('absensi')
+                    ->where('id_user', auth()->user()->id)
+                    ->where('absensi', 'Datang')
+                    ->whereIn('keterangan', ['Izin', 'Sakit'])
+                    ->whereYear('date', '=', $tahun)
+                    ->whereMonth('date', '=', $bulan)
+                    ->select('*')
+                    ->get();
+        
+                $jumlahAbsensiIzinSakit = count($absensiIzinSakit);
+                $jumlahAbsensiIzinSakit = min($jumlahAbsensiIzinSakit, 3);
+                $TotalAbsensiIzinSakit += $jumlahAbsensiIzinSakit;
+            }
+        }
+        
+        $persentaseAbsensi=($jumlahAbsensiHadir+$TotalAbsensiIzinSakit)/$jumlahAbsensi*100;
+        $formattedPersentaseAbsensi = ($persentaseAbsensi == round($persentaseAbsensi)) ? number_format($persentaseAbsensi, 0) : number_format($persentaseAbsensi, 2);
+        $totalAkhirKinerja=$totalNilaiAkhir*(($jumlahAbsensiHadir+$TotalAbsensiIzinSakit)/$jumlahAbsensi);
+        $formattedTotalAkhirKinerja = ($totalAkhirKinerja == round($totalAkhirKinerja)) ? number_format($totalAkhirKinerja, 0) : number_format($totalAkhirKinerja, 2);
+        
         return view('dashboard.karyawan', [
             'title' => 'Dashboard',
             'active' => 'dash_karyawan',

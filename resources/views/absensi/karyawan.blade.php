@@ -147,8 +147,7 @@
         }).addTo(map);
 
         // koordinat kantor
-        var kantorCoords1 = [-6.839424, 110.560268]; //tes
-        // var kantorCoords1 = [-7.007600624422205, 110.43700765001334]; //koordinat farmtech
+        var kantorCoords1 = [-7.007600624422205, 110.43700765001334]; //koordinat farmtech
         var kantorCoords2 = [-7.0102618, 110.4358351]; //koordinat farmhill
 
         // marker untuk lokasi pengguna
