@@ -497,6 +497,25 @@ class DashboardController extends Controller
         $jumlahTidakHadirNovember = count($absenTidakHadirNovember);
         $jumlahTidakHadirDesember = count($absenTidakHadirDesember);
 
+        $tahun = date('Y');
+        $bulan = date('m');
+        $jumlahHari = cal_days_in_month(CAL_GREGORIAN, $bulan, $tahun);
+        $daftarTanggal = range(1, $jumlahHari);
+        $jumlahHadirHarian = [];
+        foreach ($daftarTanggal as $tanggal) {
+            $absenHadir = DB::table('absensi')
+                ->where('absensi', 'datang')
+                ->where('keterangan', 'Hadir')
+                ->whereYear('date', '=', $tahun)
+                ->whereMonth('date', '=', $bulan)
+                ->whereDay('date', '=', $tanggal)
+                ->select('*')
+                ->get();
+            $jumlahHadirHarian[$tanggal] = count($absenHadir);
+        }
+
+
+        
 
         return view('dashboard.executive', [
             'title' => 'Dashboard',
@@ -557,7 +576,9 @@ class DashboardController extends Controller
             'jumlahTidakHadirNovember' => $jumlahTidakHadirNovember,
             'jumlahTidakHadirDesember' => $jumlahTidakHadirDesember,
 
-            'tahun' => $tahun
+            'tahun' => $tahun,
+            'jumlahHari' => $jumlahHari,
+            'jumlahHadirHarian' => $jumlahHadirHarian,
         ]);
     }
 

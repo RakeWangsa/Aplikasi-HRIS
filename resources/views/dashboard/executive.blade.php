@@ -220,7 +220,7 @@
                                     },
                                     yaxis: {
                                         title: {
-                                            text: 'jumlah pegawai'
+                                            text: 'Jumlah Absensi'
                                         }
                                     },
                                     fill: {
@@ -237,9 +237,15 @@
                             });
                         </script>
 
-                                                    <div id="columnChartHarian" class="mt-4"></div>
+                        <div id="columnChartHarian" class="mt-4"></div>
                             <script>
                                 document.addEventListener("DOMContentLoaded", () => {
+                                    <?php
+                                        $data = [];
+                                        for ($i = 1; $i <= $jumlahHari; $i++) {
+                                            $data[] = $i;
+                                        }
+                                    ?>
                                     new ApexCharts(document.querySelector("#columnChartHarian"), {
                                         series: [{
                                             name: 'Hadir',
@@ -273,8 +279,10 @@
                                             width: 2,
                                             colors: ['transparent']
                                         },
+
+
                                         xaxis: {
-                                            categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10','11','12','13', '14', '15', '16', '17', '18', '19', '20', '21', '22','23','24','25', '26', '27', '28', '29', '30', '31'],
+                                            categories: <?php echo json_encode($data); ?>,
                                         },
                                         yaxis: {
                                             title: {
