@@ -31,6 +31,23 @@ class DashboardController extends Controller
 
         $totalNilaiAkhir = $kpi->sum('nilai_akhir');
 
+        $absensi = DB::table('absensi')
+        ->where('id_user',auth()->user()->id)
+        ->select('*')
+        ->get();
+
+        $absensiHadir = DB::table('absensi')
+        ->where('id_user',auth()->user()->id)
+        ->where('keterangan','Hadir')
+        ->select('*')
+        ->get();
+
+        $jumlahAbsensi=count($absensi);
+        $jumlahAbsensiHadir=count($absensiHadir);
+        $persentaseAbsensi=$jumlahAbsensiHadir/$jumlahAbsensi*100;
+        $formattedPersentaseAbsensi = number_format($persentaseAbsensi, 2);
+        $totalAkhirKinerja=($totalNilaiAkhir+$persentaseAbsensi)/2;
+        $formattedTotalAkhirKinerja = number_format($totalAkhirKinerja, 2);
         return view('dashboard.karyawan', [
             'title' => 'Dashboard',
             'active' => 'dash_karyawan',
@@ -38,6 +55,8 @@ class DashboardController extends Controller
             'tanggal' => $tanggal,
             'greetings' => $greetings,
             'totalNilaiAkhir' => $totalNilaiAkhir,
+            'formattedPersentaseAbsensi' => $formattedPersentaseAbsensi,
+            'formattedTotalAkhirKinerja' => $formattedTotalAkhirKinerja,
         ]);
     }
 

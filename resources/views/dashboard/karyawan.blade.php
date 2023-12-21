@@ -54,7 +54,7 @@
                             <h5 class="card-title">Presentase Absensi</h5>
                             <div class="d-flex align-items-center">
                                 <div class="text-h6">
-                                    <h6>75%</h6>
+                                    <h6>{{ $formattedPersentaseAbsensi }}%</h6>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                             <h5 class="card-title">Total Akhir Kinerja</h5>
                             <div class="d-flex align-items-center">
                                 <div class="text-h6">
-                                    <h6>65%</h6>
+                                    <h6>{{ $formattedTotalAkhirKinerja }}%</h6>
                                 </div>
                             </div>
                         </div>
