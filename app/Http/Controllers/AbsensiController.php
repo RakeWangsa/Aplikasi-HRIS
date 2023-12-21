@@ -142,7 +142,6 @@ class AbsensiController extends Controller
                 $cekAbsensi = DB::table('absensi')
                 ->where('id_user', auth()->user()->id)
                 ->where('absensi', 'Pulang')
-                ->whereIn('keterangan', ['Hadir', 'Izin', 'Sakit'])
                 ->where('date', $hariIni)
                 ->select('*')
                 ->get();
@@ -154,19 +153,14 @@ class AbsensiController extends Controller
                     $namaGambar = uniqid() . '.' . $gambar->getClientOriginalExtension();
                     $gambar->move(public_path('img'), $namaGambar);
 
-                    $absensiToUpdate = Absensi::where('id_user', auth()->user()->id)
-                    ->where('absensi', 'Pulang')
-                    ->where('date', $hariIni)
-                    ->first();
-                    
-                    if ($absensiToUpdate) {
-                        // Melakukan update data absensi
-                        $absensiToUpdate->update([
-                            'time' => $waktu,
-                            'keterangan' => $status,
-                            'file' => $namaGambar,
-                        ]);
-                    }
+                    Absensi::create([
+                        'id_user' => auth()->user()->id,
+                        'absensi' => 'Pulang',
+                        'date' => $hariIni,
+                        'time' => $waktu,
+                        'keterangan' => $status,
+                        'file' => $namaGambar,
+                    ]);
                 }else{
                     return redirect()->back()->with('error', 'Anda sudah absen!');
                 }
@@ -180,7 +174,6 @@ class AbsensiController extends Controller
             $cekAbsensi = DB::table('absensi')
             ->where('id_user', auth()->user()->id)
             ->where('absensi', 'Pulang')
-            ->whereIn('keterangan', ['Hadir', 'Izin', 'Sakit'])
             ->where('date', $hariIni)
             ->select('*')
             ->get();
@@ -191,19 +184,14 @@ class AbsensiController extends Controller
                 $namaGambar = uniqid() . '.' . $gambar->getClientOriginalExtension();
                 $gambar->move(public_path('img'), $namaGambar);
 
-                $absensiToUpdate = Absensi::where('id_user', auth()->user()->id)
-                ->where('absensi', 'Pulang')
-                ->where('date', $hariIni)
-                ->first();
-                
-                if ($absensiToUpdate) {
-                    // Melakukan update data absensi
-                    $absensiToUpdate->update([
-                        'time' => $waktu,
-                        'keterangan' => $status,
-                        'file' => $namaGambar,
-                    ]);
-                }
+                Absensi::create([
+                    'id_user' => auth()->user()->id,
+                    'absensi' => 'Pulang',
+                    'date' => $hariIni,
+                    'time' => $waktu,
+                    'keterangan' => $status,
+                    'file' => $namaGambar,
+                ]);
             }else{
                 return redirect()->back()->with('error', 'Anda sudah absen!');
             }
