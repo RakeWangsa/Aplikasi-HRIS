@@ -200,7 +200,7 @@
                                         tooltip: {
                                             y: {
                                                 formatter: function(val) {
-                                                    return val + " orang"
+                                                    return val + " absensi"
                                                 }
                                             }
                                         }

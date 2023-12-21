@@ -147,7 +147,7 @@
         <div class="row">
             <div class="col-xxl-12 col-md-12">
                 <div class="card">
-                    <div class="filter">
+                    {{-- <div class="filter">
                         <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                             <li class="dropdown-header text-start">
@@ -157,9 +157,28 @@
                             <li><a class="dropdown-item" href="#">This Month</a></li>
                             <li><a class="dropdown-item" href="#">This Year</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
                     <div class="card-body">
-                        <h5 class="card-title">Statistik Absensi Karyawan</h5>
+                        <div class="card-title d-flex justify-content-between align-items-center">
+                        <h5>
+                            Statistik Absensi Karyawan
+                        </h5>
+
+                        <div class="dropdown">
+                            <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ $tahun }}
+                            </a>
+                    
+                            <!-- Dropdown items -->
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    @for ($tahun = 2023; $tahun <= 2030; $tahun++)
+                                    <li><a class="dropdown-item" href="{{ route('dash_executive') }}?tahun={{ $tahun }}">{{ $tahun }}</a></li>
+                                @endfor
+                            </ul>
+                        </div>
+                    </div>
+
+
                         <div id="columnChart"></div>
                         <script>
                             document.addEventListener("DOMContentLoaded", () => {
@@ -210,7 +229,7 @@
                                     tooltip: {
                                         y: {
                                             formatter: function(val) {
-                                                return val + " orang"
+                                                return val + " absensi"
                                             }
                                         }
                                     }

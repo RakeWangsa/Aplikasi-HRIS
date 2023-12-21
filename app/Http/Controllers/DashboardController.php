@@ -82,7 +82,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function dash_executive()
+    public function dash_executive(Request $request)
     {
         $karyawan = DB::table('Users')
         ->where('level', 'karyawan')
@@ -100,75 +100,92 @@ class DashboardController extends Controller
         $jumlahAdmin=count($admin);
         $jumlahExecutive=count($executive);
 
+        $tahun = $request->query('tahun');
+        if(!isset($tahun)){
+            $tahun = date('Y');
+        }
+
         $absenHadirJanuari = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 1")
         ->select('*')
         ->get();
         $absenHadirFebruari = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 2")
         ->select('*')
         ->get();
         $absenHadirMaret = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 3")
         ->select('*')
         ->get();
         $absenHadirApril = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 4")
         ->select('*')
         ->get();
         $absenHadirMei = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 5")
         ->select('*')
         ->get();
         $absenHadirJuni = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 6")
         ->select('*')
         ->get();
         $absenHadirJuli = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 7")
         ->select('*')
         ->get();
         $absenHadirAgustus = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 8")
         ->select('*')
         ->get();
         $absenHadirSeptember = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 9")
         ->select('*')
         ->get();
         $absenHadirOktober = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 10")
         ->select('*')
         ->get();
         $absenHadirNovember = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 11")
         ->select('*')
         ->get();
         $absenHadirDesember = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 12")
         ->select('*')
         ->get();
@@ -189,72 +206,84 @@ class DashboardController extends Controller
         $absenSakitJanuari = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Sakit')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 1")
         ->select('*')
         ->get();
         $absenSakitFebruari = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Sakit')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 2")
         ->select('*')
         ->get();
         $absenSakitMaret = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Sakit')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 3")
         ->select('*')
         ->get();
         $absenSakitApril = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Sakit')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 4")
         ->select('*')
         ->get();
         $absenSakitMei = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Sakit')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 5")
         ->select('*')
         ->get();
         $absenSakitJuni = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Sakit')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 6")
         ->select('*')
         ->get();
         $absenSakitJuli = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Sakit')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 7")
         ->select('*')
         ->get();
         $absenSakitAgustus = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Sakit')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 8")
         ->select('*')
         ->get();
         $absenSakitSeptember = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Sakit')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 9")
         ->select('*')
         ->get();
         $absenSakitOktober = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Sakit')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 10")
         ->select('*')
         ->get();
         $absenSakitNovember = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Sakit')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 11")
         ->select('*')
         ->get();
         $absenSakitDesember = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Sakit')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 12")
         ->select('*')
         ->get();
@@ -275,72 +304,84 @@ class DashboardController extends Controller
         $absenIzinJanuari = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Izin')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 1")
         ->select('*')
         ->get();
         $absenIzinFebruari = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Izin')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 2")
         ->select('*')
         ->get();
         $absenIzinMaret = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Izin')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 3")
         ->select('*')
         ->get();
         $absenIzinApril = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Izin')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 4")
         ->select('*')
         ->get();
         $absenIzinMei = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Izin')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 5")
         ->select('*')
         ->get();
         $absenIzinJuni = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Izin')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 6")
         ->select('*')
         ->get();
         $absenIzinJuli = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Izin')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 7")
         ->select('*')
         ->get();
         $absenIzinAgustus = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Izin')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 8")
         ->select('*')
         ->get();
         $absenIzinSeptember = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Izin')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 9")
         ->select('*')
         ->get();
         $absenIzinOktober = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Izin')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 10")
         ->select('*')
         ->get();
         $absenIzinNovember = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Izin')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 11")
         ->select('*')
         ->get();
         $absenIzinDesember = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Izin')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 12")
         ->select('*')
         ->get();
@@ -361,72 +402,84 @@ class DashboardController extends Controller
         $absenTidakHadirJanuari = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Tidak Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 1")
         ->select('*')
         ->get();
         $absenTidakHadirFebruari = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Tidak Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 2")
         ->select('*')
         ->get();
         $absenTidakHadirMaret = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Tidak Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 3")
         ->select('*')
         ->get();
         $absenTidakHadirApril = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Tidak Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 4")
         ->select('*')
         ->get();
         $absenTidakHadirMei = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Tidak Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 5")
         ->select('*')
         ->get();
         $absenTidakHadirJuni = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Tidak Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 6")
         ->select('*')
         ->get();
         $absenTidakHadirJuli = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Tidak Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 7")
         ->select('*')
         ->get();
         $absenTidakHadirAgustus = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Tidak Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 8")
         ->select('*')
         ->get();
         $absenTidakHadirSeptember = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Tidak Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 9")
         ->select('*')
         ->get();
         $absenTidakHadirOktober = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Tidak Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 10")
         ->select('*')
         ->get();
         $absenTidakHadirNovember = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Tidak Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 11")
         ->select('*')
         ->get();
         $absenTidakHadirDesember = DB::table('absensi')
         ->where('absensi', 'datang')
         ->where('keterangan', 'Tidak Hadir')
+        ->whereYear('date', '=', $tahun)
         ->whereRaw("MONTH(`date`) = 12")
         ->select('*')
         ->get();
@@ -503,6 +556,8 @@ class DashboardController extends Controller
             'jumlahTidakHadirOktober' => $jumlahTidakHadirOktober,
             'jumlahTidakHadirNovember' => $jumlahTidakHadirNovember,
             'jumlahTidakHadirDesember' => $jumlahTidakHadirDesember,
+
+            'tahun' => $tahun
         ]);
     }
 

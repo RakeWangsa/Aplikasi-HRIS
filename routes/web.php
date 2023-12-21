@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:karyawan']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:executive']], function () {
-    route::get('/executive/dashboard', [DashboardController::class, 'dash_executive']);
+    route::get('/executive/dashboard', [DashboardController::class, 'dash_executive'])->name('dash_executive');
     route::get('/executive/profile', [ProfileController::class, 'profile_karyawan']);
     route::get('/daftar/karyawan', [ProfileController::class, 'profile_executive']);
     route::get('/executive/timesheet', [TimesheetController::class, 'timesheet_executive']);
