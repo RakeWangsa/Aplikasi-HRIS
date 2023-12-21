@@ -10,7 +10,9 @@ use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\ManagementController;
 
 // Route::get('/tes', [LoginController::class, 'tes'])->name('tes')->middleware('guest');
-
+Route::get('/', function () {
+    return redirect('/login');
+});
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);

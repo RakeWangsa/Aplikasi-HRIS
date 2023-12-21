@@ -236,6 +236,64 @@
                                 }).render();
                             });
                         </script>
+
+                                                    <div id="columnChartHarian" class="mt-4"></div>
+                            <script>
+                                document.addEventListener("DOMContentLoaded", () => {
+                                    new ApexCharts(document.querySelector("#columnChartHarian"), {
+                                        series: [{
+                                            name: 'Hadir',
+                                            data: [5,4,3,2,3,4,5,6,5,2,6,3,7,5,4,5,7,8,4,5,7,5,4,5,3,4,6,5,4,1,4]
+                                        }, {
+                                            name: 'Sakit',
+                                            data: [3,5,6,2,1,7,4,7,4,5,6,4,3,4,6,7,3,4,2,1,5,3,6,7,6,4,4,3,2,4,3]
+                                        }, {
+                                            name: 'Izin',
+                                            data: [5,2,4,6,3,7,4,3,4,6,4,7,3,2,5,3,6,4,7,5,8,5,3,5,3,2,5,6,5,3,5]
+                                        }, {
+                                            name: 'Tidak Hadir',
+                                            data: [6,5,2,6,4,7,4,3,5,4,3,2,3,5,6,7,4,4,5,3,2,3,1,4,6,3,6,4,5,7,4]
+                                        }],
+                                        chart: {
+                                            type: 'bar',
+                                            height: 350
+                                        },
+                                        plotOptions: {
+                                            bar: {
+                                                horizontal: false,
+                                                columnWidth: '55%',
+                                                endingShape: 'rounded'
+                                            },
+                                        },
+                                        dataLabels: {
+                                            enabled: false
+                                        },
+                                        stroke: {
+                                            show: true,
+                                            width: 2,
+                                            colors: ['transparent']
+                                        },
+                                        xaxis: {
+                                            categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10','11','12','13', '14', '15', '16', '17', '18', '19', '20', '21', '22','23','24','25', '26', '27', '28', '29', '30', '31'],
+                                        },
+                                        yaxis: {
+                                            title: {
+                                                text: 'Jumlah Pegawai'
+                                            }
+                                        },
+                                        fill: {
+                                            opacity: 1
+                                        },
+                                        tooltip: {
+                                            y: {
+                                                formatter: function(val) {
+                                                    return val + " orang"
+                                                }
+                                            }
+                                        }
+                                    }).render();
+                                });
+                            </script>
                     </div>
                 </div>
             </div>
