@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:executive']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function () {
-    route::get('/admin/dashboard', [DashboardController::class, 'dash_admin'])->middleware('auth');
+    route::get('/admin/dashboard', [DashboardController::class, 'dash_admin'])->name('dash_admin')->middleware('auth');
     route::get('/daftar/absensi', [AbsensiController::class, 'daftar_absensi'])->middleware('auth');
     route::post('/daftar/absensi/settingBatasAbsen', [AbsensiController::class, 'settingBatasAbsen'])->name('settingBatasAbsen')->middleware('auth');
     route::get('/admin/profiles', [ProfileController::class, 'profile_admin'])->middleware('auth');
