@@ -497,14 +497,20 @@ class DashboardController extends Controller
         $jumlahTidakHadirNovember = count($absenTidakHadirNovember);
         $jumlahTidakHadirDesember = count($absenTidakHadirDesember);
 
-        $tahun = date('Y');
-        $bulan = date('m');
+        $bulan = $request->query('bulan');
+        if(!isset($bulan)){
+            $bulan = date('m');
+        }
+
         $jumlahHari = cal_days_in_month(CAL_GREGORIAN, $bulan, $tahun);
         $daftarTanggal = range(1, $jumlahHari);
         $jumlahHadirHarian = [];
+        $jumlahSakitHarian = [];
+        $jumlahIzinHarian = [];
+        $jumlahTidakHadirHarian = [];
         foreach ($daftarTanggal as $tanggal) {
             $absenHadir = DB::table('absensi')
-                ->where('absensi', 'datang')
+                ->where('absensi', 'Datang')
                 ->where('keterangan', 'Hadir')
                 ->whereYear('date', '=', $tahun)
                 ->whereMonth('date', '=', $bulan)
@@ -512,6 +518,36 @@ class DashboardController extends Controller
                 ->select('*')
                 ->get();
             $jumlahHadirHarian[$tanggal] = count($absenHadir);
+
+            $absenSakit = DB::table('absensi')
+            ->where('absensi', 'Datang')
+            ->where('keterangan', 'Sakit')
+            ->whereYear('date', '=', $tahun)
+            ->whereMonth('date', '=', $bulan)
+            ->whereDay('date', '=', $tanggal)
+            ->select('*')
+            ->get();
+            $jumlahSakitHarian[$tanggal] = count($absenSakit);
+
+            $absenIzin = DB::table('absensi')
+            ->where('absensi', 'Datang')
+            ->where('keterangan', 'Izin')
+            ->whereYear('date', '=', $tahun)
+            ->whereMonth('date', '=', $bulan)
+            ->whereDay('date', '=', $tanggal)
+            ->select('*')
+            ->get();
+            $jumlahIzinHarian[$tanggal] = count($absenIzin);
+
+            $absenTidakHadir = DB::table('absensi')
+            ->where('absensi', 'Datang')
+            ->where('keterangan', 'Tidak Hadir')
+            ->whereYear('date', '=', $tahun)
+            ->whereMonth('date', '=', $bulan)
+            ->whereDay('date', '=', $tanggal)
+            ->select('*')
+            ->get();
+            $jumlahTidakHadirHarian[$tanggal] = count($absenTidakHadir);
         }
 
 
@@ -579,6 +615,9 @@ class DashboardController extends Controller
             'tahun' => $tahun,
             'jumlahHari' => $jumlahHari,
             'jumlahHadirHarian' => $jumlahHadirHarian,
+            'jumlahSakitHarian' => $jumlahSakitHarian,
+            'jumlahIzinHarian' => $jumlahIzinHarian,
+            'jumlahTidakHadirHarian' => $jumlahTidakHadirHarian,
         ]);
     }
 
