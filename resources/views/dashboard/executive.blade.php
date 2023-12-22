@@ -172,7 +172,7 @@
                             <!-- Dropdown items -->
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     @for ($year = 2023; $year <= 2030; $year++)
-                                    <li><a class="dropdown-item" href="{{ route('dash_executive') }}?tahun={{ $year }}">{{ $year }}</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('dash_executive') }}?tahun={{ $year }}&bulan={{ $bulan }}">{{ $year }}</a></li>
                                 @endfor
                             </ul>
                         </div>
@@ -244,7 +244,7 @@
 
                             <div class="dropdown">
                                 <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ $bulan }}
+                                    Bulan {{ $bulan }}
                                 </a>
 
                                 <!-- Dropdown items -->

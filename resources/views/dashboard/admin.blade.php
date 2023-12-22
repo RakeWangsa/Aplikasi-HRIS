@@ -162,7 +162,7 @@
                                     <!-- Dropdown items -->
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             @for ($year = 2023; $year <= 2030; $year++)
-                                            <li><a class="dropdown-item" href="{{ route('dash_admin') }}?tahun={{ $year }}">{{ $year }}</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('dash_admin') }}?tahun={{ $year }}&bulan={{ $bulan }}">{{ $year }}</a></li>
                                         @endfor
                                     </ul>
                                 </div>
@@ -232,7 +232,7 @@
 
                                 <div class="dropdown">
                                     <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{ $bulan }}
+                                        Bulan {{ $bulan }}
                                     </a>
 
                                     <!-- Dropdown items -->
@@ -287,7 +287,7 @@
                                             colors: ['transparent']
                                         },
                                         xaxis: {
-                                            categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10','11','12','13', '14', '15', '16', '17', '18', '19', '20', '21', '22','23','24','25', '26', '27', '28', '29', '30', '31'],
+                                            categories: <?php echo json_encode($data); ?>,
                                         },
                                         yaxis: {
                                             title: {
