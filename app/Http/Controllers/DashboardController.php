@@ -613,6 +613,7 @@ class DashboardController extends Controller
             'jumlahTidakHadirDesember' => $jumlahTidakHadirDesember,
 
             'tahun' => $tahun,
+            'bulan' => $bulan,
             'jumlahHari' => $jumlahHari,
             'jumlahHadirHarian' => $jumlahHadirHarian,
             'jumlahSakitHarian' => $jumlahSakitHarian,
@@ -1151,6 +1152,7 @@ class DashboardController extends Controller
             'jumlahTidakHadirDesember' => $jumlahTidakHadirDesember,
 
             'tahun' => $tahun,
+            'bulan' => $bulan,
             'jumlahHari' => $jumlahHari,
             'jumlahHadirHarian' => $jumlahHadirHarian,
             'jumlahSakitHarian' => $jumlahSakitHarian,

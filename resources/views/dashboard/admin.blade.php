@@ -151,7 +151,7 @@
                         <div class="card-body">
                             <div class="card-title d-flex justify-content-between align-items-center">
                                 <h5>
-                                    Statistik Absensi Karyawan
+                                    Statistik Absensi Karyawan (Bulan)
                                 </h5>
         
                                 <div class="dropdown">
@@ -161,8 +161,8 @@
                             
                                     <!-- Dropdown items -->
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            @for ($tahun = 2023; $tahun <= 2030; $tahun++)
-                                            <li><a class="dropdown-item" href="{{ route('dash_admin') }}?tahun={{ $tahun }}">{{ $tahun }}</a></li>
+                                            @for ($year = 2023; $year <= 2030; $year++)
+                                            <li><a class="dropdown-item" href="{{ route('dash_admin') }}?tahun={{ $year }}">{{ $year }}</a></li>
                                         @endfor
                                     </ul>
                                 </div>
@@ -225,7 +225,26 @@
                                 });
                             </script>
 
-                            <div id="columnChartHarian" class="mt-4"></div>
+                            <div class="card-title d-flex justify-content-between align-items-center mt-4">
+                                <h5>
+                                    Statistik Absensi Karyawan (Hari)
+                                </h5>
+
+                                <div class="dropdown">
+                                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ $bulan }}
+                                    </a>
+
+                                    <!-- Dropdown items -->
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            @for ($bulan = 1; $bulan <= 12; $bulan++)
+                                            <li><a class="dropdown-item" href="{{ route('dash_admin') }}?tahun={{ $tahun }}&bulan={{ $bulan }}">{{ $bulan }}</a></li>
+                                        @endfor
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div id="columnChartHarian"></div>
                             <script>
                                 document.addEventListener("DOMContentLoaded", () => {
                                     <?php
