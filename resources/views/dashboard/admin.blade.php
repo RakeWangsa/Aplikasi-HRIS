@@ -228,19 +228,25 @@
                             <div id="columnChartHarian" class="mt-4"></div>
                             <script>
                                 document.addEventListener("DOMContentLoaded", () => {
+                                    <?php
+                                        $data = [];
+                                        for ($i = 1; $i <= $jumlahHari; $i++) {
+                                            $data[] = $i;
+                                        }
+                                    ?>
                                     new ApexCharts(document.querySelector("#columnChartHarian"), {
                                         series: [{
                                             name: 'Hadir',
-                                            data: [5,4,3,2,3,4,5,6,5,2,6,3,7,5,4,5,7,8,4,5,7,5,4,5,3,4,6,5,4,1,4]
+                                            data: <?php echo json_encode(array_values($jumlahHadirHarian)); ?>
                                         }, {
                                             name: 'Sakit',
-                                            data: [3,5,6,2,1,7,4,7,4,5,6,4,3,4,6,7,3,4,2,1,5,3,6,7,6,4,4,3,2,4,3]
+                                            data: <?php echo json_encode(array_values($jumlahSakitHarian)); ?>
                                         }, {
                                             name: 'Izin',
-                                            data: [5,2,4,6,3,7,4,3,4,6,4,7,3,2,5,3,6,4,7,5,8,5,3,5,3,2,5,6,5,3,5]
+                                            data: <?php echo json_encode(array_values($jumlahIzinHarian)); ?>
                                         }, {
                                             name: 'Tidak Hadir',
-                                            data: [6,5,2,6,4,7,4,3,5,4,3,2,3,5,6,7,4,4,5,3,2,3,1,4,6,3,6,4,5,7,4]
+                                            data: <?php echo json_encode(array_values($jumlahTidakHadirHarian)); ?>
                                         }],
                                         chart: {
                                             type: 'bar',
